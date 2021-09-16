@@ -20,4 +20,10 @@ public class HealthBar : MonoBehaviour
       slider.value = health;
 
     }
+
+    //Return the current health of the player
+    public int GetHealth()
+    {
+      return (int)slider.value;
+    }
 }

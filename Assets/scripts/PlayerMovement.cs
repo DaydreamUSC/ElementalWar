@@ -6,15 +6,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public int maxHealth = 20;
-    public int currentHealth;
 
-
-    public HealthBar healthBar;
+    public HealthBar healthBarOne;
+    public HealthBar healthBarTwo;
 
     void Start()
     {
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        
+        // currentHealth = maxHealth;
+        // healthBar.SetMaxHealth(maxHealth);
+        healthBarOne = GameObject.Find("CanvasOne").GetComponentInChildren(typeof(HealthBar)) as HealthBar;;
+        healthBarTwo = GameObject.Find("CanvasTwo").GetComponentInChildren(typeof(HealthBar)) as HealthBar;
+        
+        healthBarOne.SetMaxHealth(maxHealth);
+        healthBarTwo.SetMaxHealth(maxHealth);
 
     }
     public Rigidbody2D rb;
@@ -30,12 +35,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-      if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space)){
         TakeDamage(2);
-      }
-
-
-
+        }
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         if(PlayerMovement.turn == 1)
@@ -46,15 +48,22 @@ public class PlayerMovement : MonoBehaviour
         mousePos.y = mousePos.y - playerPosition.y;
         // Debug.Log(mousePos);
         // Debug.Log(player1Position);
+
     }
     void Player1Turn()
     {
         PlayerMovement.turn = 1;
+        GameObject.Find("Player1").GetComponent<PolygonCollider2D>().enabled = false;
+        GameObject.Find("Player2").GetComponent<PolygonCollider2D>().enabled = true;
+        GameObject.Find("Player2").GetComponent<shooting>().enabled = false;
     }
 
     void Player2Turn()
     {
         PlayerMovement.turn = 2;
+        GameObject.Find("Player2").GetComponent<PolygonCollider2D>().enabled = false;
+        GameObject.Find("Player1").GetComponent<PolygonCollider2D>().enabled = true;
+        GameObject.Find("Player1").GetComponent<shooting>().enabled = false;
     }
     void FixedUpdate()
     {
@@ -62,11 +71,25 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(-1 * lookDir.y, -1 * lookDir.x) * Mathf.Rad2Deg;
         rb.rotation = angle;
     }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        Debug.Log(other.gameObject.tag);
+        bool isHitByBullet = other.gameObject.tag == "Player";
+        //if player is hit, destroy bullet and change healthBar
+        if (isHitByBullet) {
+            TakeDamage(2);
+            Destroy(other.gameObject, 0.0f);
+        }
+    }
+
     void TakeDamage(int damage)
     {
-
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-
+        if (PlayerMovement.turn == 1) {
+            int currentHealth = healthBarTwo.GetHealth();
+            healthBarTwo.SetHealth(currentHealth - damage);
+        } else {
+            int currentHealth = healthBarOne.GetHealth();
+            healthBarOne.SetHealth(currentHealth - damage);
+        }
     }
 }

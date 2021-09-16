@@ -34,6 +34,7 @@ public class shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("update");
         if(PlayerMovement.turn == 1)
             playerPosition = GameObject.Find("Player1").transform.position;
         else
@@ -57,6 +58,7 @@ public class shooting : MonoBehaviour
             // force = new Vector2(Mathf.Clamp(startPoint.x-endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y-endPoint.y, minPower.y, maxPower.y));
             force = new Vector2(Mathf.Clamp(-1 * (endPoint.x - playerPosition.x), minPower.x, maxPower.x), Mathf.Clamp(-1 * (endPoint.y - playerPosition.y), minPower.y, maxPower.y));
             Shoot();
+            Debug.Log("shoot");
             tl.vanish();
             // Debug.Log("force");
             // Debug.Log(force);
