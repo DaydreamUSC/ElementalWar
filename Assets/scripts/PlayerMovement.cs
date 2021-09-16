@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerMovement.turn = 1;
         GameObject.Find("Player1").GetComponent<PolygonCollider2D>().enabled = false;
         GameObject.Find("Player2").GetComponent<PolygonCollider2D>().enabled = true;
+        GameObject.Find("Player1").GetComponent<shooting>().enabled = true;
         GameObject.Find("Player2").GetComponent<shooting>().enabled = false;
     }
 
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerMovement.turn = 2;
         GameObject.Find("Player2").GetComponent<PolygonCollider2D>().enabled = false;
         GameObject.Find("Player1").GetComponent<PolygonCollider2D>().enabled = true;
+        GameObject.Find("Player2").GetComponent<shooting>().enabled = true;
         GameObject.Find("Player1").GetComponent<shooting>().enabled = false;
     }
     void FixedUpdate()

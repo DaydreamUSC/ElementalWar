@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*  Known Bug
+    condition: switch player while dragging, the trajectory line will remain
+*/
 public class DranNshoot : MonoBehaviour
 {
     public float power = 10f;
