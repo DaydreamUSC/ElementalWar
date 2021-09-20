@@ -49,7 +49,7 @@
 | Variables | Description |
 | --- | --- |
 | gravity |  |
-| type |  |
+| type | Balckhole, Electric field |
 
 | Methods | Objectives |
 | --- | --- |

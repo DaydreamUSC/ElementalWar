@@ -10,10 +10,18 @@
 - A successful attack against the opponent will deduct the blood level of the opponent.
 - When the blood level of the opponent reaches zero, the player is the winner.
 
-## Greybox sketch
-![sketch](docs/greybox_sketch.png)
-
 ## Details
 - [Mechanics](docs/mechanics.md)
 - [Maths](docs/maths.md)
 - [Components design](docs/components_design.md)
+- [Player](docs/player.md)
+- [Game environment](docs/game_environment.md)
+- [Card system](docs/card_system.md)
+
+## Greybox sketch
+![sketch](docs/greybox_sketch.png)
+
+## Prototype
+![main menu](docs/main_menu.png)
+![character selection](docs/character_selection.png)
+![Play screen](docs/play_screen.png)
