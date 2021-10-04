@@ -1,0 +1,17 @@
+# Default line ending to LF
+* text=auto
+*.meta text eol=LF
+*.md text eol=LF
+*.js text eol=LF
+*.json text eol=LF
+*.symbols text eol=LF
+*.txt text eol=LF
+*.cs text eol=LF
+*.asmdef text eol=LF
+*.asset text eol=LF
+*.c text eol=LF
+*.cpp text eol=LF
+*.prefab text eol=LF
+*.xml text eol=LF
+*.unity text eol=LF
+*.dwlt text eol=LF
