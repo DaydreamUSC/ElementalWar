@@ -93,6 +93,8 @@ struct NotNullAttribute_t22E59D8061EE39B8A3F837C2245240C2466382FC;
 struct NumberFormatInfo_t58780B43B6A840C38FD10C50CDFE2128884CAD1D;
 // UnityEngine.Bindings.PreventReadOnlyInstanceModificationAttribute
 struct PreventReadOnlyInstanceModificationAttribute_tE8D4FA7769A398DB777682CC73E6E7664F9DB1D7;
+// UnityEngine.RejectDragAndDropMaterial
+struct RejectDragAndDropMaterial_tFCD851DB9AAA1C31F06A8C682B136C11B0C16950;
 // UnityEngine.Scripting.RequiredByNativeCodeAttribute
 struct RequiredByNativeCodeAttribute_t855401D3C2EF3B44F4F1C3EE2DCD361CFC358D20;
 // System.Runtime.Serialization.SafeSerializationManager
@@ -1061,6 +1063,15 @@ public:
 
 // UnityEngine.Bindings.PreventReadOnlyInstanceModificationAttribute
 struct PreventReadOnlyInstanceModificationAttribute_tE8D4FA7769A398DB777682CC73E6E7664F9DB1D7  : public Attribute_t037CA9D9F3B742C063DB364D2EEBBF9FC5772C71
+{
+public:
+
+public:
+};
+
+
+// UnityEngine.RejectDragAndDropMaterial
+struct RejectDragAndDropMaterial_tFCD851DB9AAA1C31F06A8C682B136C11B0C16950  : public Attribute_t037CA9D9F3B742C063DB364D2EEBBF9FC5772C71
 {
 public:
 
@@ -2837,6 +2848,22 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NotNullAttribute__ctor_m7F7AF5B61F69FAA7
 #endif
 // System.Void UnityEngine.Bindings.PreventReadOnlyInstanceModificationAttribute::.ctor()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreventReadOnlyInstanceModificationAttribute__ctor_m955473006F5BE3BB9263DAAF768278F151ECF91C (PreventReadOnlyInstanceModificationAttribute_tE8D4FA7769A398DB777682CC73E6E7664F9DB1D7 * __this, const RuntimeMethod* method)
+{
+	{
+		Attribute__ctor_m5C1862A7DFC2C25A4797A8C5F681FBB5CB53ECE1(__this, /*hidden argument*/NULL);
+		return;
+	}
+}
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+// System.Void UnityEngine.RejectDragAndDropMaterial::.ctor()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RejectDragAndDropMaterial__ctor_mB524E496E19CCEB9A7876536BD7C99D554441BBB (RejectDragAndDropMaterial_tFCD851DB9AAA1C31F06A8C682B136C11B0C16950 * __this, const RuntimeMethod* method)
 {
 	{
 		Attribute__ctor_m5C1862A7DFC2C25A4797A8C5F681FBB5CB53ECE1(__this, /*hidden argument*/NULL);

@@ -6,10 +6,6 @@ void RegisterAllStrippedInternalCalls()
 		void Register_Unity_Collections_LowLevel_Unsafe_UnsafeUtility_Free();
 		Register_Unity_Collections_LowLevel_Unsafe_UnsafeUtility_Free();
 
-		//System.Void Unity.Collections.LowLevel.Unsafe.UnsafeUtility::MemCpy(System.Void*,System.Void*,System.Int64)
-		void Register_Unity_Collections_LowLevel_Unsafe_UnsafeUtility_MemCpy();
-		Register_Unity_Collections_LowLevel_Unsafe_UnsafeUtility_MemCpy();
-
 	//End Registrations for type : Unity.Collections.LowLevel.Unsafe.UnsafeUtility
 
 	//Start Registrations for type : Unity.Jobs.JobHandle
@@ -19,6 +15,38 @@ void RegisterAllStrippedInternalCalls()
 		Register_Unity_Jobs_JobHandle_ScheduleBatchedJobs();
 
 	//End Registrations for type : Unity.Jobs.JobHandle
+
+	//Start Registrations for type : UnityEngine.Analytics.Analytics
+
+		//System.Boolean UnityEngine.Analytics.Analytics::IsInitialized()
+		void Register_UnityEngine_Analytics_Analytics_IsInitialized();
+		Register_UnityEngine_Analytics_Analytics_IsInitialized();
+
+		//UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::SendCustomEventName(System.String)
+		void Register_UnityEngine_Analytics_Analytics_SendCustomEventName();
+		Register_UnityEngine_Analytics_Analytics_SendCustomEventName();
+
+	//End Registrations for type : UnityEngine.Analytics.Analytics
+
+	//Start Registrations for type : UnityEngine.Analytics.AnalyticsSessionInfo
+
+		//System.Int64 UnityEngine.Analytics.AnalyticsSessionInfo::get_sessionElapsedTime()
+		void Register_UnityEngine_Analytics_AnalyticsSessionInfo_get_sessionElapsedTime();
+		Register_UnityEngine_Analytics_AnalyticsSessionInfo_get_sessionElapsedTime();
+
+		//System.Int64 UnityEngine.Analytics.AnalyticsSessionInfo::get_sessionId()
+		void Register_UnityEngine_Analytics_AnalyticsSessionInfo_get_sessionId();
+		Register_UnityEngine_Analytics_AnalyticsSessionInfo_get_sessionId();
+
+		//System.String UnityEngine.Analytics.AnalyticsSessionInfo::get_userId()
+		void Register_UnityEngine_Analytics_AnalyticsSessionInfo_get_userId();
+		Register_UnityEngine_Analytics_AnalyticsSessionInfo_get_userId();
+
+		//UnityEngine.Analytics.AnalyticsSessionState UnityEngine.Analytics.AnalyticsSessionInfo::get_sessionState()
+		void Register_UnityEngine_Analytics_AnalyticsSessionInfo_get_sessionState();
+		Register_UnityEngine_Analytics_AnalyticsSessionInfo_get_sessionState();
+
+	//End Registrations for type : UnityEngine.Analytics.AnalyticsSessionInfo
 
 	//Start Registrations for type : UnityEngine.AnimationCurve
 
@@ -125,6 +153,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.String UnityEngine.Application::get_absoluteURL()
 		void Register_UnityEngine_Application_get_absoluteURL();
 		Register_UnityEngine_Application_get_absoluteURL();
+
+		//System.String UnityEngine.Application::get_dataPath()
+		void Register_UnityEngine_Application_get_dataPath();
+		Register_UnityEngine_Application_get_dataPath();
 
 		//System.String UnityEngine.Application::get_unityVersion()
 		void Register_UnityEngine_Application_get_unityVersion();
@@ -1546,6 +1578,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Object_Internal_CloneSingle();
 		Register_UnityEngine_Object_Internal_CloneSingle();
 
+		//UnityEngine.Object UnityEngine.Object::Internal_CloneSingleWithParent(UnityEngine.Object,UnityEngine.Transform,System.Boolean)
+		void Register_UnityEngine_Object_Internal_CloneSingleWithParent();
+		Register_UnityEngine_Object_Internal_CloneSingleWithParent();
+
 		//UnityEngine.Object UnityEngine.Object::Internal_InstantiateSingle_Injected(UnityEngine.Object,UnityEngine.Vector3&,UnityEngine.Quaternion&)
 		void Register_UnityEngine_Object_Internal_InstantiateSingle_Injected();
 		Register_UnityEngine_Object_Internal_InstantiateSingle_Injected();
@@ -1609,6 +1645,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Boolean UnityEngine.Physics2D::get_queriesHitTriggers()
 		void Register_UnityEngine_Physics2D_get_queriesHitTriggers();
 		Register_UnityEngine_Physics2D_get_queriesHitTriggers();
+
+		//System.Void UnityEngine.Physics2D::IgnoreCollision(UnityEngine.Collider2D,UnityEngine.Collider2D,System.Boolean)
+		void Register_UnityEngine_Physics2D_IgnoreCollision();
+		Register_UnityEngine_Physics2D_IgnoreCollision();
 
 		//UnityEngine.RaycastHit2D[] UnityEngine.Physics2D::GetRayIntersectionAll_Internal_Injected(UnityEngine.PhysicsScene2D&,UnityEngine.Vector3&,UnityEngine.Vector3&,System.Single,System.Int32)
 		void Register_UnityEngine_Physics2D_GetRayIntersectionAll_Internal_Injected();
@@ -1723,18 +1763,6 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_PlayerPrefs_DeleteKey();
 
 	//End Registrations for type : UnityEngine.PlayerPrefs
-
-	//Start Registrations for type : UnityEngine.Profiling.Profiler
-
-		//System.Void UnityEngine.Profiling.Profiler::BeginSampleImpl(System.String,UnityEngine.Object)
-		void Register_UnityEngine_Profiling_Profiler_BeginSampleImpl();
-		Register_UnityEngine_Profiling_Profiler_BeginSampleImpl();
-
-		//System.Void UnityEngine.Profiling.Profiler::EndSample()
-		void Register_UnityEngine_Profiling_Profiler_EndSample();
-		Register_UnityEngine_Profiling_Profiler_EndSample();
-
-	//End Registrations for type : UnityEngine.Profiling.Profiler
 
 	//Start Registrations for type : UnityEngine.QualitySettings
 
@@ -2279,6 +2307,14 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_Sprite_get_vertices();
 
 	//End Registrations for type : UnityEngine.Sprite
+
+	//Start Registrations for type : UnityEngine.SpriteRenderer
+
+		//System.Void UnityEngine.SpriteRenderer::set_color_Injected(UnityEngine.Color&)
+		void Register_UnityEngine_SpriteRenderer_set_color_Injected();
+		Register_UnityEngine_SpriteRenderer_set_color_Injected();
+
+	//End Registrations for type : UnityEngine.SpriteRenderer
 
 	//Start Registrations for type : UnityEngine.SystemInfo
 
