@@ -61,10 +61,11 @@ public class Player : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        Debug.Log(other.gameObject.tag);
-        bool isHitByBullet = other.gameObject.tag == "Player";
+        
+        bool isHitByBullet = other.gameObject.tag == "Bullet";
         //if player is hit, destroy bullet and change healthBar
         if (isHitByBullet) {
+            Debug.Log("is hit!");
             bullet_property b_p = other.gameObject.GetComponent<bullet_property>();
             TakeDamage(2*ChangeWeapon.bulletPower);
             Destroy(other.gameObject, 0.0f);

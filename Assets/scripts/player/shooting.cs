@@ -45,7 +45,7 @@ public class shooting : MonoBehaviour
     [PunRPC]
     public void UpdateShoot(Vector2 bulletForce)
     {
-        GameObject bullet = Instantiate("Bullet1", firePoint.position, transform.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         Debug.Log("Pho" + PhotonNetwork.IsMasterClient);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
