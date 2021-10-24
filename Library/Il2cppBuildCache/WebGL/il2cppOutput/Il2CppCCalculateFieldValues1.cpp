@@ -15218,8 +15218,6 @@ public:
 struct Player_t5689617909B48F7640EA0892D85C92C13CC22C6F  : public MonoBehaviour_t37A501200D970A8257124B0EAE00A0FF3DDC354A
 {
 public:
-	// System.Int32 Player::maxHealth
-	int32_t ___maxHealth_4;
 	// HealthBar Player::healthBar
 	HealthBar_t4F6E9402E45BDE8CFEEEB63CC2DD44170233BFA1 * ___healthBar_6;
 	// Photon.Pun.PhotonView Player::photonView
@@ -15236,14 +15234,6 @@ public:
 	Vector2_tBB32F2736AEC229A7BFBCE18197EC0F6AC7EC2D9  ___mousePos_18;
 
 public:
-	inline static int32_t get_offset_of_maxHealth_4() { return static_cast<int32_t>(offsetof(Player_t5689617909B48F7640EA0892D85C92C13CC22C6F, ___maxHealth_4)); }
-	inline int32_t get_maxHealth_4() const { return ___maxHealth_4; }
-	inline int32_t* get_address_of_maxHealth_4() { return &___maxHealth_4; }
-	inline void set_maxHealth_4(int32_t value)
-	{
-		___maxHealth_4 = value;
-	}
-
 	inline static int32_t get_offset_of_healthBar_6() { return static_cast<int32_t>(offsetof(Player_t5689617909B48F7640EA0892D85C92C13CC22C6F, ___healthBar_6)); }
 	inline HealthBar_t4F6E9402E45BDE8CFEEEB63CC2DD44170233BFA1 * get_healthBar_6() const { return ___healthBar_6; }
 	inline HealthBar_t4F6E9402E45BDE8CFEEEB63CC2DD44170233BFA1 ** get_address_of_healthBar_6() { return &___healthBar_6; }
@@ -15308,6 +15298,8 @@ public:
 struct Player_t5689617909B48F7640EA0892D85C92C13CC22C6F_StaticFields
 {
 public:
+	// System.Int32 Player::maxHealth
+	int32_t ___maxHealth_4;
 	// System.Int32 Player::side
 	int32_t ___side_5;
 	// System.Int32 Player::currentHP
@@ -15324,6 +15316,14 @@ public:
 	List_1_t77853C3DC110F6F5725CB0367AC457999D9E5099 * ___currentWeapon_12;
 
 public:
+	inline static int32_t get_offset_of_maxHealth_4() { return static_cast<int32_t>(offsetof(Player_t5689617909B48F7640EA0892D85C92C13CC22C6F_StaticFields, ___maxHealth_4)); }
+	inline int32_t get_maxHealth_4() const { return ___maxHealth_4; }
+	inline int32_t* get_address_of_maxHealth_4() { return &___maxHealth_4; }
+	inline void set_maxHealth_4(int32_t value)
+	{
+		___maxHealth_4 = value;
+	}
+
 	inline static int32_t get_offset_of_side_5() { return static_cast<int32_t>(offsetof(Player_t5689617909B48F7640EA0892D85C92C13CC22C6F_StaticFields, ___side_5)); }
 	inline int32_t get_side_5() const { return ___side_5; }
 	inline int32_t* get_address_of_side_5() { return &___side_5; }
@@ -29183,7 +29183,7 @@ IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable3896[3] =
 };
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable3897[15] = 
 {
-	Player_t5689617909B48F7640EA0892D85C92C13CC22C6F::get_offset_of_maxHealth_4(),
+	Player_t5689617909B48F7640EA0892D85C92C13CC22C6F_StaticFields::get_offset_of_maxHealth_4(),
 	Player_t5689617909B48F7640EA0892D85C92C13CC22C6F_StaticFields::get_offset_of_side_5(),
 	Player_t5689617909B48F7640EA0892D85C92C13CC22C6F::get_offset_of_healthBar_6(),
 	Player_t5689617909B48F7640EA0892D85C92C13CC22C6F_StaticFields::get_offset_of_currentHP_7(),
