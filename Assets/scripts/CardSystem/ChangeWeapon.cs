@@ -32,7 +32,7 @@ public class ChangeWeapon : MonoBehaviour
     //shoot.UpdateShoot(bs);
   }
   void Change(){
-    Player.PlayerShootPower *= 2;
+    Player.PlayerShootPower *= 1;
     Player.PlayerShootSpeed *= 2;
     
     AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Weapon Card: double bulletPower and bulletSpeed", new Dictionary<string, object>{

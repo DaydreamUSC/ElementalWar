@@ -2045,6 +2045,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 270304520779009432, guid: 92fac7789cfd842b2a6b476b5f31e88e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 108.81531
+      objectReference: {fileID: 0}
+    - target: {fileID: 270304520779009432, guid: 92fac7789cfd842b2a6b476b5f31e88e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 21.600006
+      objectReference: {fileID: 0}
     - target: {fileID: 270304521391487765, guid: 92fac7789cfd842b2a6b476b5f31e88e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2160,6 +2168,14 @@ PrefabInstance:
     - target: {fileID: 270304521702097950, guid: 92fac7789cfd842b2a6b476b5f31e88e, type: 3}
       propertyPath: m_Name
       value: CanvasWeaponCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 270304522035903004, guid: 92fac7789cfd842b2a6b476b5f31e88e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 109.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 270304522035903004, guid: 92fac7789cfd842b2a6b476b5f31e88e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -39.4
       objectReference: {fileID: 0}
     - target: {fileID: 270304522035903006, guid: 92fac7789cfd842b2a6b476b5f31e88e, type: 3}
       propertyPath: m_Text
