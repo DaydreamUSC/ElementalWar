@@ -11,12 +11,11 @@ public class CureEffects : MonoBehaviour
     public EnergyBar energyBar;
     void Update(){
         if(Input.GetKeyDown(KeyCode.Alpha2)){
-            if(energyBar.getCurrentEnergy() >= 5){
+            if(energyBar.getCurrentEnergy() >= 5 && Player.currentHP<Player.maxHealth){
                 Player.currentHP += addHP;
                 energyBar.UseEnergy(5); // consume EP 
-
                 AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Skill Card: Cure", new Dictionary<string, object>{
-                    { "currentHP", GetComponentInChildren<HealthBar>().GetHealth() },
+                    { "currentHP", Player.currentHP},
                     { "Player", System.Environment.UserName }
                 }); 
                 Debug.Log("[Analytics] Click Skill Card: Cure:" + analyticsResult);

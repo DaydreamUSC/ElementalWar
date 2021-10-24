@@ -313,7 +313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df0a7f672858e34dae40bf9add2f2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   rb: {fileID: 4609132770446082565}
   cam: {fileID: 1493931434229830177, guid: d493f638693181c409b7b32810d33574, type: 3}
 --- !u!114 &-1061812824026636201

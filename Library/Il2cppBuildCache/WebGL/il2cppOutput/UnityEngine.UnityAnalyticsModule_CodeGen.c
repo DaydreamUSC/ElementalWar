@@ -64,9 +64,39 @@ extern void IdentityTokenChanged_EndInvoke_m7103AA2B42EE8FD1C80047657E4EABB63524
 extern void Analytics_IsInitialized_mDED78986B5F1E6791ECE0064577732A096966281 (void);
 // 0x0000001A UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::SendCustomEventName(System.String)
 extern void Analytics_SendCustomEventName_m10EB26605FBED454C167175381C32AD024064B38 (void);
-// 0x0000001B UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::CustomEvent(System.String)
-extern void Analytics_CustomEvent_m4E57C9D42C6C5386A976B99EDDCD19547F7EC823 (void);
-static Il2CppMethodPointer s_methodPointers[27] = 
+// 0x0000001B UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::SendCustomEvent(UnityEngine.Analytics.CustomEventData)
+extern void Analytics_SendCustomEvent_m612B7988F1A27A5A1B84231DD330ED35A4D7ED7A (void);
+// 0x0000001C UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::CustomEvent(System.String,System.Collections.Generic.IDictionary`2<System.String,System.Object>)
+extern void Analytics_CustomEvent_m1E9B8BA28D46AD42DA9D447644BB69B3B4D93C1A (void);
+// 0x0000001D System.Void UnityEngine.Analytics.CustomEventData::.ctor(System.String)
+extern void CustomEventData__ctor_mC564404622B8340774573060EC3BBEBCCD7377B1 (void);
+// 0x0000001E System.Void UnityEngine.Analytics.CustomEventData::Finalize()
+extern void CustomEventData_Finalize_mA643562EEBB83A6FB95E42259FA1F4CEAB4DFABD (void);
+// 0x0000001F System.Void UnityEngine.Analytics.CustomEventData::Destroy()
+extern void CustomEventData_Destroy_mA9C57502CC6C37D7C0C32AEED69BE87595CA7469 (void);
+// 0x00000020 System.Void UnityEngine.Analytics.CustomEventData::Dispose()
+extern void CustomEventData_Dispose_m545BA9BFE77B0B24273EDBDA6D23C870FA078B24 (void);
+// 0x00000021 System.IntPtr UnityEngine.Analytics.CustomEventData::Internal_Create(UnityEngine.Analytics.CustomEventData,System.String)
+extern void CustomEventData_Internal_Create_m2AA0680F724ED835DC7AD68DE8306393D8F38570 (void);
+// 0x00000022 System.Void UnityEngine.Analytics.CustomEventData::Internal_Destroy(System.IntPtr)
+extern void CustomEventData_Internal_Destroy_m1EDD7404F46BE6D67272C848147D06C49F4E8795 (void);
+// 0x00000023 System.Boolean UnityEngine.Analytics.CustomEventData::AddString(System.String,System.String)
+extern void CustomEventData_AddString_m60A2E98FBC2236C1766CD2B45F1CE39D97887DCD (void);
+// 0x00000024 System.Boolean UnityEngine.Analytics.CustomEventData::AddInt32(System.String,System.Int32)
+extern void CustomEventData_AddInt32_m11A64F041E6A45BAC7D30A072FA061C174B8DF95 (void);
+// 0x00000025 System.Boolean UnityEngine.Analytics.CustomEventData::AddUInt32(System.String,System.UInt32)
+extern void CustomEventData_AddUInt32_mC48999FF75E69854279B736B9E0CC3ABDB20D6A2 (void);
+// 0x00000026 System.Boolean UnityEngine.Analytics.CustomEventData::AddInt64(System.String,System.Int64)
+extern void CustomEventData_AddInt64_mB5DF70721C26716472E5CC3BF0B003D0DFBB4548 (void);
+// 0x00000027 System.Boolean UnityEngine.Analytics.CustomEventData::AddUInt64(System.String,System.UInt64)
+extern void CustomEventData_AddUInt64_mE50C0ABB73EC1DE0BB05CC3368E41693082AEBD5 (void);
+// 0x00000028 System.Boolean UnityEngine.Analytics.CustomEventData::AddBool(System.String,System.Boolean)
+extern void CustomEventData_AddBool_mF741C99511A43133D1012FBA4A3BC446C85E8388 (void);
+// 0x00000029 System.Boolean UnityEngine.Analytics.CustomEventData::AddDouble(System.String,System.Double)
+extern void CustomEventData_AddDouble_mF4835878ECDB335F6B62A60B484D0F278CAF6576 (void);
+// 0x0000002A System.Boolean UnityEngine.Analytics.CustomEventData::AddDictionary(System.Collections.Generic.IDictionary`2<System.String,System.Object>)
+extern void CustomEventData_AddDictionary_m96774BD8CD889811F66F744A5CDCF7F1D0362212 (void);
+static Il2CppMethodPointer s_methodPointers[42] = 
 {
 	RemoteSettings_RemoteSettingsUpdated_m5E3BAE9A00236820CF32F74D9F3A94E99055D8A4,
 	RemoteSettings_RemoteSettingsBeforeFetchFromServer_mE1753C7AE5ECBA0B7C7171CADF1DB4E1811BF043,
@@ -94,44 +124,74 @@ static Il2CppMethodPointer s_methodPointers[27] =
 	IdentityTokenChanged_EndInvoke_m7103AA2B42EE8FD1C80047657E4EABB635243872,
 	Analytics_IsInitialized_mDED78986B5F1E6791ECE0064577732A096966281,
 	Analytics_SendCustomEventName_m10EB26605FBED454C167175381C32AD024064B38,
-	Analytics_CustomEvent_m4E57C9D42C6C5386A976B99EDDCD19547F7EC823,
+	Analytics_SendCustomEvent_m612B7988F1A27A5A1B84231DD330ED35A4D7ED7A,
+	Analytics_CustomEvent_m1E9B8BA28D46AD42DA9D447644BB69B3B4D93C1A,
+	CustomEventData__ctor_mC564404622B8340774573060EC3BBEBCCD7377B1,
+	CustomEventData_Finalize_mA643562EEBB83A6FB95E42259FA1F4CEAB4DFABD,
+	CustomEventData_Destroy_mA9C57502CC6C37D7C0C32AEED69BE87595CA7469,
+	CustomEventData_Dispose_m545BA9BFE77B0B24273EDBDA6D23C870FA078B24,
+	CustomEventData_Internal_Create_m2AA0680F724ED835DC7AD68DE8306393D8F38570,
+	CustomEventData_Internal_Destroy_m1EDD7404F46BE6D67272C848147D06C49F4E8795,
+	CustomEventData_AddString_m60A2E98FBC2236C1766CD2B45F1CE39D97887DCD,
+	CustomEventData_AddInt32_m11A64F041E6A45BAC7D30A072FA061C174B8DF95,
+	CustomEventData_AddUInt32_mC48999FF75E69854279B736B9E0CC3ABDB20D6A2,
+	CustomEventData_AddInt64_mB5DF70721C26716472E5CC3BF0B003D0DFBB4548,
+	CustomEventData_AddUInt64_mE50C0ABB73EC1DE0BB05CC3368E41693082AEBD5,
+	CustomEventData_AddBool_mF741C99511A43133D1012FBA4A3BC446C85E8388,
+	CustomEventData_AddDouble_mF4835878ECDB335F6B62A60B484D0F278CAF6576,
+	CustomEventData_AddDictionary_m96774BD8CD889811F66F744A5CDCF7F1D0362212,
 };
-static const int32_t s_InvokerIndices[27] = 
+static const int32_t s_InvokerIndices[42] = 
 {
-	2899,
-	2950,
-	2498,
-	993,
-	1846,
-	775,
-	1565,
-	2718,
-	2894,
-	2894,
-	2270,
-	2929,
-	2930,
-	2930,
+	2939,
+	2990,
+	2533,
+	1009,
+	1876,
+	788,
+	1590,
+	2756,
 	2934,
-	2894,
-	993,
-	413,
-	95,
-	1565,
-	993,
-	1565,
-	540,
-	1565,
-	2943,
-	2788,
-	2788,
+	2934,
+	2305,
+	2969,
+	2970,
+	2970,
+	2974,
+	2934,
+	1009,
+	421,
+	98,
+	1590,
+	1009,
+	1590,
+	552,
+	1590,
+	2983,
+	2827,
+	2827,
+	2584,
+	1590,
+	1876,
+	1876,
+	1876,
+	2603,
+	2932,
+	832,
+	830,
+	830,
+	831,
+	831,
+	833,
+	829,
+	1423,
 };
 extern const CustomAttributesCacheGenerator g_UnityEngine_UnityAnalyticsModule_AttributeGenerators[];
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_UnityEngine_UnityAnalyticsModule_CodeGenModule;
 const Il2CppCodeGenModule g_UnityEngine_UnityAnalyticsModule_CodeGenModule = 
 {
 	"UnityEngine.UnityAnalyticsModule.dll",
-	27,
+	42,
 	s_methodPointers,
 	0,
 	NULL,

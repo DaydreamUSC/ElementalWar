@@ -9,7 +9,7 @@ using UnityEngine.Analytics;
 
 public class Player : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public static int maxHealth = 100;
     //public  GameObject healthBar;
     public static int side;
     private  HealthBar healthBar;
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("LoseScene");
             PhotonNetwork.Disconnect();
 
-            /*------------------Analytics------------------*/
+            /*------------------Begin Analytics------------------*/
             #if ENABLE_CLOUD_SERVICES_ANALYTICS
             float endTime = Time.time;
             float gameDuration = endTime - PhotonManager.startTime;
@@ -141,6 +141,7 @@ public class Player : MonoBehaviour
                 { "WinField", WinField}
             }); 
             #endif
+            /*------------------End Analytics------------------*/
         }
     }
 
