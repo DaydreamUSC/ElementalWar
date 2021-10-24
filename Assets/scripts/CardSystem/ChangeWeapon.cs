@@ -5,10 +5,8 @@ using UnityEngine.Analytics;
 
 public class ChangeWeapon : MonoBehaviour
 {
-  static public int bulletPower=8;
-  static public int bulletSpeed=8;
   //private shooting shoot;
-
+  public EnergyBar energyBar;
   /*
   public void Awake(){
     shoot = GameObject.FindObjectOfType<shooting>();
@@ -18,28 +16,31 @@ public class ChangeWeapon : MonoBehaviour
   void Start()
   {
       //shoot = GameObject.FindObjectOfType<shooting>();
-      bulletPower = 8; //Weapon bullet Power
-      bulletSpeed = 8; //Weapon bullet Power
-      Debug.Log("initialize bulletSpeed and bulletPower");
+      //Debug.Log("initialize bulletSpeed and bulletPower");
   }
 
   void Update(){
-    if(Input.GetMouseButtonDown(0)){
-      Change();
-      Debug.Log("analyticsResult=" + Analytics.CustomEvent("Click double bulletPower and bulletSpeed"));
-
-      
+    if(Input.GetKeyDown(KeyCode.Alpha1)){
+      if(energyBar.getCurrentEnergy() >= 7 && Player.PlayerShootSpeed<256f){
+        Change();
+        energyBar.UseEnergy(7); 
+      }
     }
     //int bs = bulletSpeed;
     //shoot.UpdateShoot(bulletSpeed);
-    HUD.GetInstance().UpdateWeaponUI(bulletPower, bulletSpeed);
+    HUD.GetInstance().UpdateWeaponUI(Player.PlayerShootPower, Player.PlayerShootSpeed);
     //shoot.UpdateShoot(bs);
   }
   void Change(){
-    bulletPower = bulletPower*2;
-    bulletSpeed = bulletSpeed*2;
+    Player.PlayerShootPower *= 2;
+    Player.PlayerShootSpeed *= 2;
+    
+    AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Weapon Card: double bulletPower and bulletSpeed", new Dictionary<string, object>{
+        { "PlayerShootPower", Player.PlayerShootPower },
+        { "PlayerShootSpeed", Player.PlayerShootSpeed },
+        { "Player", System.Environment.UserName }
+    });
+    Debug.Log("[Analytics] Click Weapon Card: double bulletPower and bulletSpeed:" + analyticsResult);
   }
-
-
   // Update is called once per frame
 }

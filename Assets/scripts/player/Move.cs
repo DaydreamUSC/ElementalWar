@@ -7,10 +7,11 @@ public class Move : MonoBehaviour
     public static float moveSpeed= 20f;
     Vector2 movement;
     public Rigidbody2D rb;
-    public GameObject HealthBar;
+    //public GameObject HealthBar;
     // Start is called before the first frame update
     void Start()
     {
+      moveSpeed = 20f;
     }
     
     // Update is called once per frame
@@ -21,8 +22,8 @@ public class Move : MonoBehaviour
     }
     void FixedUpdate(){
       rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-      RectTransform trans_HealthBar = HealthBar.GetComponent<RectTransform>();
-      trans_HealthBar.position = new Vector3(rb.position.x, rb.position.y+2f, 0f);
+      RectTransform trans_HealthBar = GetComponentInChildren<RectTransform>();
+      trans_HealthBar.localPosition = new Vector3(0f, 2f, 0f);
       //trans_HealthBar.position += new Vector3(movement.x, movement.y, 0f);
     }
 }

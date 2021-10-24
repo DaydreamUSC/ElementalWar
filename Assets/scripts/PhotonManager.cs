@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.Analytics;
+
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
+    public static float startTime;
+    public string localComputerName = System.Environment.UserName;
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -24,9 +28,35 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 2}, TypedLobby.Default);
     }
     public override void OnJoinedRoom(){
-        Debug.Log("Player2 joined");
-        PhotonNetwork.Instantiate("Player1", transform.position, Quaternion.identity);
+        startTime = Time.time;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameObject Player1 = PhotonNetwork.Instantiate("Player1", new Vector3(-15, 0, -5), Quaternion.identity);
+            Player1.name = "Player1";
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"field", 1}});
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", System.Environment.UserName}});
+            //PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"Player1",  System.Environment.UserName}});
+        }
+        else
+        {
+            int direction = (int)PhotonNetwork.CurrentRoom.CustomProperties["field"];
+            GameObject Player2 = PhotonNetwork.Instantiate("Player1", new Vector3(direction*15, 0, -5), Quaternion.identity);
+            Player2.name = "Player2";
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"ClientName", System.Environment.UserName}});
+        }
+        
+        ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable();
+        ht["what"] = 1;
+        PhotonNetwork.LocalPlayer.CustomProperties = ht;
+        //Debug.Log(PhotonNetwork.IsMasterClient);
     }
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient) {
+        int fieldSide = -1*Player.side;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"field", fieldSide}});
+        PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", System.Environment.UserName}});
+    }	
+
+
     // UnityEngine.Analytics
     #if ENABLE_CLOUD_SERVICES_ANALYTICS
     void OnSessionStateChanged(AnalyticsSessionState sessionState, long sessionId, long sessionElapsedTime, bool sessionChanged)
