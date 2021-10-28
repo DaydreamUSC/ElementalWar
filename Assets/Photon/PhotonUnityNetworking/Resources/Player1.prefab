@@ -300,7 +300,6 @@ MonoBehaviour:
   - {fileID: 4609132770446082591}
   - {fileID: 4842285954486266298}
   - {fileID: 4065136743943408568}
-  - {fileID: 6536679425152093792}
 --- !u!114 &6536679425152093792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,11 +449,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6537685841109549516, guid: 79b31f84b3ddc8a4785be2efba3e87bd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -357.29706
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6537685841109549516, guid: 79b31f84b3ddc8a4785be2efba3e87bd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 178.53175
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6537685841109549516, guid: 79b31f84b3ddc8a4785be2efba3e87bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -10,7 +10,7 @@ public class cardselection3 : MonoBehaviour
   public int addHP3 = 20;
   public float addSpeed3 = 20f;
   public EnergyBar energyBar;
-
+  public GameObject myplayer;
 
 
 
@@ -74,9 +74,10 @@ public class cardselection3 : MonoBehaviour
 
   void Cure(){
     displayCardName3.GetInstance().UpdateName("Cure");
-    if(energyBar.getCurrentEnergy() >= 6 && Player.currentHP<Player.maxHealth){
+    if(myplayer!=null && energyBar.getCurrentEnergy() >= 6 && Player.currentHP<Player.maxHealth){
 
-        Player.currentHP += addHP3;
+        myplayer.SendMessage("CurePlayer",addHP3);
+        
         energyBar.UseEnergy(6); // consume EP
         AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Skill Card: Cure", new Dictionary<string, object>{
             { "currentHP", Player.currentHP},
@@ -123,4 +124,13 @@ public class cardselection3 : MonoBehaviour
     });
     Debug.Log("[Analytics] Click Weapon Card: double bulletPower and bulletSpeed:" + analyticsResult);
   }
+  
+  public void SetPlayer(GameObject input){
+        if(myplayer==null && input!=null){
+            myplayer=input;
+            Debug.Log("Cure added in cardselection1");
+        }
+  }
+  
+  
 }

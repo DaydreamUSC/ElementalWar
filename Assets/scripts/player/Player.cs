@@ -33,6 +33,20 @@ public class Player : MonoBehaviour
         currentHP = maxHealth;
         PlayerShootSpeed = 8;
         PlayerShootPower = 8;
+        
+        if(photonView.IsMine){
+            GameObject cureBttn = GameObject.Find("/CanvasSkillCard/changeCard1");
+            cureBttn.SendMessage("SetPlayer",this.gameObject);
+            Debug.Log("Cure added in Player1");
+            
+            cureBttn = GameObject.Find("/CanvasSkillCard/changeCard2");
+            cureBttn.SendMessage("SetPlayer",this.gameObject);
+            Debug.Log("Cure added in Player2");
+            
+            cureBttn = GameObject.Find("/CanvasSkillCard/changeCard3");
+            cureBttn.SendMessage("SetPlayer",this.gameObject);
+            Debug.Log("Cure added in Player3");
+        }
     }
     public Rigidbody2D rb;
     public Camera cam;
@@ -43,16 +57,21 @@ public class Player : MonoBehaviour
     Vector2 mousePos;
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)){
-            TakeDamage(20);
+        if(photonView.IsMine){
+            if(Input.GetKeyDown(KeyCode.Space)){
+                HPdeduction(20);
+                CheckDeath();
+            }
+
+            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            playerPosition = this.transform.position;
+            mousePos.x = mousePos.x - playerPosition.x;
+            mousePos.y = mousePos.y - playerPosition.y;
+
+            // healthBar.SetHealth(currentHP);
+            
         }
-
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        playerPosition = this.transform.position;
-        mousePos.x = mousePos.x - playerPosition.x;
-        mousePos.y = mousePos.y - playerPosition.y;
-
-        healthBar.SetHealth(currentHP);
+        
     }
 
     /*void FixedUpdate()
@@ -67,7 +86,7 @@ public class Player : MonoBehaviour
         bool isHitByBullet = other.gameObject.tag == "Bullet";
         //if player is hit, destroy bullet and change healthBar
         bool isMaster = PhotonNetwork.IsMasterClient;
-        if (isMaster)
+        if (photonView.IsMine && isMaster)
         {
 
             bool player2_hasfield = GetComponent<Place_field>().player2_hasfield;
@@ -79,7 +98,7 @@ public class Player : MonoBehaviour
                 Debug.Log("property" + property);
             }
         }
-        else
+        else if(photonView.IsMine)
         {
             bool player1_hasfield = GetComponent<Place_field>().player1_hasfield;
             Debug.Log("player1" + player1_hasfield);
@@ -92,21 +111,51 @@ public class Player : MonoBehaviour
         }
 
 
-        if (isHitByBullet) {
+        if (isHitByBullet && photonView.IsMine) {
             //Debug.Log("is hit! "+name);
             //bullet_property b_p = other.gameObject.GetComponent<bullet_property>();
 
-            TakeDamage(2*PlayerShootPower);
+            
+            photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
+            CheckDeath();
             Destroy(other.gameObject, 0.0f);
         }
     }
-    void TakeDamage(int damage)
-    {
-        //Debug.Log("take damage");   
+    
+    [PunRPC]
+    void HPdeduction(int damage){
         if(healthBar == null)
             return;
         int currentHealth = healthBar.GetHealth();
         healthBar.SetHealth(currentHealth - damage);
+    }
+    
+    [PunRPC]
+    void HPaddition(int point){
+        if(healthBar == null)
+            return;
+        int currentHealth = healthBar.GetHealth();
+        currentHealth+=point;
+        if(currentHealth>maxHealth){
+            currentHealth = maxHealth;
+        }
+        
+        healthBar.SetHealth(currentHealth);
+    }
+    
+    void CurePlayer(int point){
+        if(photonView.IsMine){
+            Debug.Log("CURE CALLED in player.cs");
+            photonView.RPC("HPaddition", RpcTarget.All, point);
+        }
+    }
+    
+    
+    
+    void CheckDeath()
+    {
+        //Debug.Log("take damage");   
+
         currentHP = healthBar.GetHealth();
         Debug.Log("Current Health: "+currentHP);
         if (currentHP <= 0){
