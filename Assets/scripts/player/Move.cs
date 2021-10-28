@@ -11,7 +11,8 @@ public class Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      moveSpeed = 20f;
+        moveSpeed = 20f;
+        rb= GetComponent<Rigidbody2D>();
     }
     
     // Update is called once per frame
@@ -22,8 +23,8 @@ public class Move : MonoBehaviour
     }
     void FixedUpdate(){
       rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-      RectTransform trans_HealthBar = GetComponentInChildren<RectTransform>();
-      trans_HealthBar.localPosition = new Vector3(0f, 2f, 0f);
-      //trans_HealthBar.position += new Vector3(movement.x, movement.y, 0f);
+      // RectTransform trans_HealthBar = GetComponentInChildren<RectTransform>();
+      // trans_HealthBar.localPosition = new Vector3(0f, 2f, 0f);
+      // trans_HealthBar.position += new Vector3(movement.x, movement.y, 0f);
     }
 }

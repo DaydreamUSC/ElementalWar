@@ -43,16 +43,20 @@ public class Player : MonoBehaviour
     Vector2 mousePos;
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)){
-            TakeDamage(20);
+        if(photonView.IsMine){
+            if(Input.GetKeyDown(KeyCode.Space)){
+                TakeDamage(20);
+            }
+
+            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            playerPosition = this.transform.position;
+            mousePos.x = mousePos.x - playerPosition.x;
+            mousePos.y = mousePos.y - playerPosition.y;
+
+            healthBar.SetHealth(currentHP);
+    
         }
-
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        playerPosition = this.transform.position;
-        mousePos.x = mousePos.x - playerPosition.x;
-        mousePos.y = mousePos.y - playerPosition.y;
-
-        healthBar.SetHealth(currentHP);
+        
     }
 
     /*void FixedUpdate()
@@ -67,7 +71,7 @@ public class Player : MonoBehaviour
         bool isHitByBullet = other.gameObject.tag == "Bullet";
         //if player is hit, destroy bullet and change healthBar
         bool isMaster = PhotonNetwork.IsMasterClient;
-        if (isMaster)
+        if (photonView.IsMine && isMaster)
         {
 
             bool player2_hasfield = GetComponent<Place_field>().player2_hasfield;
@@ -79,7 +83,7 @@ public class Player : MonoBehaviour
                 Debug.Log("property" + property);
             }
         }
-        else
+        else if(photonView.IsMine)
         {
             bool player1_hasfield = GetComponent<Place_field>().player1_hasfield;
             Debug.Log("player1" + player1_hasfield);
@@ -97,7 +101,9 @@ public class Player : MonoBehaviour
             //bullet_property b_p = other.gameObject.GetComponent<bullet_property>();
 
             TakeDamage(2*PlayerShootPower);
-            Destroy(other.gameObject, 0.0f);
+            if(photonView.IsMine){
+                Destroy(other.gameObject, 0.0f);
+            }
         }
     }
     void TakeDamage(int damage)
@@ -107,6 +113,9 @@ public class Player : MonoBehaviour
             return;
         int currentHealth = healthBar.GetHealth();
         healthBar.SetHealth(currentHealth - damage);
+        if(!photonView.IsMine){
+            return;
+        }
         currentHP = healthBar.GetHealth();
         Debug.Log("Current Health: "+currentHP);
         if (currentHP <= 0){
