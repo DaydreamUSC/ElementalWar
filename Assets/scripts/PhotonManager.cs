@@ -13,15 +13,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public string localComputerName = System.Environment.UserName;
     void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
+        //PhotonNetwork.ConnectUsingSettings();
         // UnityEngine.Analytics
         #if ENABLE_CLOUD_SERVICES_ANALYTICS
         Debug.Log("Start   " + AnalyticsSessionInfo.userId + " " + AnalyticsSessionInfo.sessionState + " " + AnalyticsSessionInfo.sessionId + " " + AnalyticsSessionInfo.sessionElapsedTime);
         AnalyticsSessionInfo.sessionStateChanged += OnSessionStateChanged;
         #endif
+        //Debug.Log(PhotonNetwork.IsMasterClient);
     }
 
-    public override void OnConnectedToMaster(){
+    /*public override void OnConnectedToMaster(){
         PhotonNetwork.JoinLobby();
     }
     public override void OnJoinedLobby(){
@@ -31,11 +32,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         PhotonNetwork.CreateRoom(null, new RoomOptions {MaxPlayers = 2}, TypedLobby.Default);
-    }
+    }*/
     public override void OnJoinedRoom(){
         startTime = Time.time;
         if (PhotonNetwork.IsMasterClient)
         {
+            Debug.Log("Is MasterClient");
             GameObject Player1 = PhotonNetwork.Instantiate("Player1", new Vector3(-15, 0, -5), Quaternion.identity);
             Player1.name = "Player1";
             PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"field", 1}});
@@ -44,6 +46,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
         else
         {
+            Debug.Log("Is Client");
             int direction = (int)PhotonNetwork.CurrentRoom.CustomProperties["field"];
             GameObject Player2 = PhotonNetwork.Instantiate("Player1", new Vector3(direction*15, 0, -5), Quaternion.identity);
             Player2.name = "Player2";

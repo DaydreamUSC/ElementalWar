@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 public class ReloadGame : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -16,6 +18,6 @@ public class ReloadGame : MonoBehaviour
         
     }
     public void LoadGame(){
-        SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene("Lobby");
     }
 }

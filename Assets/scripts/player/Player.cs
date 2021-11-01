@@ -160,8 +160,6 @@ public class Player : MonoBehaviour
         Debug.Log("Current Health: "+currentHP);
         if (currentHP <= 0){
 
-            SceneManager.LoadScene("LoseScene");
-            PhotonNetwork.Disconnect();
 
             /*------------------Begin Analytics------------------*/
             #if ENABLE_CLOUD_SERVICES_ANALYTICS
@@ -191,6 +189,8 @@ public class Player : MonoBehaviour
             }); 
             #endif
             /*------------------End Analytics------------------*/
+            SceneManager.LoadScene("LoseScene");
+            PhotonNetwork.LeaveLobby();
         }
     }
 
