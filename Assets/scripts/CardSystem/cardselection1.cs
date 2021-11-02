@@ -12,23 +12,34 @@ public class cardselection1 : MonoBehaviour
     public int addHP1 = 20;
     public float addSpeed1 = 20f;
     public EnergyBar energyBar;
+    public Place_field placefield;
     public GameObject myplayer;
 
-
+    public bool clicked;
 
 
     // Start is called before the first frame update
     void Start()
     {
-      int num = Random.Range(0,3);//0~2
+      clicked = false;
+      int num = Random.Range(0,6);//0~5
       if(num==0){
           displayCardName1.GetInstance().UpdateName("Cure");
       }
-      if(num==1){
+      else if(num==1){
           displayCardName1.GetInstance().UpdateName("Speed");
       }
-      if(num==2){
+      else if(num==2){
           displayCardName1.GetInstance().UpdateName("Weapon");
+      }
+      else if(num==3){
+          displayCardName1.GetInstance().UpdateName("Redfield");
+      }
+      else if(num==4){
+          displayCardName1.GetInstance().UpdateName("Bluefield");
+      }
+      else if(num==5){
+          displayCardName1.GetInstance().UpdateName("Yellowfield");
       }
 
     }
@@ -37,52 +48,91 @@ public class cardselection1 : MonoBehaviour
     void Update()
     {
       int num;
-      if(Input.GetKeyDown(KeyCode.Alpha1)){
+      if(Input.GetKeyDown(KeyCode.Alpha1 )){
+        Debug.Log(clicked);
+        if(!clicked){
+        clicked = true;
+        StartCoroutine(wait());
+        Debug.Log(card.text);
         if(card.text=="Cure"){
+          energyBar.UseEnergy(7);
           Cure();
-          num = Random.Range(0,3);
+          num = Random.Range(0,6);
           Select(num);
-        }
-        if(card.text=="Speed"){
-          Speed();
-          num = Random.Range(0,3);
-          Select(num);
-        }
-        if(card.text=="Weapon"){
-          Weapon();
-          num = Random.Range(0,3);
-          Select(num);
-        }
 
+        }
+        else if(card.text=="Speed"){
+          energyBar.UseEnergy(5);
+          Speed();
+          num = Random.Range(0,6);
+          Select(num);
+        }
+        else if(card.text=="Weapon"){
+          energyBar.UseEnergy(8);
+          Weapon();
+          num = Random.Range(0,6);
+          Select(num);
+        }
+        else if(card.text=="Redfield"){
+          energyBar.UseEnergy(3);
+          placefield.R();
+          num = Random.Range(0,6);
+          Select(num);
+        }
+        else if(card.text=="Bluefield"){
+          energyBar.UseEnergy(3);
+          placefield.B();
+          num = Random.Range(0,6);
+          Select(num);
+        }
+        else if(card.text=="Yellowfield"){
+          energyBar.UseEnergy(3);
+          //placefield.Y();
+          num = Random.Range(0,6);
+          Select(num);
+        }
+      }
       }
 
 
+    }
 
+    private IEnumerator wait(){
 
-
-
+      yield return new WaitForSeconds(1);
+      clicked = false;
     }
     void Select(int num){
       if(num==0){
           displayCardName1.GetInstance().UpdateName("Cure");
       }
-      if(num==1){
+      else if(num==1){
           displayCardName1.GetInstance().UpdateName("Speed");
       }
-      if(num==2){
+      else if(num==2){
           displayCardName1.GetInstance().UpdateName("Weapon");
+      }
+      else if(num==4){
+          displayCardName1.GetInstance().UpdateName("Redfield");
+      }
+      else if(num==5){
+          displayCardName1.GetInstance().UpdateName("Bluefield");
+      }
+      else if(num==6){
+          displayCardName1.GetInstance().UpdateName("Yellowfield");
       }
     }
 
 
     void Cure(){
+      Debug.Log("Cure");
       displayCardName1.GetInstance().UpdateName("Cure");
       if(myplayer!=null && energyBar.getCurrentEnergy() >= 6 && Player.currentHP<Player.maxHealth){
-
+          Debug.Log(myplayer);
           myplayer.SendMessage("CurePlayer",addHP1);
-          
-          
-          energyBar.UseEnergy(6); // consume EP
+
+
+           // consume EP
           AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Skill Card: Cure", new Dictionary<string, object>{
               { "currentHP", Player.currentHP},
               { "Player", System.Environment.UserName }
@@ -93,11 +143,12 @@ public class cardselection1 : MonoBehaviour
     }
 
     void Speed(){
+      Debug.Log("Speed");
       displayCardName1.GetInstance().UpdateName("Speed");
       if(energyBar.getCurrentEnergy() >= 3 && Move.moveSpeed<120f){
 
           Move.moveSpeed += addSpeed1;
-          energyBar.UseEnergy(3);
+
           AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Skill Card: MoveSpeedUp", new Dictionary<string, object>{
               { "currentSpeed", Move.moveSpeed },
               { "Player", System.Environment.UserName }
@@ -108,11 +159,12 @@ public class cardselection1 : MonoBehaviour
     }
 
     void Weapon(){
+      Debug.Log("Weapon");
       displayCardName1.GetInstance().UpdateName("Weapon");
       if(energyBar.getCurrentEnergy() >= 7 && Player.PlayerShootSpeed<256f){
 
         Change();
-        energyBar.UseEnergy(7);
+
 
       }
     }
@@ -128,9 +180,9 @@ public class cardselection1 : MonoBehaviour
       });
       Debug.Log("[Analytics] Click Weapon Card: double bulletPower and bulletSpeed:" + analyticsResult);
     }
-    
-    
-    
+
+
+
     public void SetPlayer(GameObject input){
         if(myplayer==null && input!=null){
             myplayer=input;

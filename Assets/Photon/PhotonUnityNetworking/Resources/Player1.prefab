@@ -321,13 +321,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4609132770446082566}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7022d9c6abc10404ca5b425633af04b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1_hasfield: 0
-  player1_field_color: None
+  player1_hasfield: 1
+  player1_field_color: red
   player2_hasfield: 0
   player2_field_color: None
 --- !u!1 &4609132771035683180

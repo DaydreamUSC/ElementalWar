@@ -19,6 +19,7 @@ public class displayCardName1 : MonoBehaviour
     public void UpdateName( string card_name ){
       //weaponIcon.sprite = icon;
       cardname.text = card_name;
+      Debug.Log("This is updatename"+ card_name);
 
     }
 }

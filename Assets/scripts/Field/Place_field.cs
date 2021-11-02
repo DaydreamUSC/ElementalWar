@@ -22,104 +22,101 @@ public class Place_field : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                if (!player1_hasfield)
-                {
-                    player1_hasfield = true;
-                }
-                else
-                {
-                    PhotonNetwork.Destroy(player1_current_field);
-                }
-                change_field_player1("red");
-            }else
-            {
-                if (!player2_hasfield)
-                {
-                    player2_hasfield = true;
-                }
-                else
-                {
-                    //Debug.Log("current_field_player2" + player2_current_field.name);
-                    PhotonNetwork.Destroy(player2_current_field);
-                }
-                change_field_player2("red");
-            }
-        }
+    public void R(){
+      Debug.Log("RRRRRR");
+      if (PhotonNetwork.IsMasterClient)
+      {
+          if (!player1_hasfield)
+          {
+              player1_hasfield = true;
+          }
+          else
+          {
+              PhotonNetwork.Destroy(player1_current_field);
+          }
+          change_field_player1("red");
+      }else
+      {
+          if (!player2_hasfield)
+          {
+              player2_hasfield = true;
+          }
+          else
+          {
+                  //Debug.Log("current_field_player2" + player2_current_field.name);
+              PhotonNetwork.Destroy(player2_current_field);
+          }
+          change_field_player2("red");
+      }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                if (!player1_hasfield)
-                {
-                    player1_hasfield = true;
-                }
-                else
-                {
-                    PhotonNetwork.Destroy(player1_current_field);
-                }
-                change_field_player1("blue");
-            }
-
-            else
-            {
-                if (!player2_hasfield)
-                {
-                    player2_hasfield = true;
-                }
-                else
-                {
-                    PhotonNetwork.Destroy(player2_current_field);
-                }
-                change_field_player2("blue");
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            if (gameObject.name == "Player1")
-            {
-                if (!player1_hasfield)
-                {
-                    player1_hasfield = true;
-                }
-                else
-                {
-                 
-                    PhotonNetwork.Destroy(player1_current_field);
-                }
-                change_field_player1("yellow");
-            }
-
-            else
-            {
-                if (!player2_hasfield)
-                {
-                    player2_hasfield = true;
-                }
-                else
-                {
-                    PhotonNetwork.Destroy(player2_current_field);
-                }
-                change_field_player2("yellow");
-            }
-        }
     }
+    public void B(){
+      Debug.Log("BBBBBB");
+      if (PhotonNetwork.IsMasterClient)
+      {
+          if (!player1_hasfield)
+          {
+              player1_hasfield = true;
+          }
+          else
+          {
+              PhotonNetwork.Destroy(player1_current_field);
+          }
+          change_field_player1("blue");
+      }
+
+      else
+      {
+          if (!player2_hasfield)
+          {
+              player2_hasfield = true;
+          }
+          else
+          {
+              PhotonNetwork.Destroy(player2_current_field);
+          }
+          change_field_player2("blue");
+      }
+    }
+
+    public void Y(){
+      if (gameObject.name == "Player1")
+      {
+          if (!player1_hasfield)
+          {
+              player1_hasfield = true;
+          }
+          else
+          {
+
+              PhotonNetwork.Destroy(player1_current_field);
+          }
+          change_field_player1("yellow");
+      }
+
+      else
+      {
+          if (!player2_hasfield)
+          {
+              player2_hasfield = true;
+          }
+          else
+          {
+              PhotonNetwork.Destroy(player2_current_field);
+          }
+          change_field_player2("yellow");
+      }
+    }
+    // Update is called once per frame
+
 
     [PunRPC]
     public void change_field_player1(string color)
     {
-        if (color == "red") {   
+        if (color == "red") {
             //Debug.Log("triggger!!!");
         player1_current_field = PhotonNetwork.Instantiate("Player1_fire_field", new Vector3(16.6f, 0, -5), Quaternion.identity);
-        
+
         player1_current_field.name = "Player1_fire_field";
         player1_field_color = "red";
 
