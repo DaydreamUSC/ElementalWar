@@ -21,17 +21,10 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
-        if (PhotonNetwork.IsMasterClient){
-            Debug.Log("Is Master");
-        }
-        else{
-            Debug.Log("Is Client");
-        }
     }
 
     public override void OnConnectedToMaster(){
       Debug.Log("Player has connected to the Photon Master server");
-      
       PhotonNetwork.AutomaticallySyncScene = true;
 
     }
@@ -85,19 +78,24 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
       roomSize = 2;
 
     }
+    public static bool randomMatch = false;
     public void JoinLobbyOnClick(){
+      randomMatch = false;
       if(!PhotonNetwork.InLobby){
         PhotonNetwork.JoinLobby();
       }
     }
-    /*public override void OnJoinedLobby(){
+    public static void QuickMatch(){
+      randomMatch = true;
+      PhotonNetwork.JoinLobby();
+    }
+    public override void OnJoinedLobby(){
+      if(randomMatch)
         PhotonNetwork.JoinRandomRoom();
-        //PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions {MaxPlayers = 2}, TypedLobby.Default);
-    }*/
-
-    //new
-    // public override void OnJoinedLobby(){
-    //   PhotonNetwork.JoinRoom(roomName);
-    //   Debug.Log("Try to join room");
-    // }
+    }
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        PhotonNetwork.CreateRoom(null, new RoomOptions {MaxPlayers = 2}, TypedLobby.Default);
+        SceneManager.LoadScene("MainGame");
+    }
 }

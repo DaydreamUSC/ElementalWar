@@ -5,14 +5,17 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
     public static float startTime;
     public string localComputerName = System.Environment.UserName;
+    public static bool isWinner;
     void Start()
     {
+        isWinner = true;
         //PhotonNetwork.ConnectUsingSettings();
         // UnityEngine.Analytics
         #if ENABLE_CLOUD_SERVICES_ANALYTICS
@@ -41,7 +44,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             GameObject Player1 = PhotonNetwork.Instantiate("Player1", new Vector3(-15, 0, -5), Quaternion.identity);
             Player1.name = "Player1";
             PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"field", 1}});
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", System.Environment.UserName}});
+            //PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", System.Environment.UserName}});
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", LobbyPlayerName.playerNameDisplay}});
+            
             //PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"Player1",  System.Environment.UserName}});
         }
         else
@@ -50,7 +55,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             int direction = (int)PhotonNetwork.CurrentRoom.CustomProperties["field"];
             GameObject Player2 = PhotonNetwork.Instantiate("Player1", new Vector3(direction*15, 0, -5), Quaternion.identity);
             Player2.name = "Player2";
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"ClientName", System.Environment.UserName}});
+            //PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"ClientName", System.Environment.UserName}});
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"ClientName", LobbyPlayerName.playerNameDisplay}});
         }
         
         ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable();
@@ -63,7 +69,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"field", fieldSide}});
         PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", System.Environment.UserName}});
     }	
-
+    public override void OnLeftRoom(){
+        if(isWinner)
+            SceneManager.LoadScene("WinScene");
+        else
+            SceneManager.LoadScene("LoseScene");
+    }
 
     // UnityEngine.Analytics
     #if ENABLE_CLOUD_SERVICES_ANALYTICS

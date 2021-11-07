@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.Analytics;
@@ -57,6 +56,9 @@ public class Player : MonoBehaviour
     Vector2 mousePos;
     void Update()
     {
+        if(PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("GameOver")){
+            PhotonNetwork.Disconnect();
+        }
         if(photonView.IsMine){
             if(Input.GetKeyDown(KeyCode.Space)){
                 HPdeduction(20);
@@ -160,6 +162,7 @@ public class Player : MonoBehaviour
         Debug.Log("Current Health: "+currentHP);
         if (currentHP <= 0){
 
+            
 
             /*------------------Begin Analytics------------------*/
             #if ENABLE_CLOUD_SERVICES_ANALYTICS
@@ -170,7 +173,8 @@ public class Player : MonoBehaviour
 
             string MasterClient = (string)PhotonNetwork.CurrentRoom.CustomProperties["MasterClientName"];
             string Client = (string)PhotonNetwork.CurrentRoom.CustomProperties["ClientName"];
-            string Loser = System.Environment.UserName;
+            //string Loser = System.Environment.UserName;
+            string Loser = LobbyPlayerName.playerNameDisplay;
             string Winner = (Loser==Client)? MasterClient:Client;
             string LoseField = (transform.position.x>0)? "Right":"Left";
             string WinField = (transform.position.x>0)? "Left":"Right";
@@ -179,19 +183,19 @@ public class Player : MonoBehaviour
             Debug.Log("@player.cs/LoseField: "+ LoseField);
             Debug.Log("@player.cs/WinField: "+ WinField);
                 
-            Debug.Log("@player.cs/System.Environment.UserName: "+ System.Environment.UserName);
+            //Debug.Log("@player.cs/System.Environment.UserName: "+ System.Environment.UserName);
             Analytics.CustomEvent("gameOver", new Dictionary<string, object>{
                 { "gameDuration", gameDuration },
                 { "Winner", Winner },
                 { "Loser", Loser},
                 { "LoseField", LoseField},
                 { "WinField", WinField}
-            }); 
+            }); // only loser will send this event (check the userID of this event to be loser)
             #endif
             /*------------------End Analytics------------------*/
-            SceneManager.LoadScene("LoseScene");
-            PhotonNetwork.LeaveLobby();
+            PhotonManager.isWinner = false;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"GameOver", true}});
         }
     }
-
+    
 }
