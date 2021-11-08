@@ -12,7 +12,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public int roomSize;
     public GameObject roomListingPrefab;
     public Transform roomsPanel;
-
+    public bool randomMatch;
     private void Awake(){
       lobby = this;
     }
@@ -21,10 +21,11 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+        randomMatch = false;
     }
-
+    
     public override void OnConnectedToMaster(){
-      Debug.Log("Player has connected to the Photon Master server");
+      //Debug.Log("Player has connected to the Photon Master server");
       PhotonNetwork.AutomaticallySyncScene = true;
 
     }
@@ -53,19 +54,20 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
     }
 
     public void CreateRoom(){
-      Debug.Log("Trying to create a new room");
+      //Debug.Log("Trying to create a new room");
       RoomOptions roomOps = new RoomOptions(){
         IsVisible = true,
         IsOpen = true,
         MaxPlayers = (byte)roomSize
       };
-      PhotonNetwork.JoinOrCreateRoom(roomName, roomOps, TypedLobby.Default);
-      SceneManager.LoadScene("MainGame");
-      // PhotonNetwork.LeaveRoom();
+      randomMatch = false;
+      PhotonNetwork.CreateRoom(roomName, roomOps, TypedLobby.Default);
+      SceneManager.LoadScene("WaitingScene");
+      //PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
+      //SceneManager.LoadScene("MainGame");
     }
     public override void OnCreateRoomFailed(short returnCode, string message){
       Debug.Log("Tried to create a new room but failed, there must be a room with the same name.");
-      // CreateRoom();
     }
 
     public void OnRoomNameChanged(string nameIn){
@@ -78,14 +80,14 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
       roomSize = 2;
 
     }
-    public static bool randomMatch = false;
+    
     public void JoinLobbyOnClick(){
       randomMatch = false;
       if(!PhotonNetwork.InLobby){
         PhotonNetwork.JoinLobby();
       }
     }
-    public static void QuickMatch(){
+    public void QuickMatch(){
       randomMatch = true;
       PhotonNetwork.JoinLobby();
     }
@@ -96,6 +98,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         PhotonNetwork.CreateRoom(null, new RoomOptions {MaxPlayers = 2}, TypedLobby.Default);
-        SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene("WaitingScene");
     }
 }

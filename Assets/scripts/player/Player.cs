@@ -36,15 +36,15 @@ public class Player : MonoBehaviour
         if(photonView.IsMine){
             GameObject cureBttn = GameObject.Find("/CanvasSkillCard/changeCard1");
             cureBttn.SendMessage("SetPlayer",this.gameObject);
-            Debug.Log("Cure added in Player1");
+            //Debug.Log("Cure added in Player1");
             
             cureBttn = GameObject.Find("/CanvasSkillCard/changeCard2");
             cureBttn.SendMessage("SetPlayer",this.gameObject);
-            Debug.Log("Cure added in Player2");
+            //Debug.Log("Cure added in Player2");
             
             cureBttn = GameObject.Find("/CanvasSkillCard/changeCard3");
             cureBttn.SendMessage("SetPlayer",this.gameObject);
-            Debug.Log("Cure added in Player3");
+            //Debug.Log("Cure added in Player3");
         }
     }
     public Rigidbody2D rb;
@@ -84,31 +84,28 @@ public class Player : MonoBehaviour
     }*/
 
     void OnCollisionEnter2D(Collision2D other) {
-        
         bool isHitByBullet = other.gameObject.tag == "Bullet";
         //if player is hit, destroy bullet and change healthBar
         bool isMaster = PhotonNetwork.IsMasterClient;
         if (photonView.IsMine && isMaster)
         {
-
             bool player2_hasfield = GetComponent<Place_field>().player2_hasfield;
-            Debug.Log("player1" + player2_hasfield);
+            //Debug.Log("player1" + player2_hasfield);
             if (player2_hasfield)
             {
                 
                 string property = GetComponent<Place_field>().player2_field_color;
-                Debug.Log("property" + property);
+                //Debug.Log("property" + property);
             }
         }
         else if(photonView.IsMine)
         {
             bool player1_hasfield = GetComponent<Place_field>().player1_hasfield;
-            Debug.Log("player1" + player1_hasfield);
+            //Debug.Log("player1" + player1_hasfield);
             if (player1_hasfield)
             {
-               
                 string property = GetComponent<Place_field>().player1_field_color;
-                Debug.Log("property" + property);
+                //Debug.Log("property" + property);
             }
         }
 
@@ -121,6 +118,9 @@ public class Player : MonoBehaviour
             photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
             CheckDeath();
             Destroy(other.gameObject, 0.0f);
+        }
+        else if(!isHitByBullet){
+            Debug.Log("Hit by something other than bullet: "+other.gameObject.tag);
         }
     }
     
@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
     
     void CurePlayer(int point){
         if(photonView.IsMine){
-            Debug.Log("CURE CALLED in player.cs");
+            //Debug.Log("CURE CALLED in player.cs");
             photonView.RPC("HPaddition", RpcTarget.All, point);
         }
     }
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
         //Debug.Log("take damage");   
 
         currentHP = healthBar.GetHealth();
-        Debug.Log("Current Health: "+currentHP);
+        //Debug.Log("Current Health: "+currentHP);
         if (currentHP <= 0){
 
             

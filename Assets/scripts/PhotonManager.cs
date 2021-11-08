@@ -16,13 +16,30 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     void Start()
     {
         isWinner = true;
-        //PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.ConnectUsingSettings();
         // UnityEngine.Analytics
         #if ENABLE_CLOUD_SERVICES_ANALYTICS
         Debug.Log("Start   " + AnalyticsSessionInfo.userId + " " + AnalyticsSessionInfo.sessionState + " " + AnalyticsSessionInfo.sessionId + " " + AnalyticsSessionInfo.sessionElapsedTime);
         AnalyticsSessionInfo.sessionStateChanged += OnSessionStateChanged;
         #endif
         //Debug.Log(PhotonNetwork.IsMasterClient);
+        /*Debug.Log("PM Player1ID: "+PhotonNetwork.CurrentRoom.CustomProperties["Player1ID"]);
+        Debug.Log("PM LocalPlayerID: "+PhotonNetwork.LocalPlayer);*/
+        if(PhotonNetwork.CurrentRoom.CustomProperties["Player1ID"] == PhotonNetwork.LocalPlayer){
+            GameObject Player1 = PhotonNetwork.Instantiate("Player1", new Vector3(-15, 0, -5), Quaternion.identity);
+            Debug.Log("Instantiate Player1"+PhotonNetwork.LocalPlayer);
+            Player1.name = "Player1";
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", LobbyPlayerName.playerNameDisplay}});
+        }
+        else{
+            GameObject Player2 = PhotonNetwork.Instantiate("Player1", new Vector3(15, 0, -5), Quaternion.identity);
+            Debug.Log("Instantiate Player2"+PhotonNetwork.LocalPlayer);
+            Player2.name = "Player2";
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"ClientName", LobbyPlayerName.playerNameDisplay}});
+        }
+        ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable();
+        ht["what"] = 1;
+        PhotonNetwork.LocalPlayer.CustomProperties = ht;
     }
 
     /*public override void OnConnectedToMaster(){
@@ -36,7 +53,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CreateRoom(null, new RoomOptions {MaxPlayers = 2}, TypedLobby.Default);
     }*/
-    public override void OnJoinedRoom(){
+    /*public override void OnJoinedRoom(){
         startTime = Time.time;
         if (PhotonNetwork.IsMasterClient)
         {
@@ -63,10 +80,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         ht["what"] = 1;
         PhotonNetwork.LocalPlayer.CustomProperties = ht;
         //Debug.Log(PhotonNetwork.IsMasterClient);
-    }
+    }*/
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient) {
-        int fieldSide = -1*Player.side;
-        PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"field", fieldSide}});
+        /*int fieldSide = -1*Player.side;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"field", fieldSide}});*/
         PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", System.Environment.UserName}});
     }	
     public override void OnLeftRoom(){

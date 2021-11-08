@@ -21,7 +21,8 @@ public class RoomButton : MonoBehaviour
     public void JoinRoomOnClicked(){
       PhotonNetwork.JoinRoom(roomName);
       Debug.Log("Plyaer2 joined");
-      SceneManager.LoadScene("MainGame");
+      SceneManager.LoadScene("WaitingScene");
+      //SceneManager.LoadScene("MainGame");
     }
 
 }

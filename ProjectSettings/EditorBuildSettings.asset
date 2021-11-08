@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: fcb2a3e5160c48c4cb6643b93a7ef4f9
+  - enabled: 1
+    path: Assets/Scenes/WaitingScene.unity
+    guid: 4694f87957a025c4e898ffd8423279e0
   m_configObjects: {}
