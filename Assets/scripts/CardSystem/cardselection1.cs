@@ -47,6 +47,7 @@ public class cardselection1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
       int num;
       if(Input.GetKeyDown(KeyCode.Alpha1 )){
         Debug.Log(clicked);
@@ -55,41 +56,46 @@ public class cardselection1 : MonoBehaviour
         StartCoroutine(wait());
         Debug.Log(card.text);
         if(card.text=="Cure"){
-          energyBar.UseEnergy(7);
+
           Cure();
           num = Random.Range(0,6);
           Select(num);
-
+          energyBar.UseEnergy(7);
         }
         else if(card.text=="Speed"){
-          energyBar.UseEnergy(5);
+
           Speed();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(5);
         }
         else if(card.text=="Weapon"){
-          energyBar.UseEnergy(8);
+
           Weapon();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(8);
         }
         else if(card.text=="Redfield"){
-          energyBar.UseEnergy(3);
+          
           placefield.R();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(3);
         }
         else if(card.text=="Bluefield"){
-          energyBar.UseEnergy(3);
+
           placefield.B();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(3);
         }
         else if(card.text=="Yellowfield"){
-          energyBar.UseEnergy(3);
+
           //placefield.Y();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(3);
         }
       }
       }
@@ -127,8 +133,10 @@ public class cardselection1 : MonoBehaviour
     void Cure(){
       Debug.Log("Cure");
       displayCardName1.GetInstance().UpdateName("Cure");
+
       if(myplayer!=null && energyBar.getCurrentEnergy() >= 6 && Player.currentHP<Player.maxHealth){
           Debug.Log(myplayer);
+          Debug.Log("cure_if1");
           myplayer.SendMessage("CurePlayer",addHP1);
 
 
@@ -161,11 +169,9 @@ public class cardselection1 : MonoBehaviour
     void Weapon(){
       Debug.Log("Weapon");
       displayCardName1.GetInstance().UpdateName("Weapon");
+      Debug.Log(energyBar.getCurrentEnergy());
       if(energyBar.getCurrentEnergy() >= 7 && Player.PlayerShootSpeed<256f){
-
         Change();
-
-
       }
     }
 

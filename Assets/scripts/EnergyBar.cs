@@ -28,6 +28,8 @@ public class EnergyBar : MonoBehaviour
         energyBar.value = 0;
         regen = StartCoroutine(RegenEnergy());
     }
+    
+
 
     public float getCurrentEnergy(){
         return energyBar.value;
@@ -47,7 +49,7 @@ public class EnergyBar : MonoBehaviour
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Energy Consumption", new Dictionary<string, object>{
                 { "current_energy", current_energy},
                 { "Player", System.Environment.UserName }
-            }); 
+            });
             Debug.Log("[Analytics] Energy Consumption:" + analyticsResult);
         }
         else

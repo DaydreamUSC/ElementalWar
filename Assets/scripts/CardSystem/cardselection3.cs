@@ -55,41 +55,47 @@ public class cardselection3 : MonoBehaviour
         StartCoroutine(wait());
         Debug.Log(card.text);
         if(card.text=="Cure"){
-          energyBar.UseEnergy(7);
+
           Cure();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(7);
 
         }
         else if(card.text=="Speed"){
-          energyBar.UseEnergy(5);
+
           Speed();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(5);
         }
         else if(card.text=="Weapon"){
-          energyBar.UseEnergy(8);
+
           Weapon();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(8);
         }
         else if(card.text=="Redfield"){
-          energyBar.UseEnergy(3);
+
           placefield.R();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(3);
         }
         else if(card.text=="Bluefield"){
-          energyBar.UseEnergy(3);
+
           placefield.B();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(3);
         }
         else if(card.text=="Yellowfield"){
-          energyBar.UseEnergy(3);
+
           //placefield.Y();
           num = Random.Range(0,6);
           Select(num);
+          energyBar.UseEnergy(3);
         }
       }
       }
@@ -186,7 +192,7 @@ public class cardselection3 : MonoBehaviour
     public void SetPlayer(GameObject input){
         if(myplayer==null && input!=null){
             myplayer=input;
-            Debug.Log("Cure added in cardselection1");
+            Debug.Log("Cure added in cardselection3");
         }
     }
 
