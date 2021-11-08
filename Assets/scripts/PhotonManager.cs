@@ -25,18 +25,24 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //Debug.Log(PhotonNetwork.IsMasterClient);
         /*Debug.Log("PM Player1ID: "+PhotonNetwork.CurrentRoom.CustomProperties["Player1ID"]);
         Debug.Log("PM LocalPlayerID: "+PhotonNetwork.LocalPlayer);*/
+        
         if(PhotonNetwork.CurrentRoom.CustomProperties["Player1ID"] == PhotonNetwork.LocalPlayer){
             GameObject Player1 = PhotonNetwork.Instantiate("Player1", new Vector3(-15, 0, -5), Quaternion.identity);
             Debug.Log("Instantiate Player1"+PhotonNetwork.LocalPlayer);
             Player1.name = "Player1";
             PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", LobbyPlayerName.playerNameDisplay}});
         }
-        else{
+        else if(PhotonNetwork.CurrentRoom.CustomProperties["Player2ID"] == PhotonNetwork.LocalPlayer){
             GameObject Player2 = PhotonNetwork.Instantiate("Player1", new Vector3(15, 0, -5), Quaternion.identity);
             Debug.Log("Instantiate Player2"+PhotonNetwork.LocalPlayer);
             Player2.name = "Player2";
             PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"ClientName", LobbyPlayerName.playerNameDisplay}});
         }
+        else{
+            Debug.Log("PhotonManager Strat() Player2ID: "+PhotonNetwork.CurrentRoom.CustomProperties["Player1ID"]);
+            Debug.Log("PhotonManager Strat() LocalPlayerID: "+PhotonNetwork.LocalPlayer);
+        }
+        
         ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable();
         ht["what"] = 1;
         PhotonNetwork.LocalPlayer.CustomProperties = ht;

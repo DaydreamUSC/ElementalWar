@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class RoomButton : MonoBehaviour
+public class RoomButton : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
     // public Text playerNameDisplay;
     public Text nameText;
@@ -20,9 +21,8 @@ public class RoomButton : MonoBehaviour
     }
     public void JoinRoomOnClicked(){
       PhotonNetwork.JoinRoom(roomName);
-      Debug.Log("Plyaer2 joined");
+      Debug.Log("Player2 joined");
       SceneManager.LoadScene("WaitingScene");
-      //SceneManager.LoadScene("MainGame");
     }
 
 }
