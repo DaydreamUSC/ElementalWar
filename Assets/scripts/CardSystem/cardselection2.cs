@@ -51,47 +51,53 @@ public class cardselection2 : MonoBehaviour
       if(Input.GetKeyDown(KeyCode.Alpha2)){
         Debug.Log(clicked);
         if(!clicked){
-        clicked = true;
-        StartCoroutine(wait());
-        Debug.Log(card.text);
-        if(card.text=="Cure"){
-          energyBar.UseEnergy(7);
-          Cure();
-          num = Random.Range(0,6);
-          Select(num);
+          clicked = true;
+          StartCoroutine(wait());
+          Debug.Log(card.text);
+          if(card.text=="Cure"){
 
+            Cure();
+            energyBar.UseEnergy(7);
+            num = Random.Range(0,6);
+            Select(num);
+
+          }
+          else if(card.text=="Speed"){
+
+            Speed();
+            energyBar.UseEnergy(5);
+            num = Random.Range(0,6);
+            Select(num);
+          }
+          else if(card.text=="Weapon"){
+
+            Weapon();
+            energyBar.UseEnergy(8);
+            num = Random.Range(0,6);
+            Select(num);
+          }
+          else if(card.text=="Redfield"){
+
+            placefield.R();
+            energyBar.UseEnergy(3);
+            num = Random.Range(0,6);
+            Select(num);
+          }
+          else if(card.text=="Bluefield"){
+
+            placefield.B();
+            energyBar.UseEnergy(3);
+            num = Random.Range(0,6);
+            Select(num);
+          }
+          else if(card.text=="Yellowfield"){
+
+            //placefield.Y();
+            energyBar.UseEnergy(3);
+            num = Random.Range(0,6);
+            Select(num);
+          }
         }
-        else if(card.text=="Speed"){
-          energyBar.UseEnergy(5);
-          Speed();
-          num = Random.Range(0,6);
-          Select(num);
-        }
-        else if(card.text=="Weapon"){
-          energyBar.UseEnergy(8);
-          Weapon();
-          num = Random.Range(0,6);
-          Select(num);
-        }
-        else if(card.text=="Redfield"){
-          energyBar.UseEnergy(3);
-          placefield.R();
-          num = Random.Range(0,6);
-          Select(num);
-        }
-        else if(card.text=="Bluefield"){
-          energyBar.UseEnergy(3);
-          placefield.B();
-          num = Random.Range(0,6);
-          Select(num);
-        }
-        else if(card.text=="Yellowfield"){
-          energyBar.UseEnergy(3);
-          //placefield.Y();
-          num = Random.Range(0,6);
-          Select(num);
-        }
-      }
       }
 
 
@@ -186,7 +192,7 @@ public class cardselection2 : MonoBehaviour
     public void SetPlayer(GameObject input){
         if(myplayer==null && input!=null){
             myplayer=input;
-            Debug.Log("Cure added in cardselection1");
+            Debug.Log("Cure added in cardselection2");
         }
     }
 

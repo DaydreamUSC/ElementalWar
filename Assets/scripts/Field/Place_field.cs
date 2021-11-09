@@ -23,7 +23,7 @@ public class Place_field : MonoBehaviour
     }
 
     public void R(){
-      Debug.Log("RRRRRR");
+      Debug.Log("Redfield");
       if (PhotonNetwork.IsMasterClient)
       {
           if (!player1_hasfield)
@@ -51,7 +51,7 @@ public class Place_field : MonoBehaviour
 
     }
     public void B(){
-      Debug.Log("BBBBBB");
+      Debug.Log("Bluefield");
       if (PhotonNetwork.IsMasterClient)
       {
           if (!player1_hasfield)
@@ -80,6 +80,7 @@ public class Place_field : MonoBehaviour
     }
 
     public void Y(){
+      Debug.Log("Yellowfield");
       if (gameObject.name == "Player1")
       {
           if (!player1_hasfield)
