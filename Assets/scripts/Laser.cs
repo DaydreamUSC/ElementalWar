@@ -10,7 +10,7 @@ public class Laser : MonoBehaviour
     public Transform firePoint;
     public GameObject startVFX;
     public GameObject endVFX;
-    private Player player;
+
     int hitcount = 0;
 
 
@@ -22,7 +22,6 @@ public class Laser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<Player>();
         photonView = GetComponent<PhotonView>();
         FillLists();
         DisableLaser();
@@ -33,24 +32,29 @@ public class Laser : MonoBehaviour
     {
         if(photonView.IsMine)
         {
+
             if(Input.GetButtonDown("Fire1"))
             {
-                photonView.RPC("EnableLaser", RpcTarget.All);
-                // EnableLaser();
+                StartCoroutine("LaserOn");
             }
+            // if(Input.GetButtonDown("Fire1"))
+            // {
+            //     photonView.RPC("EnableLaser", RpcTarget.All);
+            //     // EnableLaser();
+            // }
             
-            if(Input.GetButton("Fire1"))
-            {
-                var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
-                Vector2 LaserEndpoint = new Vector2((mousePos.x+6),(mousePos.y));
-                photonView.RPC("UpdateLaser", RpcTarget.All, LaserEndpoint);
-                // UpdateLaser();
-            }
-            if(Input.GetButtonUp("Fire1"))
-            {
-                photonView.RPC("DisableLaser", RpcTarget.All);
-                // DisableLaser();
-            }
+            // if(Input.GetButton("Fire1"))
+            // {
+            //     var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
+            //     Vector2 LaserEndpoint = new Vector2((mousePos.x+6),(mousePos.y));
+            //     photonView.RPC("UpdateLaser", RpcTarget.All, LaserEndpoint);
+            //     // UpdateLaser();
+            // }
+            // if(Input.GetButtonUp("Fire1"))
+            // {
+            //     photonView.RPC("DisableLaser", RpcTarget.All);
+            //     // DisableLaser();
+            // }
 
             Vector2 direction = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x+6) * Mathf.Rad2Deg;
@@ -60,6 +64,36 @@ public class Laser : MonoBehaviour
         }
 
     }
+
+    //Laser last about 5 seconds
+    private IEnumerator LaserOn()
+    {
+        Move.moveSpeed = 2f;
+
+        photonView.RPC("EnableLaser", RpcTarget.All);
+        var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 LaserEndpoint = new Vector2((mousePos.x+6),(mousePos.y));
+        Vector2 ExtendedEndPoint = LaserEndpoint + (LaserEndpoint - (Vector2)firePoint.position) * 20;
+        Vector2 playerposition = this.transform.position;
+        Quaternion CurrentRotation = transform.rotation;
+
+        for(float ft = 75f; ft >= 0; ft -= 0.1f)
+        {
+            transform.rotation = CurrentRotation; //Lock the rotation to Laser start point
+            if(playerposition != (Vector2)this.transform.position)//Let the LaserEndPoint move as player move
+            {
+                ExtendedEndPoint = ExtendedEndPoint - ((Vector2)playerposition - (Vector2)this.transform.position);
+                playerposition = this.transform.position;
+            }
+            photonView.RPC("UpdateLaser", RpcTarget.All, ExtendedEndPoint);
+            yield return new WaitForSeconds(.005f);
+        }
+
+        photonView.RPC("DisableLaser", RpcTarget.All);
+
+        Move.moveSpeed = 20f;
+    }
+
     [PunRPC]    
     void EnableLaser()
     {

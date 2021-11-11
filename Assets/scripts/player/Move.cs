@@ -5,6 +5,7 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     public static float moveSpeed= 20f;
+    // public static float moveSpeed= 20f;
     Vector2 movement;
     public Rigidbody2D rb;
     //public GameObject HealthBar;
