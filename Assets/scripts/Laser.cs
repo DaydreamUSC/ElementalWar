@@ -11,6 +11,8 @@ public class Laser : MonoBehaviour
     public GameObject startVFX;
     public GameObject endVFX;
 
+    private Coroutine LaserActivate;
+
     int hitcount = 0;
 
 
@@ -35,7 +37,9 @@ public class Laser : MonoBehaviour
 
             if(Input.GetButtonDown("Fire1"))
             {
-                StartCoroutine("LaserOn");
+                if(LaserActivate != null)
+                    StopCoroutine(LaserActivate);
+                LaserActivate = StartCoroutine("LaserOn");
             }
             // if(Input.GetButtonDown("Fire1"))
             // {
@@ -69,6 +73,7 @@ public class Laser : MonoBehaviour
     private IEnumerator LaserOn()
     {
         Move.moveSpeed = 2f;
+        photonView.RPC("LockHealthBarRotation", RpcTarget.All, true);
 
         photonView.RPC("EnableLaser", RpcTarget.All);
         var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
@@ -79,7 +84,8 @@ public class Laser : MonoBehaviour
 
         for(float ft = 75f; ft >= 0; ft -= 0.1f)
         {
-            transform.rotation = CurrentRotation; //Lock the rotation to Laser start point
+            photonView.RPC("LockPlayerRotation", RpcTarget.All, CurrentRotation); //Lock the rotation to Laser start point
+
             if(playerposition != (Vector2)this.transform.position)//Let the LaserEndPoint move as player move
             {
                 ExtendedEndPoint = ExtendedEndPoint - ((Vector2)playerposition - (Vector2)this.transform.position);
@@ -92,6 +98,19 @@ public class Laser : MonoBehaviour
         photonView.RPC("DisableLaser", RpcTarget.All);
 
         Move.moveSpeed = 20f;
+        photonView.RPC("LockHealthBarRotation", RpcTarget.All, false);
+    }
+
+    [PunRPC]
+    void LockHealthBarRotation(bool Laser_Switch)
+    {
+        HealthBar.LaserSwitch = Laser_Switch;
+    }
+
+    [PunRPC]
+    void LockPlayerRotation(Quaternion Current_Rotation)
+    {
+        transform.rotation = Current_Rotation;
     }
 
     [PunRPC]    
