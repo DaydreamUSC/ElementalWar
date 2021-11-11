@@ -276,7 +276,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3555047654008334419, guid: 0cc9091e73a13df439fd1fbce958a8d7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0cc9091e73a13df439fd1fbce958a8d7, type: 3}
 --- !u!1 &332954128
 GameObject:
@@ -1562,15 +1563,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518449617}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7022d9c6abc10404ca5b425633af04b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player1_hasfield: 0
-  player1_field_color: None
+  player1_field_property: None
   player2_hasfield: 0
-  player2_field_color: None
+  player2_field_property: None
 --- !u!4 &1518449619
 Transform:
   m_ObjectHideFlags: 0

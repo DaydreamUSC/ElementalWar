@@ -50,6 +50,10 @@ MonoBehaviour:
   - GameOver
   - HPaddition
   - HPdeduction
+  - addForce
+  - DestroyBullet
+  - WaitAndDestroy
+  - change_color
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

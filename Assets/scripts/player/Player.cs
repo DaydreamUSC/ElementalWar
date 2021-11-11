@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public static int maxHealth = 100;
     //public  GameObject healthBar;
     public static int side;
-    private  HealthBar healthBar;
+    private HealthBar healthBar;
     public static int currentHP;
     public static int currentEP;
     public static int PlayerShootSpeed = 8;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     //public Weaponbase Weapon;
     void Start()
     {
-        if(transform.position.x > 0)
+        if (transform.position.x > 0)
             side = 1;
         else
             side = -1;
@@ -32,18 +32,18 @@ public class Player : MonoBehaviour
         currentHP = maxHealth;
         PlayerShootSpeed = 8;
         PlayerShootPower = 8;
-        
-        if(photonView.IsMine){
+
+        if (photonView.IsMine) {
             GameObject cureBttn = GameObject.Find("/CanvasSkillCard/changeCard1");
-            cureBttn.SendMessage("SetPlayer",this.gameObject);
+            cureBttn.SendMessage("SetPlayer", this.gameObject);
             //Debug.Log("Cure added in Player1");
-            
+
             cureBttn = GameObject.Find("/CanvasSkillCard/changeCard2");
-            cureBttn.SendMessage("SetPlayer",this.gameObject);
+            cureBttn.SendMessage("SetPlayer", this.gameObject);
             //Debug.Log("Cure added in Player2");
-            
+
             cureBttn = GameObject.Find("/CanvasSkillCard/changeCard3");
-            cureBttn.SendMessage("SetPlayer",this.gameObject);
+            cureBttn.SendMessage("SetPlayer", this.gameObject);
             //Debug.Log("Cure added in Player3");
         }
     }
@@ -56,11 +56,11 @@ public class Player : MonoBehaviour
     Vector2 mousePos;
     void Update()
     {
-        if(PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("GameOver")){
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("GameOver")) {
             PhotonNetwork.Disconnect();
         }
-        if(photonView.IsMine){
-            if(Input.GetKeyDown(KeyCode.Space)){
+        if (photonView.IsMine) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
                 HPdeduction(20);
                 CheckDeath();
             }
@@ -71,9 +71,9 @@ public class Player : MonoBehaviour
             mousePos.y = mousePos.y - playerPosition.y;
 
             // healthBar.SetHealth(currentHP);
-            
+
         }
-        
+
     }
 
     /*void FixedUpdate()
@@ -83,9 +83,10 @@ public class Player : MonoBehaviour
         rb.rotation = angle;
     }*/
 
-    void OnCollisionEnter2D(Collision2D other) {
+    void OnTriggerEnter2D(Collider2D other) {
         bool isHitByBullet = other.gameObject.tag == "Bullet";
         //if player is hit, destroy bullet and change healthBar
+        char ownerID = other.gameObject.GetComponent<bullet_property>().ownerID;
         bool isMaster = PhotonNetwork.IsMasterClient;
         if (photonView.IsMine && isMaster)
         {
@@ -93,37 +94,87 @@ public class Player : MonoBehaviour
             //Debug.Log("player1" + player2_hasfield);
             if (player2_hasfield)
             {
-                
-                string property = GetComponent<Place_field>().player2_field_color;
+
+                string property = GetComponent<Place_field>().player2_field_property;
                 //Debug.Log("property" + property);
             }
         }
-        else if(photonView.IsMine)
+        else if (photonView.IsMine)
         {
             bool player1_hasfield = GetComponent<Place_field>().player1_hasfield;
             //Debug.Log("player1" + player1_hasfield);
             if (player1_hasfield)
             {
-                string property = GetComponent<Place_field>().player1_field_color;
+                string property = GetComponent<Place_field>().player1_field_property;
                 //Debug.Log("property" + property);
             }
         }
 
-
-        if (isHitByBullet && photonView.IsMine) {
+        char Player_ownerID = GetComponent<PhotonView>().Owner.ToString()[2];
+        if (isHitByBullet && (Player_ownerID != ownerID)) {
+            Debug.Log("Player_ownerID" + Player_ownerID);
+            Debug.Log("owner_ID" + ownerID);
             //Debug.Log("is hit! "+name);
             //bullet_property b_p = other.gameObject.GetComponent<bullet_property>();
 
-            
-            photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
+
+            //photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
             CheckDeath();
-            Destroy(other.gameObject, 0.0f);
+
+            string color = other.gameObject.GetComponent<bullet_property>().col;
+
+            //burning!
+            if (color == "red")
+            {
+                StartCoroutine(Burning());
+            }
+
+            if (color == "blue")
+            {
+
+
+            }
+
+            if (color == "yellow")
+            {
+
+
+            }
+
+
+            Debug.Log("color is" + color);
+
+
+
+            int photonID = other.gameObject.GetComponent<PhotonView>().ViewID;
+            photonView.RPC("DestroyBullet", RpcTarget.All, photonID);
+
+
         }
-        else if(!isHitByBullet){
-            Debug.Log("Hit by something other than bullet: "+other.gameObject.tag);
+        else if (!isHitByBullet) {
+            Debug.Log("Hit by something oth er than bullet: " + other.gameObject.tag);
         }
     }
-    
+
+    IEnumerator Burning()
+    {
+        photonView.RPC("HPdeduction", RpcTarget.All, 3);
+        yield return new WaitForSeconds(1);
+        photonView.RPC("HPdeduction", RpcTarget.All, 3);
+        yield return new WaitForSeconds(1);
+        photonView.RPC("HPdeduction", RpcTarget.All, 3);
+    }
+
+
+
+    [PunRPC]
+    void DestroyBullet(int photonID)
+    {
+        GameObject bullet = PhotonNetwork.GetPhotonView(photonID).gameObject;
+        Destroy(bullet);
+    }
+
+
     [PunRPC]
     void HPdeduction(int damage){
         if(healthBar == null)

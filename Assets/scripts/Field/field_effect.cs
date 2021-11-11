@@ -14,7 +14,7 @@ public class field_effect : MonoBehaviour
     // Update is called once per frame
     void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log(GetComponent<Place_field>().player1_field_color);
+        
     }
 
 

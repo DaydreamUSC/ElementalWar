@@ -7,29 +7,75 @@ public class bullet_property : MonoBehaviour
     public SpriteRenderer bulletSprite;
     public string col;
     private PhotonView photonView;
+    public string owner;
+    public char ownerID;
+    public Vector3 scale;
     // Start is called before the first frame update
     void Start()
     {
         bulletSprite = GetComponent<SpriteRenderer>();
         col = "white";
         photonView = GetComponent<PhotonView>();
+        scale = transform.localScale;
     }
 
     // Update is called once per frame
 
 
 
+    //field_effect
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        ownerID = GetComponent<PhotonView>().Owner.ToString()[2];
+        //Debug.Log("ownerID" + ownerid);
+        
+        //Player1 field
+        if (other.gameObject.tag == "Player1_field" && ownerID.ToString() == "1")
+        {
+            if (other.gameObject.name == "Player1_fire_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "red");
+            }
+
+            if(other.gameObject.name == "Player1_frozen_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "blue");
+            }
+            if (other.gameObject.name == "Player1_Enlarge_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "enlarge");
+            }
+        }
+
+        //Player2 field
+        if (other.gameObject.tag == "Player2_field" && ownerID.ToString() == "2")
+        {
+            if (other.gameObject.name == "Player2_fire_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "red");
+            }
+
+            if (other.gameObject.name == "Player2_frozen_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "blue");
+            }
+            if (other.gameObject.name == "Player2_Enlarge_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "enlarge");
+            }
+        }
+
+
+
+
+    }
     void Update()
     {
 
     }
-    public void change_color_rpc(string color)
-    {
-        photonView.RPC("change_color_RPC", RpcTarget.All, color);
-    }
 
 
-
+    [PunRPC]
     public void change_color(string color)
     {
         if (color == "red")
@@ -50,11 +96,10 @@ public class bullet_property : MonoBehaviour
             bulletSprite.color = Color.blue;
             col = "blue";
         }
+        
+        if (color == "enlarge")
+        {
+            transform.localScale = new Vector3(transform.localScale.x*3, transform.localScale.y*3, 1f);
+        }
     }
-
-    public string get_color()
-    {
-        return col;
-    }
-
 }

@@ -9,11 +9,12 @@ public class shooting : MonoBehaviour
 
     public Transform firePoint;
     public GameObject bulletPrefab;
-   
+    public Transform firePoint_down;
+    public Transform firePoint_up;
     //public int bulletSpeed = 10f; //= 10f;
     /*public Vector2 minPower;
     public Vector2 maxPower;*/
-
+    public bool Shotgun = true;
     public float Lifetime = 3.0f;
 
     Camera cam;
@@ -21,6 +22,7 @@ public class shooting : MonoBehaviour
     Vector3 endPoint;
     Vector3 playerPosition;
     private PhotonView photonView;
+
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -38,23 +40,44 @@ public class shooting : MonoBehaviour
             bulletDir.Normalize();
             if (Time.frameCount%60 == 0){
                 // Debug.Log(Time.frameCount);
-                photonView.RPC("UpdateShoot", RpcTarget.All, speed*bulletDir);
+                //photonView.RPC("UpdateShoot", RpcTarget.All, speed*bulletDir);
+                if (Shotgun) {
+                    Vector2 bulletDir_up = new Vector2(bulletDir.x + 0.1f, bulletDir.y + 0.1f);
+                    Vector2 bulletDir_down = new Vector2(bulletDir.x - 0.1f, bulletDir.y - 0.1f);
+                    UpdateShoot(speed * bulletDir_up,firePoint_up);
+                    UpdateShoot(speed * bulletDir_down,firePoint_down);
+                    
+                }
+                UpdateShoot(speed * bulletDir,firePoint);
             }
         }
     }
-    [PunRPC]
-    public void UpdateShoot(Vector2 bulletForce)
-    {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-        //Debug.Log("Pho" + PhotonNetwork.IsMasterClient);
 
+
+
+    
+    public void UpdateShoot(Vector2 bulletForce, Transform firePoint)
+    {
+        GameObject bullet = PhotonNetwork.Instantiate("bullet1", firePoint.position, transform.rotation);
+        int photonid = bullet.GetComponent<PhotonView>().ViewID;
+        
+        photonView.RPC("addForce", RpcTarget.All, photonid, bulletForce);
+    }
+
+
+    [PunRPC]
+    public void addForce(int photonid, Vector2 bulletForce)
+        { 
+        //Debug.Log("Pho" + PhotonNetwork.IsMasterClient);
+        GameObject bullet = PhotonNetwork.GetPhotonView(photonid).gameObject;
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        
-        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        
+
+        //Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         rb.AddForce(bulletForce, ForceMode2D.Impulse);
         WaitAndDestroy(bullet);
-    }
+        }
+
+    [PunRPC]
     void WaitAndDestroy(GameObject bullet)
     {
         Destroy(bullet,Lifetime);

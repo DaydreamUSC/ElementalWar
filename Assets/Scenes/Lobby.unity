@@ -1089,6 +1089,7 @@ MonoBehaviour:
   roomSize: 0
   roomListingPrefab: {fileID: 573093632613839737, guid: 0de96c5b3c8b24cb48d5b0783adac727, type: 3}
   roomsPanel: {fileID: 46499343}
+  randomMatch: 0
 --- !u!4 &432808617
 Transform:
   m_ObjectHideFlags: 0
@@ -1533,6 +1534,7 @@ MonoBehaviour:
   roomSize: 0
   roomListingPrefab: {fileID: 0}
   roomsPanel: {fileID: 0}
+  randomMatch: 0
 --- !u!4 &576151546
 Transform:
   m_ObjectHideFlags: 0
