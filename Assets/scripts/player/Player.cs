@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
     }
     
     [PunRPC]
-    void HPdeduction(int damage){
+    public void HPdeduction(int damage){
         if(healthBar == null)
             return;
         int currentHealth = healthBar.GetHealth();
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
     
     
     
-    void CheckDeath()
+    public void CheckDeath()
     {
         //Debug.Log("take damage");   
 
