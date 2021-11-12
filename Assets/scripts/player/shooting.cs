@@ -14,7 +14,7 @@ public class shooting : MonoBehaviour
     //public int bulletSpeed = 10f; //= 10f;
     /*public Vector2 minPower;
     public Vector2 maxPower;*/
-    public bool Shotgun = true;
+    public bool Shotgun = false;
     public float Lifetime = 3.0f;
 
     Camera cam;
