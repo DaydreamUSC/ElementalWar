@@ -54,6 +54,12 @@ MonoBehaviour:
   - DestroyBullet
   - WaitAndDestroy
   - change_color
+  - DisableLaser
+  - EnableLaser
+  - LockHealthBarRotation
+  - LockPlayerRotation
+  - RotateToMouse
+  - UpdateLaser
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

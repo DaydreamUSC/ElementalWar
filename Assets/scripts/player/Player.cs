@@ -176,7 +176,7 @@ public class Player : MonoBehaviour
 
 
     [PunRPC]
-    void HPdeduction(int damage){
+    public void HPdeduction(int damage){
         if(healthBar == null)
             return;
         int currentHealth = healthBar.GetHealth();
@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
     
     
     
-    void CheckDeath()
+    public void CheckDeath()
     {
         //Debug.Log("take damage");   
 
@@ -244,8 +244,11 @@ public class Player : MonoBehaviour
             }); // only loser will send this event (check the userID of this event to be loser)
             #endif
             /*------------------End Analytics------------------*/
-            PhotonManager.isWinner = false;
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"GameOver", true}});
+            if(photonView.IsMine)
+            {
+                PhotonManager.isWinner = false;
+                PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"GameOver", true}});
+            }
         }
     }
     

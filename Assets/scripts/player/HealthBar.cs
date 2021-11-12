@@ -7,8 +7,10 @@ public class HealthBar : MonoBehaviour
 {
 
     public Slider slider;
+    public static bool LaserSwitch = false;
     void Update() {
-      transform.rotation = Quaternion.identity;
+      if(!LaserSwitch)
+        transform.rotation = Quaternion.identity;
     }
     public void SetMaxHealth(int health)
     {
