@@ -14,6 +14,7 @@ public class Laser : MonoBehaviour
     private Coroutine LaserActivate;
 
     int hitcount = 0;
+    
 
 
     private PhotonView photonView;
@@ -125,17 +126,19 @@ public class Laser : MonoBehaviour
     [PunRPC]
     void UpdateLaser(Vector2 LaserEndpoint)
     {
-        // var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
-        // Vector2 LaserEndpoint = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         lineRenderer.SetPosition(0, (Vector2)firePoint.position);
         startVFX.transform.position = (Vector2)firePoint.position;
 
         lineRenderer.SetPosition(1, LaserEndpoint);
-        // lineRenderer.SetPosition(1, mousePos);
 
         Vector2 direction = LaserEndpoint - (Vector2)transform.position;
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude);
+        // Bit shift the index of the layer (5) to get a bit mask
+        int layerMask = 1 << 5;
+        // This would cast rays only against colliders in layer 5.
+        // But instead we want to collide against everything except layer 5. The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude, layerMask);
 
         if(hit.collider != null)
         {

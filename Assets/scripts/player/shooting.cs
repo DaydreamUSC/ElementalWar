@@ -20,6 +20,8 @@ public class shooting : MonoBehaviour
     Vector2 bulletDir;
     Vector3 endPoint;
     Vector3 playerPosition;
+
+    public GameObject mid_boundary;
     private PhotonView photonView;
     private void Start()
     {
@@ -51,6 +53,7 @@ public class shooting : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        // Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), mid_boundary.GetComponent<Collider2D>());
         
         rb.AddForce(bulletForce, ForceMode2D.Impulse);
         WaitAndDestroy(bullet);

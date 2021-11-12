@@ -193,8 +193,11 @@ public class Player : MonoBehaviour
             }); // only loser will send this event (check the userID of this event to be loser)
             #endif
             /*------------------End Analytics------------------*/
-            PhotonManager.isWinner = false;
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"GameOver", true}});
+            if(photonView.IsMine)
+            {
+                PhotonManager.isWinner = false;
+                PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"GameOver", true}});
+            }
         }
     }
     

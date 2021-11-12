@@ -9854,6 +9854,7 @@ MonoBehaviour:
   firePoint: {fileID: 4609132771035683181}
   bulletPrefab: {fileID: 3815141518301349025, guid: 66047cee101feda48a66166dae4a734f, type: 3}
   Lifetime: 3
+  mid_boundary: {fileID: 0}
 --- !u!114 &4609132770446082586
 MonoBehaviour:
   m_ObjectHideFlags: 0
