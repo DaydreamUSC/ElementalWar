@@ -76,6 +76,9 @@ sysinfo.txt
 *.aab
 *.unitypackage
 
+# Mac .DS_Store
+*.DS_Store
+
 # Crashlytics generated file
 crashlytics-build.properties
 
