@@ -27,6 +27,7 @@ public class shooting : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         cam = Camera.main;
+        Shotgun = false;
     }
     // Update is called once per frame
 

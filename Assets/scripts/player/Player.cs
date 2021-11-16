@@ -84,6 +84,8 @@ public class Player : MonoBehaviour
     }*/
 
     void OnTriggerEnter2D(Collider2D other) {
+        if(other == null)
+            return ;
         bool isHitByBullet = other.gameObject.tag == "Bullet";
         //if player is hit, destroy bullet and change healthBar
         char ownerID = other.gameObject.GetComponent<bullet_property>().ownerID;
@@ -118,7 +120,7 @@ public class Player : MonoBehaviour
             //bullet_property b_p = other.gameObject.GetComponent<bullet_property>();
 
 
-            //photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
+            photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
             CheckDeath();
 
             string color = other.gameObject.GetComponent<bullet_property>().col;
@@ -170,6 +172,8 @@ public class Player : MonoBehaviour
     [PunRPC]
     void DestroyBullet(int photonID)
     {
+        if(PhotonNetwork.GetPhotonView(photonID) == null)
+            return ;
         GameObject bullet = PhotonNetwork.GetPhotonView(photonID).gameObject;
         Destroy(bullet);
     }

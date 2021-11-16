@@ -29,7 +29,7 @@ public class Laser : MonoBehaviour
         FillLists();
         DisableLaser();
     }
-
+    Vector2 direction;
     // Update is called once per frame
     void Update()
     {
@@ -61,10 +61,13 @@ public class Laser : MonoBehaviour
             //     // DisableLaser();
             // }
 
-            Vector2 direction = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            Vector3 endPoint = camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 playerPosition = this.transform.position;
+            direction = new Vector2((endPoint.x - playerPosition.x), (endPoint.y - playerPosition.y));
+            /*direction = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x+6) * Mathf.Rad2Deg;
-            rotation.eulerAngles = new Vector3(0,0,angle);
-            photonView.RPC("RotateToMouse", RpcTarget.All, rotation);
+            rotation.eulerAngles = new Vector3(0,0,angle);*/
+            //photonView.RPC("RotateToMouse", RpcTarget.All, rotation);
             // RotateToMouse();
         }
 
@@ -74,7 +77,7 @@ public class Laser : MonoBehaviour
     private IEnumerator LaserOn()
     {
         Move.moveSpeed = 2f;
-        photonView.RPC("LockHealthBarRotation", RpcTarget.All, true);
+        //photonView.RPC("LockHealthBarRotation", RpcTarget.All, true);
 
         photonView.RPC("EnableLaser", RpcTarget.All);
         var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
@@ -85,7 +88,7 @@ public class Laser : MonoBehaviour
 
         for(float ft = 75f; ft >= 0; ft -= 0.1f)
         {
-            photonView.RPC("LockPlayerRotation", RpcTarget.All, CurrentRotation); //Lock the rotation to Laser start point
+            //photonView.RPC("LockPlayerRotation", RpcTarget.All, CurrentRotation); //Lock the rotation to Laser start point
 
             if(playerposition != (Vector2)this.transform.position)//Let the LaserEndPoint move as player move
             {
@@ -99,9 +102,9 @@ public class Laser : MonoBehaviour
         photonView.RPC("DisableLaser", RpcTarget.All);
 
         Move.moveSpeed = 20f;
-        photonView.RPC("LockHealthBarRotation", RpcTarget.All, false);
+        //photonView.RPC("LockHealthBarRotation", RpcTarget.All, false);
     }
-
+    /*
     [PunRPC]
     void LockHealthBarRotation(bool Laser_Switch)
     {
@@ -112,7 +115,7 @@ public class Laser : MonoBehaviour
     void LockPlayerRotation(Quaternion Current_Rotation)
     {
         transform.rotation = Current_Rotation;
-    }
+    }*/
 
     [PunRPC]    
     void EnableLaser()
@@ -132,12 +135,15 @@ public class Laser : MonoBehaviour
 
         lineRenderer.SetPosition(1, LaserEndpoint);
 
-        Vector2 direction = LaserEndpoint - (Vector2)transform.position;
+        //Vector2 direction = LaserEndpoint - (Vector2)transform.position;
         // Bit shift the index of the layer (5) to get a bit mask
         int layerMask = 1 << 5;
         // This would cast rays only against colliders in layer 5.
         // But instead we want to collide against everything except layer 5. The ~ operator does this, it inverts a bitmask.
         layerMask = ~layerMask;
+        
+        //angle.Normalize();
+        
         RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude, layerMask);
 
         if(hit.collider != null)
@@ -185,13 +191,13 @@ public class Laser : MonoBehaviour
             particles[i].Stop();       
     }
 
-    [PunRPC]
+    /*[PunRPC]
     void RotateToMouse(Quaternion rotation)
     {
         
         transform.rotation = rotation;
 
-    }
+    }*/
     void FillLists()
     {
         for(int i=0; i<startVFX.transform.childCount; i++)

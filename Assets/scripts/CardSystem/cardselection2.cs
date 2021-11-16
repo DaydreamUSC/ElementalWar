@@ -22,7 +22,7 @@ public class cardselection2 : MonoBehaviour
     void Start()
     {
       clicked = false;
-      int num = Random.Range(0,6);//0~5
+      int num = Random.Range(0,7);//0~6
       if(num==0){
           displayCardName2.GetInstance().UpdateName("Cure");
       }
@@ -41,6 +41,9 @@ public class cardselection2 : MonoBehaviour
       else if(num==5){
           displayCardName2.GetInstance().UpdateName("Yellowfield");
       }
+      else if (num == 6){
+          displayCardName2.GetInstance().UpdateName("Enlargefield");
+      }
 
     }
 
@@ -58,7 +61,7 @@ public class cardselection2 : MonoBehaviour
 
             Cure();
             energyBar.UseEnergy(7);
-            num = Random.Range(0,6);
+            num = Random.Range(0,7);
             Select(num);
 
           }
@@ -66,38 +69,46 @@ public class cardselection2 : MonoBehaviour
 
             Speed();
             energyBar.UseEnergy(5);
-            num = Random.Range(0,6);
+            num = Random.Range(0,7);
             Select(num);
           }
           else if(card.text=="Weapon"){
 
             Weapon();
             energyBar.UseEnergy(8);
-            num = Random.Range(0,6);
+            num = Random.Range(0,7);
             Select(num);
           }
           else if(card.text=="Redfield"){
 
             placefield.R();
             energyBar.UseEnergy(3);
-            num = Random.Range(0,6);
+            num = Random.Range(0,7);
             Select(num);
           }
           else if(card.text=="Bluefield"){
 
             placefield.B();
             energyBar.UseEnergy(3);
-            num = Random.Range(0,6);
+            num = Random.Range(0,7);
             Select(num);
           }
           else if(card.text=="Yellowfield"){
 
             //placefield.Y();
             energyBar.UseEnergy(3);
-            num = Random.Range(0,6);
+            num = Random.Range(0,7);
             Select(num);
           }
-        }
+          else if (card.text == "Enlargefield")
+          {
+            placefield.Enlarge();
+                  //placefield.Y();
+            energyBar.UseEnergy(3);
+            num = Random.Range(0,7);
+            Select(num);
+                }
+            }
       }
 
 
@@ -118,14 +129,17 @@ public class cardselection2 : MonoBehaviour
       else if(num==2){
           displayCardName2.GetInstance().UpdateName("Weapon");
       }
-      else if(num==4){
+      else if(num==3){
           displayCardName2.GetInstance().UpdateName("Redfield");
       }
-      else if(num==5){
+      else if(num==4){
           displayCardName2.GetInstance().UpdateName("Bluefield");
       }
-      else if(num==6){
+      else if(num==5){
           displayCardName2.GetInstance().UpdateName("Yellowfield");
+      }
+      else if(num==6){
+          displayCardName2.GetInstance().UpdateName("Enlargefield");
       }
     }
 
