@@ -18,7 +18,10 @@ public class Player : MonoBehaviour
     public static int PlayerShootPower = 8;
     public static int PlayerMoveSpeed;
     public static List<Card> currentWeapon;
+    private AudioSource Bullet_Shoot_Audio;
     private PhotonView photonView;
+    private AudioSource[] sounds;
+    private AudioSource Hit_Sound;
     //public Weaponbase Weapon;
     void Start()
     {
@@ -45,10 +48,14 @@ public class Player : MonoBehaviour
             cureBttn = GameObject.Find("/CanvasSkillCard/changeCard3");
             cureBttn.SendMessage("SetPlayer", this.gameObject);
             //Debug.Log("Cure added in Player3");
+
+            sounds = GetComponents<AudioSource>();
+            Hit_Sound = sounds[1];
         }
     }
     public Rigidbody2D rb;
     public Camera cam;
+    
     // Update is called once per frame
 
     Vector3 playerPosition;
@@ -185,6 +192,7 @@ public class Player : MonoBehaviour
             return;
         int currentHealth = healthBar.GetHealth();
         healthBar.SetHealth(currentHealth - damage);
+        Hit_Sound.PlayOneShot(Hit_Sound.clip);
     }
     
     [PunRPC]
@@ -207,7 +215,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    
+
     
     public void CheckDeath()
     {

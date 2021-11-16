@@ -16,6 +16,8 @@ public class shooting : MonoBehaviour
     public Vector2 maxPower;*/
     public bool Shotgun = false;
     public float Lifetime = 3.0f;
+    private AudioSource Bullet_Shoot_Audio;
+    public AudioSource[] sounds;
 
     Camera cam;
     Vector2 bulletDir;
@@ -28,6 +30,8 @@ public class shooting : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         cam = Camera.main;
         Shotgun = false;
+        sounds = GetComponents<AudioSource>();
+        Bullet_Shoot_Audio = sounds[0];
     }
     // Update is called once per frame
 
@@ -61,7 +65,7 @@ public class shooting : MonoBehaviour
     {
         GameObject bullet = PhotonNetwork.Instantiate("bullet1", firePoint.position, transform.rotation);
         int photonid = bullet.GetComponent<PhotonView>().ViewID;
-        
+        Bullet_Shoot_Audio.PlayOneShot(Bullet_Shoot_Audio.clip);
         photonView.RPC("addForce", RpcTarget.All, photonid, bulletForce);
     }
 
