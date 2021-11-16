@@ -75,6 +75,10 @@ sysinfo.txt
 *.apk
 *.aab
 *.unitypackage
+*.exe
+!/Assets/Photon/PhotonLibs/*.exe
+*.dll
+!/Assets/Photon/PhotonLibs/*.dll
 
 # Mac .DS_Store
 *.DS_Store
