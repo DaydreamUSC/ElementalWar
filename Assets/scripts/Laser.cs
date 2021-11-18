@@ -137,10 +137,10 @@ public class Laser : MonoBehaviour
 
         //Vector2 direction = LaserEndpoint - (Vector2)transform.position;
         // Bit shift the index of the layer (5) to get a bit mask
-        int layerMask = 1 << 5;
+        int layerMask = (LayerMask.GetMask("Player"));
         // This would cast rays only against colliders in layer 5.
         // But instead we want to collide against everything except layer 5. The ~ operator does this, it inverts a bitmask.
-        layerMask = ~layerMask;
+        //layerMask = layerMask;
         
         //angle.Normalize();
         
@@ -162,6 +162,7 @@ public class Laser : MonoBehaviour
             //     Debug.Log("Hit "+hit.collider.name);
             //     lineRenderer.SetPosition(1, hit.point);
             // }
+            Debug.Log(hit.collider.name);
             if(hit.collider.name == "Player1(Clone)" || hit.collider.name == "Player1" || hit.collider.name == "Player2")
             // if(hit.collider.name == "Player1" || hit.collider.name == "Player2" )
             {
@@ -172,7 +173,7 @@ public class Laser : MonoBehaviour
                     Debug.Log("Call HPdeduction");
                     hit.collider.gameObject.GetComponent<Player>().HPdeduction(1);
                     hit.collider.gameObject.GetComponent<Player>().CheckDeath();
-                    // photonView.RPC("CallFromPlayer", RpcTarget.All, 1);
+                    photonView.RPC("CallFromPlayer", RpcTarget.All, 1);
                     hitcount = 0;
                 }
             }

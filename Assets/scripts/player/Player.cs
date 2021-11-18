@@ -51,6 +51,12 @@ public class Player : MonoBehaviour
 
             sounds = GetComponents<AudioSource>();
             Hit_Sound = sounds[1];
+        
+        if (!PhotonNetwork.IsMasterClient)
+            {
+                photonView.RPC("flipPlayer", RpcTarget.All);
+                Debug.Log("flipped!!");
+            }
         }
     }
     public Rigidbody2D rb;
@@ -127,7 +133,7 @@ public class Player : MonoBehaviour
             //bullet_property b_p = other.gameObject.GetComponent<bullet_property>();
 
 
-            photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
+            //photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
             CheckDeath();
 
             string color = other.gameObject.GetComponent<bullet_property>().col;
@@ -174,7 +180,13 @@ public class Player : MonoBehaviour
         photonView.RPC("HPdeduction", RpcTarget.All, 3);
     }
 
-
+    [PunRPC]
+    void flipPlayer()
+    {
+        Vector3 newScale = transform.localScale;
+        newScale.x *= -1;
+        transform.localScale = newScale;
+    }
 
     [PunRPC]
     void DestroyBullet(int photonID)
