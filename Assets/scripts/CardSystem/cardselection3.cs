@@ -22,7 +22,7 @@ public class cardselection3 : MonoBehaviour
     void Start()
     {
       clicked = false;
-      int num = Random.Range(0,7);//0~6
+      int num = Random.Range(0,8);//0~6
       if(num==0){
           displayCardName3.GetInstance().UpdateName("Cure");
       }
@@ -44,7 +44,9 @@ public class cardselection3 : MonoBehaviour
       else if (num == 6){
           displayCardName3.GetInstance().UpdateName("Enlargefield");
       }
-
+      else if (num == 7){
+          displayCardName1.GetInstance().UpdateName("Laser Gun");
+      }
     }
 
     // Update is called once per frame
@@ -52,16 +54,16 @@ public class cardselection3 : MonoBehaviour
     {
       int num;
       if(Input.GetKeyDown(KeyCode.Alpha3)){
-        Debug.Log(clicked);
-        if(!clicked){
-          clicked = true;
-          StartCoroutine(wait());
+        // Debug.Log(clicked);
+        // if(!clicked){
+          // clicked = true;
+          // StartCoroutine(wait());
           Debug.Log(card.text);
           if(card.text=="Cure"){
 
             Cure();
             energyBar.UseEnergy(7);
-            num = Random.Range(0,7);
+            num = Random.Range(0,8);
             Select(num);
 
           }
@@ -69,35 +71,35 @@ public class cardselection3 : MonoBehaviour
 
             Speed();
             energyBar.UseEnergy(5);
-            num = Random.Range(0,7);
+            num = Random.Range(0,8);
             Select(num);
           }
           else if(card.text=="Weapon"){
 
             Weapon();
             energyBar.UseEnergy(8);
-            num = Random.Range(0,7);
+            num = Random.Range(0,8);
             Select(num);
           }
           else if(card.text=="Redfield"){
 
             placefield.R();
             energyBar.UseEnergy(3);
-            num = Random.Range(0,7);
+            num = Random.Range(0,8);
             Select(num);
           }
           else if(card.text=="Bluefield"){
 
             placefield.B();
             energyBar.UseEnergy(3);
-            num = Random.Range(0,7);
+            num = Random.Range(0,8);
             Select(num);
           }
           else if(card.text=="Yellowfield"){
 
             //placefield.Y();
             energyBar.UseEnergy(3);
-            num = Random.Range(0,7);
+            num = Random.Range(0,8);
             Select(num);
           }
           else if (card.text == "Enlargefield")
@@ -105,10 +107,17 @@ public class cardselection3 : MonoBehaviour
             placefield.Enlarge();
                   //placefield.Y();
             energyBar.UseEnergy(3);
-            num = Random.Range(0,7);
+            num = Random.Range(0,8);
             Select(num);
                 }
-            }
+          else if (card.text == "Laser Gun")
+          {
+            enableLaser();
+            energyBar.UseEnergy(7);
+            num = Random.Range(0,8);
+            Select(num);
+          }
+        // }
       }
 
 
@@ -141,8 +150,18 @@ public class cardselection3 : MonoBehaviour
       else if(num==6){
           displayCardName3.GetInstance().UpdateName("Enlargefield");
       }
+      else if(num==7){
+          displayCardName1.GetInstance().UpdateName("Laser Gun");
+      }
     }
 
+    void enableLaser() {
+      Debug.Log("TEST");
+      if (energyBar.getCurrentEnergy() >= 7) {
+        Debug.Log("Taking laser gun");
+        myplayer.SendMessage("UseLaser");
+      }
+    }
 
     void Cure(){
       Debug.Log("Cure");

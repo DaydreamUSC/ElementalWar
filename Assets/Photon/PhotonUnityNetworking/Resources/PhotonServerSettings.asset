@@ -60,6 +60,8 @@ MonoBehaviour:
   - LockPlayerRotation
   - RotateToMouse
   - UpdateLaser
+  - flipPlayer2
+  - flipPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

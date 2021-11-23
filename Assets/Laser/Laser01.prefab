@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2674226929574434123}
   - component: {fileID: 7257432801320913761}
   - component: {fileID: 7126584069236807950}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4813,9 +4813,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6385955019350415063}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Laser01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 3910367030866362708}
   - component: {fileID: 6974122410147174681}
   - component: {fileID: 8090870759037344973}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beam (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9652,7 +9652,7 @@ GameObject:
   - component: {fileID: 7865950242939098485}
   - component: {fileID: 5241021943980128547}
   - component: {fileID: 8185737796593893627}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particles (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14457,7 +14457,7 @@ GameObject:
   - component: {fileID: 7625290025890747983}
   - component: {fileID: 9073450422278273724}
   - component: {fileID: 231148516310118848}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14592,7 +14592,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: f6c29cd4754fb054e97789baadca46b3, type: 2}
+  sharedProfile: {fileID: 0}
 --- !u!61 &231148516310118848
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14628,7 +14628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8767758712976241784}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EndVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14662,7 +14662,7 @@ GameObject:
   - component: {fileID: 9211597107692247007}
   - component: {fileID: 1564313402961881085}
   - component: {fileID: 8863828096990690438}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19464,7 +19464,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8614767425650530037}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StartVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

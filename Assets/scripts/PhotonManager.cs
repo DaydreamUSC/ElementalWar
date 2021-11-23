@@ -34,6 +34,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
         else if(PhotonNetwork.CurrentRoom.CustomProperties["Player2ID"] == PhotonNetwork.LocalPlayer){
             GameObject Player2 = PhotonNetwork.Instantiate("Player1", new Vector3(15, 0, -5), Quaternion.identity);
+            
             Debug.Log("Instantiate Player2"+PhotonNetwork.LocalPlayer);
             Player2.name = "Player2";
             PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"ClientName", LobbyPlayerName.playerNameDisplay}});
@@ -47,6 +48,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         ht["what"] = 1;
         PhotonNetwork.LocalPlayer.CustomProperties = ht;
     }
+
 
     /*public override void OnConnectedToMaster(){
         PhotonNetwork.JoinLobby();
