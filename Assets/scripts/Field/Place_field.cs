@@ -22,7 +22,12 @@ public class Place_field : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
 
-    
+    public void No()
+    {
+        Debug.Log("No");
+        PlaceField("No");
+
+    }
     // Update is called once per frame
     public void R()
     {
@@ -45,7 +50,7 @@ public class Place_field : MonoBehaviour
 
     public void Enlarge()
     {
-        Debug.Log("");
+        Debug.Log("Enlargefield");
         PlaceField("Enlarge");
     }
 
@@ -85,7 +90,12 @@ public class Place_field : MonoBehaviour
     [PunRPC]
     public void change_field_player1(string property)
     {
-        if (property == "red") {
+        if (property == "No") {
+            //Debug.Log("triggger!!!");
+        player1_hasfield = false;
+
+        }
+        else if (property == "red") {
             //Debug.Log("triggger!!!");
         player1_current_field = PhotonNetwork.Instantiate("Player1_fire_field", new Vector3(16.6f, 0, -5), Quaternion.identity);
 
@@ -94,19 +104,19 @@ public class Place_field : MonoBehaviour
 
         }
 
-        if (property == "blue")
+        else if (property == "blue")
         {
             player1_current_field =  PhotonNetwork.Instantiate("Player1_frozen_field", new Vector3(16.6f, 0, -5), Quaternion.identity);
             player1_current_field.name = "Player1_frozen_field";
             player1_field_property = "blue";
         }
-        if (property == "yellow")
+        else if (property == "yellow")
         {
             player1_current_field = PhotonNetwork.Instantiate("Player1_lighting_field", new Vector3(16.6f, 0, -5), Quaternion.identity);
             player1_current_field.name = "Player1_lighting_field";
             player1_field_property = "yellow";
         }
-        if (property == "Enlarge")
+        else if (property == "Enlarge")
         {
             player1_current_field = PhotonNetwork.Instantiate("Player1_Enlarge_field", new Vector3(17.3f, 0, -5), Quaternion.identity);
             player1_current_field.name = "Player1_Enlarge_field";
@@ -121,7 +131,12 @@ public class Place_field : MonoBehaviour
     [PunRPC]
     public void change_field_player2(string property)
     {
-        if (property == "red")
+        if (property == "No") {
+            //Debug.Log("triggger!!!");
+        player2_hasfield = false;
+
+        }
+        else if (property == "red")
         {
             player2_current_field = PhotonNetwork.Instantiate("Player2_fire_field", new Vector3(-16.9f, 0, -5), Quaternion.identity);
             player2_current_field.name = "Player2_fire_field";
@@ -129,19 +144,19 @@ public class Place_field : MonoBehaviour
 
         }
 
-        if (property == "blue")
+        else if (property == "blue")
         {
             player2_current_field = PhotonNetwork.Instantiate("Player2_frozen_field", new Vector3(-16.9f, 0, -5), Quaternion.identity);
             player2_current_field.name = "Player2_frozen_field";
             player2_field_property = "blue";
         }
-        if (property == "yellow")
+        else if (property == "yellow")
         {
             player2_current_field = PhotonNetwork.Instantiate("Player2_lighting_field", new Vector3(-16.9f, 0, -5), Quaternion.identity);
             player2_current_field.name = "Player2_lighting_field";
             player2_field_property = "yellow";
         }
-        if (property == "Enlarge")
+        else if (property == "Enlarge")
         {
             player2_current_field = PhotonNetwork.Instantiate("Player2_Enlarge_field", new Vector3(-17.2f, 0, -5), Quaternion.identity);
             player2_current_field.name = "Player2_Enlarge_field";
