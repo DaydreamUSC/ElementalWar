@@ -15,7 +15,7 @@ public class shooting : MonoBehaviour
     /*public Vector2 minPower;
     public Vector2 maxPower;*/
     public static bool Shotgun = false;
-    public float Lifetime = 3.0f;
+    public float Lifetime = 7.0f;
     private AudioSource Bullet_Shoot_Audio;
     public AudioSource[] sounds;
 

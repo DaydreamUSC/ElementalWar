@@ -10,7 +10,7 @@ public class cardselection3 : MonoBehaviour
     //public string[] totalcard = new string[] {"weapon1","weapon2","skill1","skill2","field1","field2","field3"};
     public Text card;
     public int addHP3 = 20;
-    public float addSpeed3 = 20f;
+    public float addSpeed3 = 30f;
     public EnergyBar energyBar;
     public Place_field placefield;
     public GameObject myplayer;
@@ -73,7 +73,7 @@ public class cardselection3 : MonoBehaviour
           }
           else if(card.text=="Speed"){
             if(energyBar.getCurrentEnergy() >= 5 ){
-              Speed();
+              StartCoroutine(Speeddo());
               energyBar.UseEnergy(5);
               num = Random.Range(0,9);
               Select(num);
@@ -179,9 +179,50 @@ public class cardselection3 : MonoBehaviour
       }
     }
 
+<<<<<<< Updated upstream
     void Shotgun(){
       shooting.Shotgun = true;
+=======
+    private IEnumerator RF(){
+      placefield.R();
+      yield return new WaitForSeconds(10);
+      placefield.No();
     }
+    private IEnumerator BF(){
+      placefield.B();
+      yield return new WaitForSeconds(10);
+      placefield.No();
+    }
+    private IEnumerator YF(){
+      placefield.Y();
+      yield return new WaitForSeconds(10);
+      placefield.No();
+    }
+    private IEnumerator EF(){
+      placefield.Enlarge();
+      yield return new WaitForSeconds(10);
+      placefield.No();
+    }
+    private IEnumerator ShotGun(){
+      shooting.Shotgun = true;
+
+      yield return new WaitForSeconds(10);
+      shooting.Shotgun = false;
+    }
+
+    private IEnumerator Sign(){
+      Signal.GetInstance().UpdateName("No Enough Energry");
+
+      yield return new WaitForSeconds(1);
+      Signal.GetInstance().UpdateName(" ");
+>>>>>>> Stashed changes
+    }
+    private IEnumerator Speeddo(){
+      Speed();
+      yield return new WaitForSeconds(10);
+      Move.moveSpeed = 20f;
+    }
+
 
     void enableLaser() {
       Debug.Log("TEST");
@@ -243,8 +284,8 @@ public class cardselection3 : MonoBehaviour
     private IEnumerator Change(){
 
       Player.PlayerShootPower = 4;
-      Player.PlayerShootSpeed = 16;
-      yield return new WaitForSeconds(5);
+      Player.PlayerShootSpeed = 32;
+      yield return new WaitForSeconds(10);
       Player.PlayerShootPower = 2;
       Player.PlayerShootSpeed = 8;
     }
