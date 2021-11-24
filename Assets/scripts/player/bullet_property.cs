@@ -28,7 +28,7 @@ public class bullet_property : MonoBehaviour
     {
         ownerID = GetComponent<PhotonView>().Owner.ToString()[2];
         //Debug.Log("ownerID" + ownerid);
-        
+
         //Player1 field
         if (other.gameObject.tag == "Player1_field" && ownerID.ToString() == "1")
         {
@@ -36,33 +36,42 @@ public class bullet_property : MonoBehaviour
             {
                 photonView.RPC("change_color", RpcTarget.All, "red");
             }
-
-            if(other.gameObject.name == "Player1_frozen_field")
+            else if (other.gameObject.name == "Player1_lighting_field")
             {
-                photonView.RPC("change_color", RpcTarget.All, "blue");
+                photonView.RPC("change_color", RpcTarget.All, "yellow");
             }
-            if (other.gameObject.name == "Player1_Enlarge_field")
+            else if (other.gameObject.name == "Player1_Enlarge_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "enlarge");
             }
+
+            else if(other.gameObject.name == "Player1_frozen_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "blue");
+            }
+
         }
 
         //Player2 field
-        if (other.gameObject.tag == "Player2_field" && ownerID.ToString() == "2")
+        else if (other.gameObject.tag == "Player2_field" && ownerID.ToString() == "2")
         {
             if (other.gameObject.name == "Player2_fire_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "red");
             }
-
-            if (other.gameObject.name == "Player2_frozen_field")
+            else if (other.gameObject.name == "Player2_lighting_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "yellow");
+            }
+            else if (other.gameObject.name == "Player2_frozen_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "blue");
             }
-            if (other.gameObject.name == "Player2_Enlarge_field")
+            else if (other.gameObject.name == "Player2_Enlarge_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "enlarge");
             }
+
         }
 
 
@@ -84,20 +93,20 @@ public class bullet_property : MonoBehaviour
             col = "red";
         }
 
-        if (color == "yellow")
+        else if (color == "yellow")
         {
             bulletSprite.color = Color.yellow;
             col = "yellow";
         }
 
 
-        if (color == "blue")
+        else if (color == "blue")
         {
             bulletSprite.color = Color.blue;
             col = "blue";
         }
-        
-        if (color == "enlarge")
+
+        else if (color == "enlarge")
         {
             transform.localScale = new Vector3(transform.localScale.x*3, transform.localScale.y*3, 1f);
         }

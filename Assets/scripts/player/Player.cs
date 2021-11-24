@@ -147,13 +147,13 @@ public class Player : MonoBehaviour
 
             if (color == "blue")
             {
-
+                StartCoroutine(Slowing());
 
             }
 
             if (color == "yellow")
             {
-
+                StartCoroutine(Stop());
 
             }
 
@@ -179,6 +179,22 @@ public class Player : MonoBehaviour
         photonView.RPC("HPdeduction", RpcTarget.All, 3);
         yield return new WaitForSeconds(1);
         photonView.RPC("HPdeduction", RpcTarget.All, 3);
+    }
+    IEnumerator Slowing()
+    {
+        Move.moveSpeed -= 8f;
+        yield return new WaitForSeconds(1);
+        Move.moveSpeed -= 8f;
+        yield return new WaitForSeconds(1);
+        Move.moveSpeed -= 8f;
+        yield return new WaitForSeconds(1);
+        Move.moveSpeed = 20f;
+    }
+    IEnumerator Stop()
+    {
+        Move.moveSpeed -= 20f;
+        yield return new WaitForSeconds(1);
+        Move.moveSpeed = 20f;
     }
 
     [PunRPC]
