@@ -14,7 +14,7 @@ public class shooting : MonoBehaviour
     //public int bulletSpeed = 10f; //= 10f;
     /*public Vector2 minPower;
     public Vector2 maxPower;*/
-    public bool Shotgun = false;
+    public static bool Shotgun = false;
     public float Lifetime = 3.0f;
     private AudioSource Bullet_Shoot_Audio;
     public AudioSource[] sounds;
@@ -51,7 +51,7 @@ public class shooting : MonoBehaviour
                     Vector2 bulletDir_down = new Vector2(bulletDir.x - 0.1f, bulletDir.y - 0.1f);
                     UpdateShoot(speed * bulletDir_up,firePoint_up);
                     UpdateShoot(speed * bulletDir_down,firePoint_down);
-                    
+
                 }
                 UpdateShoot(speed * bulletDir,firePoint);
             }
@@ -60,7 +60,7 @@ public class shooting : MonoBehaviour
 
 
 
-    
+
     public void UpdateShoot(Vector2 bulletForce, Transform firePoint)
     {
         GameObject bullet = PhotonNetwork.Instantiate("bullet1", firePoint.position, transform.rotation);
@@ -72,7 +72,7 @@ public class shooting : MonoBehaviour
 
     [PunRPC]
     public void addForce(int photonid, Vector2 bulletForce)
-        { 
+        {
         //Debug.Log("Pho" + PhotonNetwork.IsMasterClient);
         GameObject bullet = PhotonNetwork.GetPhotonView(photonid).gameObject;
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();

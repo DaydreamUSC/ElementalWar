@@ -21,7 +21,7 @@ public class cardselection1 : MonoBehaviour
     void Start()
     {
       clicked = false;
-      int num = Random.Range(0,8);//0~6
+      int num = Random.Range(0,9);//0~8
       if(num==0){
           displayCardName1.GetInstance().UpdateName("Cure");
       }
@@ -29,7 +29,7 @@ public class cardselection1 : MonoBehaviour
           displayCardName1.GetInstance().UpdateName("Speed");
       }
       else if(num==2){
-          displayCardName1.GetInstance().UpdateName("Weapon");
+          displayCardName1.GetInstance().UpdateName("DoubleGun");
       }
       else if(num==3){
           displayCardName1.GetInstance().UpdateName("Redfield");
@@ -40,11 +40,14 @@ public class cardselection1 : MonoBehaviour
       else if(num==5){
           displayCardName1.GetInstance().UpdateName("Yellowfield");
       }
-      else if (num == 6){
+      else if(num == 6){
           displayCardName1.GetInstance().UpdateName("Enlargefield");
       }
-      else if (num == 7){
+      else if(num == 7){
           displayCardName1.GetInstance().UpdateName("LaserGun");
+      }
+      else if(num == 8){
+          displayCardName1.GetInstance().UpdateName("ShotGun");
       }
     }
 
@@ -53,78 +56,98 @@ public class cardselection1 : MonoBehaviour
     {
       int num;
       if(Input.GetKeyDown(KeyCode.Alpha1)){
+
         // Debug.Log(clicked);
         // if(!clicked){
           // clicked = true;
           // StartCoroutine(wait());
           Debug.Log(card.text);
           if(card.text=="Cure"){
-
-            Cure();
-            energyBar.UseEnergy(7);
-            num = Random.Range(0,8);
-            Select(num);
+            if(energyBar.getCurrentEnergy() >= 7 ){
+              Cure();
+              energyBar.UseEnergy(7);
+              num = Random.Range(0,9);
+              Select(num);
+            }
 
           }
           else if(card.text=="Speed"){
-
-            Speed();
-            energyBar.UseEnergy(5);
-            num = Random.Range(0,8);
-            Select(num);
+            if(energyBar.getCurrentEnergy() >= 5 ){
+              Speed();
+              energyBar.UseEnergy(5);
+              num = Random.Range(0,9);
+              Select(num);
+            }
           }
-          else if(card.text=="Weapon"){
-
-            Weapon();
-            energyBar.UseEnergy(8);
-            num = Random.Range(0,8);
-            Select(num);
+          else if(card.text=="DoubleGun"){
+            if(energyBar.getCurrentEnergy() >= 5 ){
+              Weapon();
+              energyBar.UseEnergy(8);
+              num = Random.Range(0,9);
+              Select(num);
+            }
           }
           else if(card.text=="Redfield"){
-
-            placefield.R();
-            energyBar.UseEnergy(3);
-            num = Random.Range(0,8);
-            Select(num);
+            if(energyBar.getCurrentEnergy() >= 6 ){
+              placefield.R();
+              energyBar.UseEnergy(3);
+              num = Random.Range(0,9);
+              Select(num);
+            }
           }
           else if(card.text=="Bluefield"){
-
-            placefield.B();
-            energyBar.UseEnergy(3);
-            num = Random.Range(0,8);
-            Select(num);
+            if(energyBar.getCurrentEnergy() >= 6 ){
+              placefield.B();
+              energyBar.UseEnergy(3);
+              num = Random.Range(0,9);
+              Select(num);
+            }
           }
           else if(card.text=="Yellowfield"){
-
-            //placefield.Y();
-            energyBar.UseEnergy(3);
-            num = Random.Range(0,8);
-            Select(num);
+            if(energyBar.getCurrentEnergy() >= 6 ){
+              //placefield.Y();
+              energyBar.UseEnergy(3);
+              num = Random.Range(0,9);
+              Select(num);
+            }
           }
-          else if (card.text == "Enlargefield")
+          else if(card.text == "Enlargefield")
           {
-            placefield.Enlarge();
-                  //placefield.Y();
-            energyBar.UseEnergy(3);
-            num = Random.Range(0,8);
-            Select(num);
+            if(energyBar.getCurrentEnergy() >= 6 ){
+              placefield.Enlarge();
+              energyBar.UseEnergy(3);
+              num = Random.Range(0,9);
+              Select(num);
+            }
           }
-          else if (card.text == "LaserGun")
+          else if(card.text == "LaserGun")
           {
-            enableLaser();
-            energyBar.UseEnergy(10);
-            num = Random.Range(0,8);
-            Select(num);
+            if(energyBar.getCurrentEnergy() >= 10 ){
+              enableLaser();
+              energyBar.UseEnergy(10);
+              num = Random.Range(0,9);
+              Select(num);
+            }
+          }
+          else if(card.text == "ShotGun")
+          {
+            if(energyBar.getCurrentEnergy() >= 7 ){
+              StartCoroutine(ShotGun());
+              energyBar.UseEnergy(7);
+              num = Random.Range(0,9);
+              Select(num);
+            }
           }
         // }
       }
 
     }
 
-    private IEnumerator wait(){
+    private IEnumerator ShotGun(){
+      shooting.Shotgun = true;
 
-      yield return new WaitForSeconds(1);
-      clicked = false;
+      yield return new WaitForSeconds(5);
+      shooting.Shotgun = false;
     }
     void Select(int num){
       if(num==0){
@@ -134,7 +157,7 @@ public class cardselection1 : MonoBehaviour
           displayCardName1.GetInstance().UpdateName("Speed");
       }
       else if(num==2){
-          displayCardName1.GetInstance().UpdateName("Weapon");
+          displayCardName1.GetInstance().UpdateName("DoubleGun");
       }
       else if(num==3){
           displayCardName1.GetInstance().UpdateName("Redfield");
@@ -151,6 +174,13 @@ public class cardselection1 : MonoBehaviour
       else if(num==7){
           displayCardName1.GetInstance().UpdateName("LaserGun");
       }
+      else if(num == 8){
+          displayCardName1.GetInstance().UpdateName("ShotGun");
+      }
+    }
+
+    void Shotgun(){
+      shooting.Shotgun = true;
     }
 
     void enableLaser() {
@@ -196,20 +226,11 @@ public class cardselection1 : MonoBehaviour
     }
 
     void Weapon(){
-      Debug.Log("Weapon");
-      displayCardName1.GetInstance().UpdateName("Weapon");
+      Debug.Log("DoubleGun");
+      displayCardName1.GetInstance().UpdateName("DoubleGun");
       if(energyBar.getCurrentEnergy() >= 7 && Player.PlayerShootSpeed<256f){
-
-        Change();
-
-
+        StartCoroutine(Change());
       }
-    }
-
-    void Change(){
-      Player.PlayerShootPower *= 1;
-      Player.PlayerShootSpeed *= 2;
-
       AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Weapon Card: double bulletPower and bulletSpeed", new Dictionary<string, object>{
           { "PlayerShootPower", Player.PlayerShootPower },
           { "PlayerShootSpeed", Player.PlayerShootSpeed },
@@ -217,6 +238,19 @@ public class cardselection1 : MonoBehaviour
       });
       Debug.Log("[Analytics] Click Weapon Card: double bulletPower and bulletSpeed:" + analyticsResult);
     }
+
+    
+    private IEnumerator Change(){
+
+      Player.PlayerShootPower = 4;
+      Player.PlayerShootSpeed = 16;
+      yield return new WaitForSeconds(5);
+      Player.PlayerShootPower = 2;
+      Player.PlayerShootSpeed = 8;
+    }
+
+
+
 
 
 

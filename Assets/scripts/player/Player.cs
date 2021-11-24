@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public static int currentHP;
     public static int currentEP;
     public static int PlayerShootSpeed = 8;
-    public static int PlayerShootPower = 8;
+    public static int PlayerShootPower = 2;
     public static int PlayerMoveSpeed;
     public static List<Card> currentWeapon;
     private AudioSource Bullet_Shoot_Audio;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         currentHP = maxHealth;
         PlayerShootSpeed = 8;
-        PlayerShootPower = 8;
+        PlayerShootPower = 2;
 
         if (photonView.IsMine) {
             GameObject cureBttn = GameObject.Find("/CanvasSkillCard/changeCard1");

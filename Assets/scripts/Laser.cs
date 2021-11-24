@@ -14,7 +14,7 @@ public class Laser : MonoBehaviour
     private Coroutine LaserActivate;
 
     int hitcount = 0;
-    
+
 
 
     private PhotonView photonView;
@@ -47,7 +47,7 @@ public class Laser : MonoBehaviour
         //     //     photonView.RPC("EnableLaser", RpcTarget.All);
         //     //     // EnableLaser();
         //     // }
-            
+
         //     // if(Input.GetButton("Fire1"))
         //     // {
         //     //     var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
@@ -145,13 +145,13 @@ public class Laser : MonoBehaviour
         transform.rotation = Current_Rotation;
     }*/
 
-    [PunRPC]    
+    [PunRPC]
     void EnableLaser()
     {
         lineRenderer.enabled = true;
 
         for(int i=0; i<particles.Count; i++)
-            particles[i].Play();       
+            particles[i].Play();
     }
 
     [PunRPC]
@@ -173,9 +173,9 @@ public class Laser : MonoBehaviour
         // This would cast rays only against colliders in layer 5.
         // But instead we want to collide against everything except layer 5. The ~ operator does this, it inverts a bitmask.
         //layerMask = layerMask;
-        
+
         //angle.Normalize();
-        
+
         RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude, layerMask);
         // RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude, layerMask);
 
@@ -197,7 +197,7 @@ public class Laser : MonoBehaviour
                 hitcount++;
                 if(hitcount == 10)
                 {
-                    hit.collider.gameObject.GetComponent<Player>().HPdeduction(1);
+                    hit.collider.gameObject.GetComponent<Player>().HPdeduction(2);
                     // Hit_Sound.PlayOneShot(Hit_Sound.clip);
                     // Debug.Log("----------------------Call HPdeduction--------------------------");
                     // Debug.Log(hit.collider.gameObject.GetComponent<Player>().healthBar.GetHealth());
@@ -207,7 +207,7 @@ public class Laser : MonoBehaviour
 
                 }
             }
-            
+
         }
 
         endVFX.transform.position = lineRenderer.GetPosition(1);
@@ -219,13 +219,13 @@ public class Laser : MonoBehaviour
         lineRenderer.enabled = false;
 
         for(int i=0; i<particles.Count; i++)
-            particles[i].Stop();       
+            particles[i].Stop();
     }
 
     /*[PunRPC]
     void RotateToMouse(Quaternion rotation)
     {
-        
+
         transform.rotation = rotation;
 
     }*/

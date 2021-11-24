@@ -310,7 +310,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3815141518301349025, guid: 66047cee101feda48a66166dae4a734f, type: 3}
   firePoint_down: {fileID: 5142752358624011858}
   firePoint_up: {fileID: 5804013101502014971}
-  Shotgun: 1
   Lifetime: 3
   sounds: []
 --- !u!114 &770611083009781719
