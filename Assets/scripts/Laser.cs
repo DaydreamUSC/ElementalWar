@@ -190,7 +190,8 @@ public class Laser : MonoBehaviour
                 // Debug.Log(hit.collider.name+"was destroyed!");
             }
             Debug.Log(hit.collider.name);
-            if(hit.collider.name == "Player1(Clone)" || hit.collider.name == "Player1" || hit.collider.name == "Player2")
+            //if(hit.collider.name == "Player1(Clone)" || hit.collider.name == "Player1" || hit.collider.name == "Player2" || hit.collider.name == "King" || hit.collider.name == "Queen")
+            if(hit.collider.tag == "Player")
             {
                 // Debug.Log("Hit "+hit.collider.name);
                 hitcount++;

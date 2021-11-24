@@ -8,18 +8,23 @@ using Photon.Realtime;
 public class StartButton : MonoBehaviour
 {
     public InputField playerNameInput;
+    public static string selectedCharacterName = "Player1";
 
+    public void InstructionClicked(){
+      SceneManager.LoadScene("Instruction");
+    }
     public void StartClicked(){
       Debug.Log("playerName: "+playerNameInput.text);
       LobbyPlayerName.playerNameDisplay = playerNameInput.text;
+      PlayerPrefs.SetInt(selectedCharacterName, CharacterSelectionMenu.selectedCharacter);
+      Debug.Log("Selected Character: "+selectedCharacterName);
       SceneManager.LoadScene("Lobby");
     }
     public void RandomNameClicked(){
       LobbyPlayerName.playerNameDisplay = RandomString();
       Debug.Log("Random Name:"+LobbyPlayerName.playerNameDisplay);
-
+      Debug.Log("Selected Character: "+selectedCharacterName);
       SceneManager.LoadScene("Lobby");
-      //PhotonLobby.QuickMatch();
     }
     public string RandomString(){
       const string glyphs= "abcdefghijklmnopqrstuvwxyz0123456789";

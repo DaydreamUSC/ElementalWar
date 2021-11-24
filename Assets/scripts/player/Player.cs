@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
             sounds = GetComponents<AudioSource>();
             Hit_Sound = sounds[1];
-        
+
         if (!PhotonNetwork.IsMasterClient)
             {
                 photonView.RPC("flipPlayer", RpcTarget.All);
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     }
     public Rigidbody2D rb;
     public Camera cam;
-    
+
     // Update is called once per frame
 
     Vector3 playerPosition;
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
         healthBar.SetHealth(currentHealth - damage);
         // Hit_Sound.PlayOneShot(Hit_Sound.clip);
     }
-    
+
     [PunRPC]
     void HPaddition(int point){
         if(healthBar == null)
@@ -217,33 +217,33 @@ public class Player : MonoBehaviour
         if(currentHealth>maxHealth){
             currentHealth = maxHealth;
         }
-        
+
         healthBar.SetHealth(currentHealth);
     }
-    
+
     void CurePlayer(int point){
         if(photonView.IsMine){
             //Debug.Log("CURE CALLED in player.cs");
             photonView.RPC("HPaddition", RpcTarget.All, point);
         }
     }
-    
+
     void UseLaser() {
         if(photonView.IsMine){
             Debug.Log("take laser");
             GetComponent<Laser>().useLaser();
         }
     }
-    
+
     public void CheckDeath()
     {
-        //Debug.Log("take damage");   
+        //Debug.Log("take damage");
 
         currentHP = healthBar.GetHealth();
         //Debug.Log("Current Health: "+currentHP);
         if (currentHP <= 0){
 
-            
+
 
             /*------------------Begin Analytics------------------*/
             #if ENABLE_CLOUD_SERVICES_ANALYTICS
@@ -263,7 +263,7 @@ public class Player : MonoBehaviour
             Debug.Log("@player.cs/Winner: "+ Winner);
             Debug.Log("@player.cs/LoseField: "+ LoseField);
             Debug.Log("@player.cs/WinField: "+ WinField);
-                
+
             //Debug.Log("@player.cs/System.Environment.UserName: "+ System.Environment.UserName);
             Analytics.CustomEvent("gameOver", new Dictionary<string, object>{
                 { "gameDuration", gameDuration },
@@ -281,5 +281,5 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
+
 }

@@ -44,7 +44,7 @@ public class cardselection1 : MonoBehaviour
           displayCardName1.GetInstance().UpdateName("Enlargefield");
       }
       else if (num == 7){
-          displayCardName1.GetInstance().UpdateName("Laser Gun");
+          displayCardName1.GetInstance().UpdateName("LaserGun");
       }
     }
 
@@ -109,16 +109,16 @@ public class cardselection1 : MonoBehaviour
             num = Random.Range(0,8);
             Select(num);
           }
-          else if (card.text == "Laser Gun")
+          else if (card.text == "LaserGun")
           {
             enableLaser();
-            energyBar.UseEnergy(7);
+            energyBar.UseEnergy(10);
             num = Random.Range(0,8);
             Select(num);
           }
         // }
       }
-      
+
     }
 
     private IEnumerator wait(){
@@ -149,13 +149,13 @@ public class cardselection1 : MonoBehaviour
           displayCardName1.GetInstance().UpdateName("Enlargefield");
       }
       else if(num==7){
-          displayCardName1.GetInstance().UpdateName("Laser Gun");
+          displayCardName1.GetInstance().UpdateName("LaserGun");
       }
     }
 
     void enableLaser() {
       Debug.Log("TEST");
-      if (energyBar.getCurrentEnergy() >= 7) {
+      if (energyBar.getCurrentEnergy() >= 10) {
         Debug.Log("Taking laser gun");
         myplayer.SendMessage("UseLaser");
       }

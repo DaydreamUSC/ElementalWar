@@ -15,8 +15,7 @@ public class cardselection3 : MonoBehaviour
     public Place_field placefield;
     public GameObject myplayer;
 
-    public bool clicked;
-
+    private bool clicked;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +44,7 @@ public class cardselection3 : MonoBehaviour
           displayCardName3.GetInstance().UpdateName("Enlargefield");
       }
       else if (num == 7){
-          displayCardName1.GetInstance().UpdateName("Laser Gun");
+          displayCardName3.GetInstance().UpdateName("LaserGun");
       }
     }
 
@@ -109,17 +108,16 @@ public class cardselection3 : MonoBehaviour
             energyBar.UseEnergy(3);
             num = Random.Range(0,8);
             Select(num);
-                }
-          else if (card.text == "Laser Gun")
+          }
+          else if (card.text == "LaserGun")
           {
             enableLaser();
-            energyBar.UseEnergy(7);
+            energyBar.UseEnergy(10);
             num = Random.Range(0,8);
             Select(num);
           }
         // }
       }
-
 
     }
 
@@ -151,13 +149,13 @@ public class cardselection3 : MonoBehaviour
           displayCardName3.GetInstance().UpdateName("Enlargefield");
       }
       else if(num==7){
-          displayCardName1.GetInstance().UpdateName("Laser Gun");
+          displayCardName3.GetInstance().UpdateName("LaserGun");
       }
     }
 
     void enableLaser() {
       Debug.Log("TEST");
-      if (energyBar.getCurrentEnergy() >= 7) {
+      if (energyBar.getCurrentEnergy() >= 10) {
         Debug.Log("Taking laser gun");
         myplayer.SendMessage("UseLaser");
       }
@@ -225,7 +223,7 @@ public class cardselection3 : MonoBehaviour
     public void SetPlayer(GameObject input){
         if(myplayer==null && input!=null){
             myplayer=input;
-            Debug.Log("Cure added in cardselection3");
+            Debug.Log("Cure added in cardselection1");
         }
     }
 

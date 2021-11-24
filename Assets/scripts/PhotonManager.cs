@@ -27,13 +27,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("PM LocalPlayerID: "+PhotonNetwork.LocalPlayer);*/
         
         if(PhotonNetwork.CurrentRoom.CustomProperties["Player1ID"] == PhotonNetwork.LocalPlayer){
-            GameObject Player1 = PhotonNetwork.Instantiate("Player1", new Vector3(-15, 0, -5), Quaternion.identity);
+            GameObject Player1 = PhotonNetwork.Instantiate(StartButton.selectedCharacterName, new Vector3(-15, 0, -5), Quaternion.identity);
             Debug.Log("Instantiate Player1"+PhotonNetwork.LocalPlayer);
             Player1.name = "Player1";
             PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable(){{"MasterClientName", LobbyPlayerName.playerNameDisplay}});
         }
         else if(PhotonNetwork.CurrentRoom.CustomProperties["Player2ID"] == PhotonNetwork.LocalPlayer){
-            GameObject Player2 = PhotonNetwork.Instantiate("Player1", new Vector3(15, 0, -5), Quaternion.identity);
+            GameObject Player2 = PhotonNetwork.Instantiate(StartButton.selectedCharacterName, new Vector3(15, 0, -5), Quaternion.identity);
             
             Debug.Log("Instantiate Player2"+PhotonNetwork.LocalPlayer);
             Player2.name = "Player2";
