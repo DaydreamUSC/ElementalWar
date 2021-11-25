@@ -150,6 +150,8 @@ MonoBehaviour:
   owner: 
   ownerID: 0
   scale: {x: 0, y: 0, z: 0}
+  Collider: {fileID: 0}
+  bullet_Damage: 0
 --- !u!114 &2031852707097487994
 MonoBehaviour:
   m_ObjectHideFlags: 0

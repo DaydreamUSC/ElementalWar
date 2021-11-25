@@ -15,15 +15,28 @@ public class shooting : MonoBehaviour
     /*public Vector2 minPower;
     public Vector2 maxPower;*/
     public static bool Shotgun = false;
-    public float Lifetime = 3.0f;
+    public float Lifetime = 10.0f;
     private AudioSource Bullet_Shoot_Audio;
     public AudioSource[] sounds;
+
 
     Camera cam;
     Vector2 bulletDir;
     Vector3 endPoint;
     Vector3 playerPosition;
     private PhotonView photonView;
+
+
+    public Transform WeaponPoint;
+    public SpriteRenderer WeaponUI;
+    public GameObject myplayer;
+
+    private int Machinephotonid;
+    private int Laserphotonid;
+    private int Floatingphotonid;
+    private int Cannonphotonid;
+    private int num;
+    private bool BacktodefaultGun = true;
 
     private void Start()
     {
@@ -32,6 +45,15 @@ public class shooting : MonoBehaviour
         Shotgun = false;
         sounds = GetComponents<AudioSource>();
         Bullet_Shoot_Audio = sounds[0];
+        GameObject Machine = PhotonNetwork.Instantiate("MachineGun", new Vector3(-40f,-40f,-1f), transform.rotation);
+        GameObject Las = PhotonNetwork.Instantiate("Laser", new Vector3(-40f,-40f,-1f), transform.rotation);
+        GameObject Floatd = PhotonNetwork.Instantiate("Floating", new Vector3(-40f,-40f,-1f), transform.rotation);
+        GameObject Cannon = PhotonNetwork.Instantiate("Cannon_w", new Vector3(-40f,-40f,-1f), transform.rotation);
+        Machinephotonid = Machine.GetComponent<PhotonView>().ViewID;
+        Laserphotonid = Las.GetComponent<PhotonView>().ViewID;
+        Floatingphotonid = Floatd.GetComponent<PhotonView>().ViewID;
+        Cannonphotonid = Cannon.GetComponent<PhotonView>().ViewID;
+        Lifetime = 10.0f;
     }
     // Update is called once per frame
 
@@ -56,6 +78,13 @@ public class shooting : MonoBehaviour
                 UpdateShoot(speed * bulletDir,firePoint);
             }
         }
+
+      //  photonView.RPC("UpdateWeaponPosition", RpcTarget.All);
+    //   if(Input.GetMouseButtonDown(0))
+    // {
+    // //photonView.RPC("changeWeaponUI", RpcTarget.All,Canon);
+    // getWeaponID("CannonGun");
+    // }
     }
 
 
@@ -76,7 +105,10 @@ public class shooting : MonoBehaviour
         //Debug.Log("Pho" + PhotonNetwork.IsMasterClient);
         GameObject bullet = PhotonNetwork.GetPhotonView(photonid).gameObject;
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-
+        int current_damage = Player.PlayerShootPower;
+        bullet.GetComponent<bullet_property>().bullet_Damage = current_damage;
+        // Debug.Log("your shootPower");
+        // Debug.Log(Player.PlayerShootPower);
         //Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         rb.AddForce(bulletForce, ForceMode2D.Impulse);
         WaitAndDestroy(bullet);
@@ -86,5 +118,62 @@ public class shooting : MonoBehaviour
     void WaitAndDestroy(GameObject bullet)
     {
         Destroy(bullet,Lifetime);
+    }
+
+    // [PunRPC]
+    // void UpdateWeaponPosition(){
+    //   currentWeapon.transform.position = WeaponPoint.position;
+    // }
+    //
+    // [PunRPC]
+    // void flipWeapon(){
+    //   Vector3 newScale = currentWeapon.transform.localScale;
+    //   newScale.x *= -1;
+    //   currentWeapon.transform.localScale = newScale;
+    // }
+
+    public void test(string NewGun){
+      Debug.Log("!!! called me!");
+      Debug.Log("calle me!");
+      if(NewGun == "MachineGun"){
+        num = Machinephotonid;
+      }
+      if(NewGun == "LaserGun"){
+        num = Laserphotonid;
+      }
+      if(NewGun == "FloatingGun"){
+        num = Floatingphotonid;
+      }
+      if(NewGun == "CannonGun"){
+        num = Cannonphotonid;
+      }
+      photonView.RPC("changeWeaponUI", RpcTarget.All,num);
+    }
+
+    // public void getWeaponID(string NewGun){
+    //   Debug.Log("calle me!");
+    //   if(NewGun == "MachineGun"){
+    //     num = Machinephotonid;
+    //   }
+    //   if(NewGun == "LaserGun"){
+    //     num = Laserphotonid;
+    //   }
+    //   if(NewGun == "FloatingGun"){
+    //     num = Floatingphotonid;
+    //   }
+    //   if(NewGun == "CannonGun"){
+    //     num = Cannonphotonid;
+    //   }
+    //   photonView.RPC("changeWeaponUI", RpcTarget.All,num);
+    // }
+
+    [PunRPC]
+    public void changeWeaponUI(int photonid){
+    //  Debug.Log(photonid);
+      GameObject Weapon = PhotonNetwork.GetPhotonView(photonid).gameObject;
+      Debug.Log(Weapon);
+      Sprite NewGun = Weapon.GetComponent<SpriteRenderer>().sprite;
+    //  Debug.Log("?");
+      WeaponUI.sprite = NewGun;
     }
 }

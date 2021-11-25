@@ -10,10 +10,11 @@ public class cardselection1 : MonoBehaviour
     //public string[] totalcard = new string[] {"weapon1","weapon2","skill1","skill2","field1","field2","field3"};
     public Text card;
     public int addHP1 = 20;
-    public float addSpeed1 = 20f;
+    public float addSpeed1 = 8f;
     public EnergyBar energyBar;
     public Place_field placefield;
     public GameObject myplayer;
+
 
     private bool clicked;
 
@@ -21,7 +22,8 @@ public class cardselection1 : MonoBehaviour
     void Start()
     {
       clicked = false;
-      int num = Random.Range(0,9);//0~8
+      //int num = Random.Range(0,9);//0~8
+      int num = 5;
       if(num==0){
           displayCardName1.GetInstance().UpdateName("Cure");
       }
@@ -80,7 +82,7 @@ public class cardselection1 : MonoBehaviour
             }
           }
           else if(card.text=="DoubleGun"){
-            if(energyBar.getCurrentEnergy() >= 5 ){
+            if(energyBar.getCurrentEnergy() >= 8 ){
               Weapon();
               energyBar.UseEnergy(8);
               num = Random.Range(0,9);
@@ -88,7 +90,7 @@ public class cardselection1 : MonoBehaviour
             }
           }
           else if(card.text=="Redfield"){
-            if(energyBar.getCurrentEnergy() >= 6 ){
+            if(energyBar.getCurrentEnergy() >= 3 ){
               placefield.R();
               energyBar.UseEnergy(3);
               num = Random.Range(0,9);
@@ -96,7 +98,7 @@ public class cardselection1 : MonoBehaviour
             }
           }
           else if(card.text=="Bluefield"){
-            if(energyBar.getCurrentEnergy() >= 6 ){
+            if(energyBar.getCurrentEnergy() >= 3 ){
               placefield.B();
               energyBar.UseEnergy(3);
               num = Random.Range(0,9);
@@ -104,8 +106,8 @@ public class cardselection1 : MonoBehaviour
             }
           }
           else if(card.text=="Yellowfield"){
-            if(energyBar.getCurrentEnergy() >= 6 ){
-              //placefield.Y();
+            if(energyBar.getCurrentEnergy() >= 3 ){
+              placefield.Y();
               energyBar.UseEnergy(3);
               num = Random.Range(0,9);
               Select(num);
@@ -113,7 +115,7 @@ public class cardselection1 : MonoBehaviour
           }
           else if(card.text == "Enlargefield")
           {
-            if(energyBar.getCurrentEnergy() >= 6 ){
+            if(energyBar.getCurrentEnergy() >= 3 ){
               placefield.Enlarge();
               energyBar.UseEnergy(3);
               num = Random.Range(0,9);
@@ -145,8 +147,9 @@ public class cardselection1 : MonoBehaviour
 
     private IEnumerator ShotGun(){
       shooting.Shotgun = true;
-
+      myplayer.SendMessage("test","CannonGun");
       yield return new WaitForSeconds(5);
+      myplayer.SendMessage("test","MachineGun");
       shooting.Shotgun = false;
     }
     void Select(int num){
@@ -181,10 +184,12 @@ public class cardselection1 : MonoBehaviour
 
     void Shotgun(){
       shooting.Shotgun = true;
+
     }
 
     void enableLaser() {
       Debug.Log("TEST");
+      myplayer.SendMessage("test","LaserGun");
       if (energyBar.getCurrentEnergy() >= 10) {
         Debug.Log("Taking laser gun");
         myplayer.SendMessage("UseLaser");
@@ -230,6 +235,7 @@ public class cardselection1 : MonoBehaviour
       displayCardName1.GetInstance().UpdateName("DoubleGun");
       if(energyBar.getCurrentEnergy() >= 7 && Player.PlayerShootSpeed<256f){
         StartCoroutine(Change());
+
       }
       AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Weapon Card: double bulletPower and bulletSpeed", new Dictionary<string, object>{
           { "PlayerShootPower", Player.PlayerShootPower },
@@ -239,14 +245,15 @@ public class cardselection1 : MonoBehaviour
       Debug.Log("[Analytics] Click Weapon Card: double bulletPower and bulletSpeed:" + analyticsResult);
     }
 
-    
-    private IEnumerator Change(){
 
+    private IEnumerator Change(){
+      myplayer.SendMessage("test","FloatingGun");
       Player.PlayerShootPower = 4;
       Player.PlayerShootSpeed = 16;
       yield return new WaitForSeconds(5);
       Player.PlayerShootPower = 2;
       Player.PlayerShootSpeed = 8;
+      myplayer.SendMessage("test","MachineGun");
     }
 
 

@@ -10,7 +10,7 @@ public class Laser : MonoBehaviour
     public Transform firePoint;
     public GameObject startVFX;
     public GameObject endVFX;
-
+    public GameObject myplayer;
     private Coroutine LaserActivate;
 
     int hitcount = 0;
@@ -220,6 +220,7 @@ public class Laser : MonoBehaviour
 
         for(int i=0; i<particles.Count; i++)
             particles[i].Stop();
+        myplayer.SendMessage("test","MachineGun");
     }
 
     /*[PunRPC]

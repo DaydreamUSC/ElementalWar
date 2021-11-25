@@ -10,6 +10,8 @@ public class bullet_property : MonoBehaviour
     public string owner;
     public char ownerID;
     public Vector3 scale;
+    public BoxCollider2D Collider;
+    public int bullet_Damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,9 @@ public class bullet_property : MonoBehaviour
         col = "white";
         photonView = GetComponent<PhotonView>();
         scale = transform.localScale;
+        Collider = GetComponent<BoxCollider2D>();
+        // Debug.Log("bullet_D");
+        // Debug.Log(bullet_Damage);
     }
 
     // Update is called once per frame
@@ -28,7 +33,7 @@ public class bullet_property : MonoBehaviour
     {
         ownerID = GetComponent<PhotonView>().Owner.ToString()[2];
         //Debug.Log("ownerID" + ownerid);
-        
+
         //Player1 field
         if (other.gameObject.tag == "Player1_field" && ownerID.ToString() == "1")
         {
@@ -40,6 +45,10 @@ public class bullet_property : MonoBehaviour
             if(other.gameObject.name == "Player1_frozen_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "blue");
+            }
+            if(other.gameObject.name == "Player1_lighting_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "yellow");
             }
             if (other.gameObject.name == "Player1_Enlarge_field")
             {
@@ -58,6 +67,10 @@ public class bullet_property : MonoBehaviour
             if (other.gameObject.name == "Player2_frozen_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "blue");
+            }
+            if (other.gameObject.name == "Player2_lighting_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "yellow");
             }
             if (other.gameObject.name == "Player2_Enlarge_field")
             {
@@ -96,10 +109,11 @@ public class bullet_property : MonoBehaviour
             bulletSprite.color = Color.blue;
             col = "blue";
         }
-        
+
         if (color == "enlarge")
         {
             transform.localScale = new Vector3(transform.localScale.x*3, transform.localScale.y*3, 1f);
+            Collider.size = new Vector3(3f, 3f, 1f);
         }
     }
 }
