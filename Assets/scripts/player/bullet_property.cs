@@ -73,6 +73,7 @@ public class bullet_property : MonoBehaviour
             }
 
         }
+        
 
 
 

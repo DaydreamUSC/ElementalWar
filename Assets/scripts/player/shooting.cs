@@ -15,7 +15,7 @@ public class shooting : MonoBehaviour
     /*public Vector2 minPower;
     public Vector2 maxPower;*/
     public static bool Shotgun = false;
-    public float Lifetime = 3.0f;
+    public float Lifetime = 0.5f;
     private AudioSource Bullet_Shoot_Audio;
     public AudioSource[] sounds;
 
@@ -43,7 +43,7 @@ public class shooting : MonoBehaviour
             endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             bulletDir = new Vector2((endPoint.x - playerPosition.x), (endPoint.y - playerPosition.y));
             bulletDir.Normalize();
-            if (Time.frameCount%60 == 0){
+            if (Time.frameCount%40 == 0){
                 // Debug.Log(Time.frameCount);
                 //photonView.RPC("UpdateShoot", RpcTarget.All, speed*bulletDir);
                 if (Shotgun) {
@@ -85,6 +85,9 @@ public class shooting : MonoBehaviour
     [PunRPC]
     void WaitAndDestroy(GameObject bullet)
     {
-        Destroy(bullet,Lifetime);
+
+        //Destroy(bullet,Lifetime);
+
+
     }
 }
