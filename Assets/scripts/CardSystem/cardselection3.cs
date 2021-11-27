@@ -102,6 +102,9 @@ public class cardselection3 : MonoBehaviour
               num = gameObject.GetComponentInParent<CardShuffle>().GetCard(0);
               Select(num);
               }
+              else{
+                StartCoroutine(Sign());
+              }
             }
 
 
@@ -112,6 +115,9 @@ public class cardselection3 : MonoBehaviour
               num = gameObject.GetComponentInParent<CardShuffle>().GetCard(1);
               Select(num);
             }
+            else{
+              StartCoroutine(Sign());
+            }
           }
           else if(card.text=="DoubleGun"){
             if(energyBar.getCurrentEnergy() >= 8 ){
@@ -120,38 +126,53 @@ public class cardselection3 : MonoBehaviour
               num =gameObject.GetComponentInParent<CardShuffle>().GetCard(2);
               Select(num);
             }
+            else{
+              StartCoroutine(Sign());
+            }
           }
           else if(card.text=="Redfield"){
-            if(energyBar.getCurrentEnergy() >= 3 ){
-              placefield.R();
-              energyBar.UseEnergy(3);
+            if(energyBar.getCurrentEnergy() >= 6 ){
+              StartCoroutine(RF());
+              energyBar.UseEnergy(6);
               num =gameObject.GetComponentInParent<CardShuffle>().GetCard(3);
               Select(num);
             }
+            else{
+              StartCoroutine(Sign());
+            }
           }
           else if(card.text=="Bluefield"){
-            if(energyBar.getCurrentEnergy() >= 3 ){
-              placefield.B();
-              energyBar.UseEnergy(3);
+            if(energyBar.getCurrentEnergy() >= 6 ){
+              StartCoroutine(BF());
+              energyBar.UseEnergy(6);
               num =gameObject.GetComponentInParent<CardShuffle>().GetCard(4);
               Select(num);
             }
+            else{
+              StartCoroutine(Sign());
+            }
           }
           else if(card.text=="Yellowfield"){
-            if(energyBar.getCurrentEnergy() >= 3 ){
-              placefield.Y();
-              energyBar.UseEnergy(3);
+            if(energyBar.getCurrentEnergy() >= 6 ){
+              StartCoroutine(YF());
+              energyBar.UseEnergy(6);
               num =gameObject.GetComponentInParent<CardShuffle>().GetCard(5);
               Select(num);
+            }
+            else{
+              StartCoroutine(Sign());
             }
           }
           else if(card.text == "Enlargefield")
           {
-            if(energyBar.getCurrentEnergy() >= 3 ){
-              placefield.Enlarge();
-              energyBar.UseEnergy(3);
+            if(energyBar.getCurrentEnergy() >= 6 ){
+              StartCoroutine(EF());
+              energyBar.UseEnergy(6);
               num =gameObject.GetComponentInParent<CardShuffle>().GetCard(6);
               Select(num);
+            }
+            else{
+              StartCoroutine(Sign());
             }
           }
           else if(card.text == "LaserGun")
@@ -162,6 +183,9 @@ public class cardselection3 : MonoBehaviour
               num =gameObject.GetComponentInParent<CardShuffle>().GetCard(7);
               Select(num);
             }
+            else{
+              StartCoroutine(Sign());
+            }
           }
           else if(card.text == "ShotGun")
           {
@@ -171,19 +195,16 @@ public class cardselection3 : MonoBehaviour
               num =gameObject.GetComponentInParent<CardShuffle>().GetCard(8);
               Select(num);
             }
+            else{
+              StartCoroutine(Sign());
+            }
           }
         // }
 
         }
     }
 
-    private IEnumerator ShotGun(){
-      shooting.Shotgun = true;
-      myplayer.SendMessage("test","CannonGun");
-      yield return new WaitForSeconds(5);
-      myplayer.SendMessage("test","MachineGun");
-      shooting.Shotgun = false;
-    }
+
     void Select(int num){
       if(num==0){
           displayCardName3.GetInstance().UpdateName("Cure");
@@ -222,7 +243,44 @@ public class cardselection3 : MonoBehaviour
           cardNum.GetComponent<UnityEngine.UI.Image>().sprite = ShotGunImage.sprite;
       }
     }
+    private IEnumerator RF(){
+      placefield.R();
+      yield return new WaitForSeconds(10);
+      placefield.No();
+    }
+    private IEnumerator BF(){
+      placefield.B();
+      yield return new WaitForSeconds(10);
+      placefield.No();
+    }
+    private IEnumerator YF(){
+      placefield.Y();
+      yield return new WaitForSeconds(10);
+      placefield.No();
+    }
+    private IEnumerator EF(){
+      placefield.Enlarge();
+      yield return new WaitForSeconds(10);
+      placefield.No();
+    }
+    private IEnumerator ShotGun(){
+      shooting.Shotgun = true;
 
+      yield return new WaitForSeconds(10);
+      shooting.Shotgun = false;
+    }
+
+    private IEnumerator Sign(){
+      Signal.GetInstance().UpdateName("No Enough Energry");
+
+      yield return new WaitForSeconds(1);
+      Signal.GetInstance().UpdateName(" ");
+    }
+    private IEnumerator Speeddo(){
+      Speed();
+      yield return new WaitForSeconds(10);
+      Move.moveSpeed = 20f;
+    }
     void Shotgun(){
       shooting.Shotgun = true;
 
@@ -289,10 +347,10 @@ public class cardselection3 : MonoBehaviour
 
     private IEnumerator Change(){
       myplayer.SendMessage("test","FloatingGun");
+      Player.PlayerShootPower = 8;
+      Player.PlayerShootSpeed = 20;
+      yield return new WaitForSeconds(10);
       Player.PlayerShootPower = 4;
-      Player.PlayerShootSpeed = 16;
-      yield return new WaitForSeconds(5);
-      Player.PlayerShootPower = 2;
       Player.PlayerShootSpeed = 8;
       myplayer.SendMessage("test","MachineGun");
     }

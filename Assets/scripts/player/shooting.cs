@@ -65,7 +65,7 @@ public class shooting : MonoBehaviour
             endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             bulletDir = new Vector2((endPoint.x - playerPosition.x), (endPoint.y - playerPosition.y));
             bulletDir.Normalize();
-            if (Time.frameCount%60 == 0){
+            if (Time.frameCount%20 == 0){
                 // Debug.Log(Time.frameCount);
                 //photonView.RPC("UpdateShoot", RpcTarget.All, speed*bulletDir);
                 if (Shotgun) {

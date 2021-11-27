@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         PlayerShootSpeed = 8;
-        PlayerShootPower = 2;
+        PlayerShootPower = 4;
         if (transform.position.x > 0)
             side = 1;
         else
