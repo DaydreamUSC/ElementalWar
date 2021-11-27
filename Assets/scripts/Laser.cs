@@ -158,8 +158,8 @@ public class Laser : MonoBehaviour
     void UpdateLaser(Vector2 LaserEndpoint)
     {
 
-        lineRenderer.SetPosition(0, (Vector2)firePoint.position);
-        startVFX.transform.position = (Vector2)firePoint.position;
+        lineRenderer.SetPosition(0, firePoint.position);
+        startVFX.transform.position = firePoint.position;
 
         lineRenderer.SetPosition(1, LaserEndpoint);
 
@@ -176,7 +176,7 @@ public class Laser : MonoBehaviour
 
         //angle.Normalize();
 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction.normalized, direction.magnitude, layerMask);
         // RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude, layerMask);
 
         if(hit)

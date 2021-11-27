@@ -87,7 +87,7 @@ public class Place_field : MonoBehaviour
     {
         if (property == "red") {
             //Debug.Log("triggger!!!");
-        player1_current_field = PhotonNetwork.Instantiate("Player1_fire_field", new Vector3(16.6f, 0, -5), Quaternion.identity);
+        player1_current_field = PhotonNetwork.Instantiate("Player1_fire_field", new Vector3(19.3134f, 5.4915f, 5), Quaternion.identity);
 
         player1_current_field.name = "Player1_fire_field";
         player1_field_property = "red";
@@ -96,19 +96,19 @@ public class Place_field : MonoBehaviour
 
         if (property == "blue")
         {
-            player1_current_field =  PhotonNetwork.Instantiate("Player1_frozen_field", new Vector3(16.6f, 0, -5), Quaternion.identity);
+            player1_current_field =  PhotonNetwork.Instantiate("Player1_frozen_field", new Vector3(19.3455f, 5.6018f, 5), Quaternion.identity);
             player1_current_field.name = "Player1_frozen_field";
             player1_field_property = "blue";
         }
         if (property == "yellow")
         {
-            player1_current_field = PhotonNetwork.Instantiate("Player1_lighting_field", new Vector3(16.6f, 0, -5), Quaternion.identity);
+            player1_current_field = PhotonNetwork.Instantiate("Player1_lighting_field", new Vector3(19.3527f, 5.5493f, 5), Quaternion.identity);
             player1_current_field.name = "Player1_lighting_field";
             player1_field_property = "yellow";
         }
         if (property == "Enlarge")
         {
-            player1_current_field = PhotonNetwork.Instantiate("Player1_Enlarge_field", new Vector3(16.65f, 0, -5), Quaternion.identity);
+            player1_current_field = PhotonNetwork.Instantiate("Player1_Enlarge_field", new Vector3(19.3189f,5.6184f, 5), Quaternion.identity);
             player1_current_field.name = "Player1_Enlarge_field";
             player1_field_property = "Enlarge";
         }
@@ -123,7 +123,7 @@ public class Place_field : MonoBehaviour
     {
         if (property == "red")
         {
-            player2_current_field = PhotonNetwork.Instantiate("Player2_fire_field", new Vector3(-16.9f, 0, -5), Quaternion.identity);
+            player2_current_field = PhotonNetwork.Instantiate("Player2_fire_field", new Vector3(-19.065f, 5.6249f, 5), Quaternion.identity);
             player2_current_field.name = "Player2_fire_field";
             player2_field_property = "red";
 
@@ -131,20 +131,20 @@ public class Place_field : MonoBehaviour
 
         if (property == "blue")
         {
-            player2_current_field = PhotonNetwork.Instantiate("Player2_frozen_field", new Vector3(-16.9f, 0, -5), Quaternion.identity);
+            player2_current_field = PhotonNetwork.Instantiate("Player2_frozen_field", new Vector3(-19.0406f, 5.5633f, 5), Quaternion.identity);
             player2_current_field.name = "Player2_frozen_field";
             player2_field_property = "blue";
         }
         if (property == "yellow")
         {
             Debug.Log("called me!!!");
-            player2_current_field = PhotonNetwork.Instantiate("Player2_lighting_field", new Vector3(-16.9f, 0, -5), Quaternion.identity);
+            player2_current_field = PhotonNetwork.Instantiate("Player2_lighting_field", new Vector3(-18.9644f, 5.5967f, 5), Quaternion.identity);
             player2_current_field.name = "Player2_lighting_field";
             player2_field_property = "yellow";
         }
         if (property == "Enlarge")
         {
-            player2_current_field = PhotonNetwork.Instantiate("Player2_Enlarge_field", new Vector3(-16.6f, 0, -5), Quaternion.identity);
+            player2_current_field = PhotonNetwork.Instantiate("Player2_Enlarge_field", new Vector3(-19.0624f, 5.5759f, 5), Quaternion.identity);
             player2_current_field.name = "Player2_Enlarge_field";
             player2_field_property = "Enlarge";
         }

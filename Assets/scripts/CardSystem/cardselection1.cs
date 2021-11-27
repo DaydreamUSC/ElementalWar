@@ -15,7 +15,18 @@ public class cardselection1 : MonoBehaviour
     public Place_field placefield;
     public GameObject myplayer;
 
+    public GameObject cardNum;
+    public SpriteRenderer LaserGunImage;
+    public SpriteRenderer DoubleGunImage;
+    public SpriteRenderer FireImage;
+    public SpriteRenderer IceImage;
+    public SpriteRenderer LightingImage;
+    public SpriteRenderer EnlargeImage;
+    public SpriteRenderer SpeedImage;
+    public SpriteRenderer ShotGunImage;
+    public SpriteRenderer CureImage;
 
+    int num;
     private bool clicked;
 
     // Start is called before the first frame update
@@ -23,40 +34,60 @@ public class cardselection1 : MonoBehaviour
     {
       clicked = false;
       //int num = Random.Range(0,9);//0~8
-      int num = 5;
-      if(num==0){
-          displayCardName1.GetInstance().UpdateName("Cure");
-      }
-      else if(num==1){
-          displayCardName1.GetInstance().UpdateName("Speed");
-      }
-      else if(num==2){
-          displayCardName1.GetInstance().UpdateName("DoubleGun");
-      }
-      else if(num==3){
-          displayCardName1.GetInstance().UpdateName("Redfield");
-      }
-      else if(num==4){
-          displayCardName1.GetInstance().UpdateName("Bluefield");
-      }
-      else if(num==5){
-          displayCardName1.GetInstance().UpdateName("Yellowfield");
-      }
-      else if(num == 6){
-          displayCardName1.GetInstance().UpdateName("Enlargefield");
-      }
-      else if(num == 7){
-          displayCardName1.GetInstance().UpdateName("LaserGun");
-      }
-      else if(num == 8){
-          displayCardName1.GetInstance().UpdateName("ShotGun");
-      }
+      StartCoroutine(begin());
+      //num = gameObject.GetComponentInParent<CardShuffle>().GetCard(-1);
+
+
+
     }
 
+    IEnumerator begin()
+    {
+
+        yield return new WaitForSeconds(0.1f);
+        num = gameObject.GetComponentInParent<CardShuffle>().GetCard(-1);
+        if(num==0){
+            displayCardName1.GetInstance().UpdateName("Cure");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = CureImage.sprite;
+        }
+        else if(num==1){
+            displayCardName1.GetInstance().UpdateName("Speed");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = SpeedImage.sprite;
+        }
+        else if(num==2){
+            displayCardName1.GetInstance().UpdateName("DoubleGun");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = DoubleGunImage.sprite;
+        }
+        else if(num==3){
+            displayCardName1.GetInstance().UpdateName("Redfield");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = FireImage.sprite;
+        }
+        else if(num==4){
+            displayCardName1.GetInstance().UpdateName("Bluefield");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite =  IceImage.sprite;
+        }
+        else if(num==5){
+            displayCardName1.GetInstance().UpdateName("Yellowfield");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = LightingImage.sprite;
+        }
+        else if(num == 6){
+            displayCardName1.GetInstance().UpdateName("Enlargefield");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = EnlargeImage.sprite;
+        }
+        else if(num == 7){
+            displayCardName1.GetInstance().UpdateName("LaserGun");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = LaserGunImage.sprite;
+        }
+        else if(num == 8){
+            displayCardName1.GetInstance().UpdateName("ShotGun");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = ShotGunImage.sprite;
+        }
+          Debug.Log("num" + num);
+    }
     // Update is called once per frame
     void Update()
     {
-      int num;
+
       if(Input.GetKeyDown(KeyCode.Alpha1)){
 
         // Debug.Log(clicked);
@@ -68,16 +99,17 @@ public class cardselection1 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 7 ){
               Cure();
               energyBar.UseEnergy(7);
-              num = Random.Range(0,9);
+              num = gameObject.GetComponentInParent<CardShuffle>().GetCard(0);
               Select(num);
+              }
             }
 
-          }
+
           else if(card.text=="Speed"){
             if(energyBar.getCurrentEnergy() >= 5 ){
               Speed();
               energyBar.UseEnergy(5);
-              num = Random.Range(0,9);
+              num = gameObject.GetComponentInParent<CardShuffle>().GetCard(1);
               Select(num);
             }
           }
@@ -85,7 +117,7 @@ public class cardselection1 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 8 ){
               Weapon();
               energyBar.UseEnergy(8);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(2);
               Select(num);
             }
           }
@@ -93,7 +125,7 @@ public class cardselection1 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 3 ){
               placefield.R();
               energyBar.UseEnergy(3);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(3);
               Select(num);
             }
           }
@@ -101,7 +133,7 @@ public class cardselection1 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 3 ){
               placefield.B();
               energyBar.UseEnergy(3);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(4);
               Select(num);
             }
           }
@@ -109,7 +141,7 @@ public class cardselection1 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 3 ){
               placefield.Y();
               energyBar.UseEnergy(3);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(5);
               Select(num);
             }
           }
@@ -118,7 +150,7 @@ public class cardselection1 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 3 ){
               placefield.Enlarge();
               energyBar.UseEnergy(3);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(6);
               Select(num);
             }
           }
@@ -127,7 +159,7 @@ public class cardselection1 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 10 ){
               enableLaser();
               energyBar.UseEnergy(10);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(7);
               Select(num);
             }
           }
@@ -136,13 +168,13 @@ public class cardselection1 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 7 ){
               StartCoroutine(ShotGun());
               energyBar.UseEnergy(7);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(8);
               Select(num);
             }
           }
         // }
-      }
 
+        }
     }
 
     private IEnumerator ShotGun(){
@@ -155,30 +187,39 @@ public class cardselection1 : MonoBehaviour
     void Select(int num){
       if(num==0){
           displayCardName1.GetInstance().UpdateName("Cure");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = CureImage.sprite;
       }
       else if(num==1){
           displayCardName1.GetInstance().UpdateName("Speed");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = SpeedImage.sprite;
       }
       else if(num==2){
           displayCardName1.GetInstance().UpdateName("DoubleGun");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = DoubleGunImage.sprite;
       }
       else if(num==3){
           displayCardName1.GetInstance().UpdateName("Redfield");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = FireImage.sprite;
       }
       else if(num==4){
           displayCardName1.GetInstance().UpdateName("Bluefield");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite =  IceImage.sprite;
       }
       else if(num==5){
           displayCardName1.GetInstance().UpdateName("Yellowfield");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = LightingImage.sprite;
       }
-      else if(num==6){
+      else if(num == 6){
           displayCardName1.GetInstance().UpdateName("Enlargefield");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = EnlargeImage.sprite;
       }
-      else if(num==7){
+      else if(num == 7){
           displayCardName1.GetInstance().UpdateName("LaserGun");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = LaserGunImage.sprite;
       }
       else if(num == 8){
           displayCardName1.GetInstance().UpdateName("ShotGun");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = ShotGunImage.sprite;
       }
     }
 
