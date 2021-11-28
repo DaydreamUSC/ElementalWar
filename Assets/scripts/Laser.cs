@@ -197,7 +197,7 @@ public class Laser : MonoBehaviour
                 hitcount++;
                 if(hitcount == 10)
                 {
-                    hit.collider.gameObject.GetComponent<Player>().HPdeduction(2);
+                    hit.collider.gameObject.GetComponent<Player>().HPdeduction(3);
                     // Hit_Sound.PlayOneShot(Hit_Sound.clip);
                     // Debug.Log("----------------------Call HPdeduction--------------------------");
                     // Debug.Log(hit.collider.gameObject.GetComponent<Player>().healthBar.GetHealth());

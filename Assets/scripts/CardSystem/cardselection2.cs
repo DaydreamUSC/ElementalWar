@@ -236,7 +236,7 @@ public class cardselection2 : MonoBehaviour
     }
     private IEnumerator Speeddo(){
       Speed();
-      yield return new WaitForSeconds(10);
+      yield return new WaitForSeconds(7);
       Move.moveSpeed = 20f;
     }
 
