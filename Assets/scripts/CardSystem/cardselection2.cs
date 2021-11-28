@@ -110,7 +110,7 @@ public class cardselection2 : MonoBehaviour
 
           else if(card.text=="Speed"){
             if(energyBar.getCurrentEnergy() >= 5 ){
-              Speed();
+              StartCoroutine(Speeddo());
               energyBar.UseEnergy(5);
               num = gameObject.GetComponentInParent<CardShuffle>().GetCard(1);
               Select(num);
