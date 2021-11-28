@@ -9,52 +9,85 @@ public class cardselection2 : MonoBehaviour
 {
     //public string[] totalcard = new string[] {"weapon1","weapon2","skill1","skill2","field1","field2","field3"};
     public Text card;
-    public int addHP2 = 20;
-    public float addSpeed2 = 30f;
+    public int addHP1 = 20;
+    public float addSpeed1 = 8f;
     public EnergyBar energyBar;
     public Place_field placefield;
     public GameObject myplayer;
 
+    public GameObject cardNum;
+    public SpriteRenderer LaserGunImage;
+    public SpriteRenderer DoubleGunImage;
+    public SpriteRenderer FireImage;
+    public SpriteRenderer IceImage;
+    public SpriteRenderer LightingImage;
+    public SpriteRenderer EnlargeImage;
+    public SpriteRenderer SpeedImage;
+    public SpriteRenderer ShotGunImage;
+    public SpriteRenderer CureImage;
+
+    int num;
     private bool clicked;
 
     // Start is called before the first frame update
     void Start()
     {
       clicked = false;
-      int num = Random.Range(0,9);//0~8
-      if(num==0){
-          displayCardName2.GetInstance().UpdateName("Cure");
-      }
-      else if(num==1){
-          displayCardName2.GetInstance().UpdateName("DoubleSpeed");
-      }
-      else if(num==2){
-          displayCardName2.GetInstance().UpdateName("DoubleGun");
-      }
-      else if(num==3){
-          displayCardName2.GetInstance().UpdateName("Firefield");
-      }
-      else if(num==4){
-          displayCardName2.GetInstance().UpdateName("Icefield");
-      }
-      else if(num==5){
-          displayCardName2.GetInstance().UpdateName("Thunderfield");
-      }
-      else if(num == 6){
-          displayCardName2.GetInstance().UpdateName("Enlargefield");
-      }
-      else if(num == 7){
-          displayCardName2.GetInstance().UpdateName("LaserGun");
-      }
-      else if(num == 8){
-          displayCardName2.GetInstance().UpdateName("ShotGun");
-      }
+      //int num = Random.Range(0,9);//0~8
+      StartCoroutine(begin());
+      //num = gameObject.GetComponentInParent<CardShuffle>().GetCard(-1);
+
+
+
     }
 
+    IEnumerator begin()
+    {
+
+        yield return new WaitForSeconds(0.1f);
+        num = gameObject.GetComponentInParent<CardShuffle>().GetCard(-1);
+        if(num==0){
+            displayCardName2.GetInstance().UpdateName("Cure");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = CureImage.sprite;
+        }
+        else if(num==1){
+            displayCardName2.GetInstance().UpdateName("Speed");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = SpeedImage.sprite;
+        }
+        else if(num==2){
+            displayCardName2.GetInstance().UpdateName("DoubleGun");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = DoubleGunImage.sprite;
+        }
+        else if(num==3){
+            displayCardName2.GetInstance().UpdateName("Redfield");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = FireImage.sprite;
+        }
+        else if(num==4){
+            displayCardName2.GetInstance().UpdateName("Bluefield");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite =  IceImage.sprite;
+        }
+        else if(num==5){
+            displayCardName2.GetInstance().UpdateName("Yellowfield");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = LightingImage.sprite;
+        }
+        else if(num == 6){
+            displayCardName2.GetInstance().UpdateName("Enlargefield");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = EnlargeImage.sprite;
+        }
+        else if(num == 7){
+            displayCardName2.GetInstance().UpdateName("LaserGun");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = LaserGunImage.sprite;
+        }
+        else if(num == 8){
+            displayCardName2.GetInstance().UpdateName("ShotGun");
+            cardNum.GetComponent<UnityEngine.UI.Image>().sprite = ShotGunImage.sprite;
+        }
+          Debug.Log("num" + num);
+    }
     // Update is called once per frame
     void Update()
     {
-      int num;
+
       if(Input.GetKeyDown(KeyCode.Alpha2)){
 
         // Debug.Log(clicked);
@@ -66,19 +99,20 @@ public class cardselection2 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 7 ){
               Cure();
               energyBar.UseEnergy(7);
-              num = Random.Range(0,9);
+              num = gameObject.GetComponentInParent<CardShuffle>().GetCard(0);
               Select(num);
-            }
-            else{
-              StartCoroutine(Sign());
+              }
+              else{
+                StartCoroutine(Sign());
+              }
             }
 
-          }
-          else if(card.text=="DoubleSpeed"){
+
+          else if(card.text=="Speed"){
             if(energyBar.getCurrentEnergy() >= 5 ){
               StartCoroutine(Speeddo());
               energyBar.UseEnergy(5);
-              num = Random.Range(0,9);
+              num = gameObject.GetComponentInParent<CardShuffle>().GetCard(1);
               Select(num);
             }
             else{
@@ -86,43 +120,43 @@ public class cardselection2 : MonoBehaviour
             }
           }
           else if(card.text=="DoubleGun"){
-            if(energyBar.getCurrentEnergy() >= 5 ){
+            if(energyBar.getCurrentEnergy() >= 8 ){
               Weapon();
               energyBar.UseEnergy(8);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(2);
               Select(num);
             }
             else{
               StartCoroutine(Sign());
             }
           }
-          else if(card.text=="Firefield"){
+          else if(card.text=="Redfield"){
             if(energyBar.getCurrentEnergy() >= 6 ){
               StartCoroutine(RF());
-              energyBar.UseEnergy(3);
-              num = Random.Range(0,9);
+              energyBar.UseEnergy(6);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(3);
               Select(num);
             }
             else{
               StartCoroutine(Sign());
             }
           }
-          else if(card.text=="Icefield"){
+          else if(card.text=="Bluefield"){
             if(energyBar.getCurrentEnergy() >= 6 ){
               StartCoroutine(BF());
-              energyBar.UseEnergy(3);
-              num = Random.Range(0,9);
+              energyBar.UseEnergy(6);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(4);
               Select(num);
             }
             else{
               StartCoroutine(Sign());
             }
           }
-          else if(card.text=="Thunderfield"){
+          else if(card.text=="Yellowfield"){
             if(energyBar.getCurrentEnergy() >= 6 ){
               StartCoroutine(YF());
-              energyBar.UseEnergy(3);
-              num = Random.Range(0,9);
+              energyBar.UseEnergy(6);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(5);
               Select(num);
             }
             else{
@@ -133,8 +167,8 @@ public class cardselection2 : MonoBehaviour
           {
             if(energyBar.getCurrentEnergy() >= 6 ){
               StartCoroutine(EF());
-              energyBar.UseEnergy(3);
-              num = Random.Range(0,9);
+              energyBar.UseEnergy(6);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(6);
               Select(num);
             }
             else{
@@ -146,7 +180,7 @@ public class cardselection2 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 10 ){
               enableLaser();
               energyBar.UseEnergy(10);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(7);
               Select(num);
             }
             else{
@@ -158,7 +192,7 @@ public class cardselection2 : MonoBehaviour
             if(energyBar.getCurrentEnergy() >= 7 ){
               StartCoroutine(ShotGun());
               energyBar.UseEnergy(7);
-              num = Random.Range(0,9);
+              num =gameObject.GetComponentInParent<CardShuffle>().GetCard(8);
               Select(num);
             }
             else{
@@ -166,41 +200,49 @@ public class cardselection2 : MonoBehaviour
             }
           }
         // }
-      }
 
+        }
     }
 
 
     void Select(int num){
       if(num==0){
           displayCardName2.GetInstance().UpdateName("Cure");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = CureImage.sprite;
       }
       else if(num==1){
-          displayCardName2.GetInstance().UpdateName("DoubleSpeed");
+          displayCardName2.GetInstance().UpdateName("Speed");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = SpeedImage.sprite;
       }
       else if(num==2){
           displayCardName2.GetInstance().UpdateName("DoubleGun");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = DoubleGunImage.sprite;
       }
       else if(num==3){
-          displayCardName2.GetInstance().UpdateName("Firefield");
+          displayCardName2.GetInstance().UpdateName("Redfield");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = FireImage.sprite;
       }
       else if(num==4){
-          displayCardName2.GetInstance().UpdateName("Icefield");
+          displayCardName2.GetInstance().UpdateName("Bluefield");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite =  IceImage.sprite;
       }
       else if(num==5){
-          displayCardName2.GetInstance().UpdateName("Thunderfield");
+          displayCardName2.GetInstance().UpdateName("Yellowfield");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = LightingImage.sprite;
       }
-      else if(num==6){
+      else if(num == 6){
           displayCardName2.GetInstance().UpdateName("Enlargefield");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = EnlargeImage.sprite;
       }
-      else if(num==7){
+      else if(num == 7){
           displayCardName2.GetInstance().UpdateName("LaserGun");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = LaserGunImage.sprite;
       }
       else if(num == 8){
           displayCardName2.GetInstance().UpdateName("ShotGun");
+          cardNum.GetComponent<UnityEngine.UI.Image>().sprite = ShotGunImage.sprite;
       }
     }
-
     private IEnumerator RF(){
       placefield.R();
       yield return new WaitForSeconds(10);
@@ -239,9 +281,14 @@ public class cardselection2 : MonoBehaviour
       yield return new WaitForSeconds(10);
       Move.moveSpeed = 20f;
     }
+    void Shotgun(){
+      shooting.Shotgun = true;
+
+    }
 
     void enableLaser() {
       Debug.Log("TEST");
+      myplayer.SendMessage("test","LaserGun");
       if (energyBar.getCurrentEnergy() >= 10) {
         Debug.Log("Taking laser gun");
         myplayer.SendMessage("UseLaser");
@@ -253,7 +300,7 @@ public class cardselection2 : MonoBehaviour
       displayCardName2.GetInstance().UpdateName("Cure");
       if(myplayer!=null && energyBar.getCurrentEnergy() >= 6 && Player.currentHP<Player.maxHealth){
           Debug.Log(myplayer);
-          myplayer.SendMessage("CurePlayer",addHP2);
+          myplayer.SendMessage("CurePlayer",addHP1);
 
 
            // consume EP
@@ -267,11 +314,11 @@ public class cardselection2 : MonoBehaviour
     }
 
     void Speed(){
-      Debug.Log("DoubleSpeed");
-      displayCardName2.GetInstance().UpdateName("DoubleSpeed");
+      Debug.Log("Speed");
+      displayCardName2.GetInstance().UpdateName("Speed");
       if(energyBar.getCurrentEnergy() >= 3 && Move.moveSpeed<120f){
 
-          Move.moveSpeed += addSpeed2;
+          Move.moveSpeed += addSpeed1;
 
           AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Skill Card: MoveSpeedUp", new Dictionary<string, object>{
               { "currentSpeed", Move.moveSpeed },
@@ -287,6 +334,7 @@ public class cardselection2 : MonoBehaviour
       displayCardName2.GetInstance().UpdateName("DoubleGun");
       if(energyBar.getCurrentEnergy() >= 7 && Player.PlayerShootSpeed<256f){
         StartCoroutine(Change());
+
       }
       AnalyticsResult analyticsResult = Analytics.CustomEvent("Click Weapon Card: double bulletPower and bulletSpeed", new Dictionary<string, object>{
           { "PlayerShootPower", Player.PlayerShootPower },
@@ -298,12 +346,13 @@ public class cardselection2 : MonoBehaviour
 
 
     private IEnumerator Change(){
-
-      Player.PlayerShootPower = 4;
-      Player.PlayerShootSpeed = 32;
+      myplayer.SendMessage("test","FloatingGun");
+      Player.PlayerShootPower = 8;
+      Player.PlayerShootSpeed = 20;
       yield return new WaitForSeconds(10);
-      Player.PlayerShootPower = 2;
+      Player.PlayerShootPower = 4;
       Player.PlayerShootSpeed = 8;
+      myplayer.SendMessage("test","MachineGun");
     }
 
 
@@ -314,7 +363,7 @@ public class cardselection2 : MonoBehaviour
     public void SetPlayer(GameObject input){
         if(myplayer==null && input!=null){
             myplayer=input;
-            Debug.Log("Cure added in cardselection2");
+            Debug.Log("Cure added in cardselection1");
         }
     }
 

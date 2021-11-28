@@ -10,6 +10,8 @@ public class bullet_property : MonoBehaviour
     public string owner;
     public char ownerID;
     public Vector3 scale;
+    public BoxCollider2D Collider;
+    public int bullet_Damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,9 @@ public class bullet_property : MonoBehaviour
         col = "white";
         photonView = GetComponent<PhotonView>();
         scale = transform.localScale;
+        Collider = GetComponent<BoxCollider2D>();
+        // Debug.Log("bullet_D");
+        // Debug.Log(bullet_Damage);
     }
 
     // Update is called once per frame
@@ -36,44 +41,42 @@ public class bullet_property : MonoBehaviour
             {
                 photonView.RPC("change_color", RpcTarget.All, "red");
             }
-            else if (other.gameObject.name == "Player1_lighting_field")
-            {
-                photonView.RPC("change_color", RpcTarget.All, "yellow");
-            }
-            else if (other.gameObject.name == "Player1_Enlarge_field")
-            {
-                photonView.RPC("change_color", RpcTarget.All, "enlarge");
-            }
 
-            else if(other.gameObject.name == "Player1_frozen_field")
+            if(other.gameObject.name == "Player1_frozen_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "blue");
             }
-
+            if(other.gameObject.name == "Player1_lighting_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "yellow");
+            }
+            if (other.gameObject.name == "Player1_Enlarge_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "enlarge");
+            }
         }
 
         //Player2 field
-        else if (other.gameObject.tag == "Player2_field" && ownerID.ToString() == "2")
+        if (other.gameObject.tag == "Player2_field" && ownerID.ToString() == "2")
         {
             if (other.gameObject.name == "Player2_fire_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "red");
             }
-            else if (other.gameObject.name == "Player2_lighting_field")
-            {
-                photonView.RPC("change_color", RpcTarget.All, "yellow");
-            }
-            else if (other.gameObject.name == "Player2_frozen_field")
+
+            if (other.gameObject.name == "Player2_frozen_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "blue");
             }
-            else if (other.gameObject.name == "Player2_Enlarge_field")
+            if (other.gameObject.name == "Player2_lighting_field")
+            {
+                photonView.RPC("change_color", RpcTarget.All, "yellow");
+            }
+            if (other.gameObject.name == "Player2_Enlarge_field")
             {
                 photonView.RPC("change_color", RpcTarget.All, "enlarge");
             }
-
         }
-        
 
 
 
@@ -94,22 +97,23 @@ public class bullet_property : MonoBehaviour
             col = "red";
         }
 
-        else if (color == "yellow")
+        if (color == "yellow")
         {
             bulletSprite.color = Color.yellow;
             col = "yellow";
         }
 
 
-        else if (color == "blue")
+        if (color == "blue")
         {
             bulletSprite.color = Color.blue;
             col = "blue";
         }
 
-        else if (color == "enlarge")
+        if (color == "enlarge")
         {
             transform.localScale = new Vector3(transform.localScale.x*3, transform.localScale.y*3, 1f);
+            Collider.size = new Vector3(3f, 3f, 1f);
         }
     }
 }

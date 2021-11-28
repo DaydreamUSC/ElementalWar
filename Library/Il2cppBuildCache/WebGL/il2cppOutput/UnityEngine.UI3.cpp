@@ -11654,14 +11654,18 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MouseButtonEventData_PressedThisFrame_mE
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MouseButtonEventData_ReleasedThisFrame_m014BA45901727A4D5C432BB239D0E076D8A82EA1 (MouseButtonEventData_tE8E157C9D47E03160B193B4853B5DF5AA3FA65B6 * __this, const RuntimeMethod* method);
 // UnityEngine.Material UnityEngine.UI.StencilMaterial::Add(UnityEngine.Material,System.Int32,UnityEngine.Rendering.StencilOp,UnityEngine.Rendering.CompareFunction,UnityEngine.Rendering.ColorWriteMask,System.Int32,System.Int32)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Material_t8927C00353A72755313F046D0CE85178AE8218EE * StencilMaterial_Add_m096013C81D92CB4B37053C97B427A64EDFA61F25 (Material_t8927C00353A72755313F046D0CE85178AE8218EE * ___baseMat0, int32_t ___stencilID1, int32_t ___operation2, int32_t ___compareFunction3, int32_t ___colorWriteMask4, int32_t ___readMask5, int32_t ___writeMask6, const RuntimeMethod* method);
+// System.Boolean UnityEngine.Application::get_isBatchMode()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Application_get_isBatchMode_m215E452DEF633146433A61A538F52B84ACA15CBB (const RuntimeMethod* method);
+// System.Void UnityEngine.Debug::LogWarning(System.Object,UnityEngine.Object)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8 (RuntimeObject * ___message0, Object_tF2F3778131EFF286AF62B7B013A170F95A91571A * ___context1, const RuntimeMethod* method);
 // System.Boolean UnityEngine.Material::HasProperty(System.String)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Material_HasProperty_mB6F155CD45C688DA232B56BD1A74474C224BE37E (Material_t8927C00353A72755313F046D0CE85178AE8218EE * __this, String_t* ___name0, const RuntimeMethod* method);
 // System.String UnityEngine.Object::get_name()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Object_get_name_m0C7BC870ED2F0DC5A2FB09628136CD7D1CB82CFB (Object_tF2F3778131EFF286AF62B7B013A170F95A91571A * __this, const RuntimeMethod* method);
 // System.String System.String::Concat(System.String,System.String,System.String)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* String_Concat_m89EAB4C6A96B0E5C3F87300D6BE78D386B9EFC44 (String_t* ___str00, String_t* ___str11, String_t* ___str22, const RuntimeMethod* method);
-// System.Void UnityEngine.Debug::LogWarning(System.Object,UnityEngine.Object)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8 (RuntimeObject * ___message0, Object_tF2F3778131EFF286AF62B7B013A170F95A91571A * ___context1, const RuntimeMethod* method);
+// System.Void UnityEngine.UI.StencilMaterial::LogWarningWhenNotInBatchmode(System.String,UnityEngine.Object)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StencilMaterial_LogWarningWhenNotInBatchmode_m7B9EF8ED87D9B8DC4ABC75083664AA44C0B511F9 (String_t* ___warning0, Object_tF2F3778131EFF286AF62B7B013A170F95A91571A * ___context1, const RuntimeMethod* method);
 // System.Int32 System.Collections.Generic.List`1<UnityEngine.UI.StencilMaterial/MatEntry>::get_Count()
 inline int32_t List_1_get_Count_mED4FBC3BD6F8A84589A0AE542F3E38F04C900C43_inline (List_1_t81B435AD26EAEDC4948F109696316554CD0DC100 * __this, const RuntimeMethod* method)
 {
@@ -14921,6 +14925,38 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Material_t8927C00353A72755313F046D0CE85178AE8
 		return L_5;
 	}
 }
+// System.Void UnityEngine.UI.StencilMaterial::LogWarningWhenNotInBatchmode(System.String,UnityEngine.Object)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StencilMaterial_LogWarningWhenNotInBatchmode_m7B9EF8ED87D9B8DC4ABC75083664AA44C0B511F9 (String_t* ___warning0, Object_tF2F3778131EFF286AF62B7B013A170F95A91571A * ___context1, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		// if (!Application.isBatchMode)
+		bool L_0;
+		L_0 = Application_get_isBatchMode_m215E452DEF633146433A61A538F52B84ACA15CBB(/*hidden argument*/NULL);
+		if (L_0)
+		{
+			goto IL_000e;
+		}
+	}
+	{
+		// Debug.LogWarning(warning, context);
+		String_t* L_1 = ___warning0;
+		Object_tF2F3778131EFF286AF62B7B013A170F95A91571A * L_2 = ___context1;
+		IL2CPP_RUNTIME_CLASS_INIT(Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
+		Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8(L_1, L_2, /*hidden argument*/NULL);
+	}
+
+IL_000e:
+	{
+		// }
+		return;
+	}
+}
 // UnityEngine.Material UnityEngine.UI.StencilMaterial::Add(UnityEngine.Material,System.Int32,UnityEngine.Rendering.StencilOp,UnityEngine.Rendering.CompareFunction,UnityEngine.Rendering.ColorWriteMask,System.Int32,System.Int32)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Material_t8927C00353A72755313F046D0CE85178AE8218EE * StencilMaterial_Add_m096013C81D92CB4B37053C97B427A64EDFA61F25 (Material_t8927C00353A72755313F046D0CE85178AE8218EE * ___baseMat0, int32_t ___stencilID1, int32_t ___operation2, int32_t ___compareFunction3, int32_t ___colorWriteMask4, int32_t ___readMask5, int32_t ___writeMask6, const RuntimeMethod* method)
 {
@@ -14930,7 +14966,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Material_t8927C00353A72755313F046D0CE85178AE8
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Boolean_t07D1E3F34E4813023D64F584DFF7B34C9D922F37_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&ColorWriteMask_t3FA3CB36396FDF33FC5192A387BC3E75232299C0_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&CompareFunction_tBF5493E8F362C82B59254A3737D21710E0B70075_il2cpp_TypeInfo_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Int32_tFDE5F8CD43D10453F6A2E0C77FE48C6CC7009046_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_Add_m76B59C1CDDC08B09DAD61CC72583F756EC66D5F7_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_get_Count_mED4FBC3BD6F8A84589A0AE542F3E38F04C900C43_RuntimeMethod_var);
@@ -15021,15 +15056,15 @@ IL_0015:
 		}
 	}
 	{
-		// Debug.LogWarning("Material " + baseMat.name + " doesn't have _Stencil property", baseMat);
+		// LogWarningWhenNotInBatchmode("Material " + baseMat.name + " doesn't have _Stencil property", baseMat);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_7 = ___baseMat0;
 		String_t* L_8;
 		L_8 = Object_get_name_m0C7BC870ED2F0DC5A2FB09628136CD7D1CB82CFB(L_7, /*hidden argument*/NULL);
 		String_t* L_9;
 		L_9 = String_Concat_m89EAB4C6A96B0E5C3F87300D6BE78D386B9EFC44(_stringLiteral681FE31D1E9449F8A9A62C354D83737C2F5FFE58, L_8, _stringLiteral1278EE5A385E6F1ED1D60B4887FE9D53476A899A, /*hidden argument*/NULL);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_10 = ___baseMat0;
-		IL2CPP_RUNTIME_CLASS_INIT(Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
-		Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8(L_9, L_10, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(StencilMaterial_t498DA9A7C15643B79E27575F27F1D2FC2FEA6AC5_il2cpp_TypeInfo_var);
+		StencilMaterial_LogWarningWhenNotInBatchmode_m7B9EF8ED87D9B8DC4ABC75083664AA44C0B511F9(L_9, L_10, /*hidden argument*/NULL);
 		// return baseMat;
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_11 = ___baseMat0;
 		return L_11;
@@ -15047,15 +15082,15 @@ IL_003f:
 		}
 	}
 	{
-		// Debug.LogWarning("Material " + baseMat.name + " doesn't have _StencilOp property", baseMat);
+		// LogWarningWhenNotInBatchmode("Material " + baseMat.name + " doesn't have _StencilOp property", baseMat);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_14 = ___baseMat0;
 		String_t* L_15;
 		L_15 = Object_get_name_m0C7BC870ED2F0DC5A2FB09628136CD7D1CB82CFB(L_14, /*hidden argument*/NULL);
 		String_t* L_16;
 		L_16 = String_Concat_m89EAB4C6A96B0E5C3F87300D6BE78D386B9EFC44(_stringLiteral681FE31D1E9449F8A9A62C354D83737C2F5FFE58, L_15, _stringLiteralCD9DBE51C720372F84FFC7F716527FD61D493EC1, /*hidden argument*/NULL);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_17 = ___baseMat0;
-		IL2CPP_RUNTIME_CLASS_INIT(Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
-		Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8(L_16, L_17, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(StencilMaterial_t498DA9A7C15643B79E27575F27F1D2FC2FEA6AC5_il2cpp_TypeInfo_var);
+		StencilMaterial_LogWarningWhenNotInBatchmode_m7B9EF8ED87D9B8DC4ABC75083664AA44C0B511F9(L_16, L_17, /*hidden argument*/NULL);
 		// return baseMat;
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_18 = ___baseMat0;
 		return L_18;
@@ -15073,15 +15108,15 @@ IL_0069:
 		}
 	}
 	{
-		// Debug.LogWarning("Material " + baseMat.name + " doesn't have _StencilComp property", baseMat);
+		// LogWarningWhenNotInBatchmode("Material " + baseMat.name + " doesn't have _StencilComp property", baseMat);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_21 = ___baseMat0;
 		String_t* L_22;
 		L_22 = Object_get_name_m0C7BC870ED2F0DC5A2FB09628136CD7D1CB82CFB(L_21, /*hidden argument*/NULL);
 		String_t* L_23;
 		L_23 = String_Concat_m89EAB4C6A96B0E5C3F87300D6BE78D386B9EFC44(_stringLiteral681FE31D1E9449F8A9A62C354D83737C2F5FFE58, L_22, _stringLiteralD880F261C51445E5913AD2E4F89FA983CE73C51E, /*hidden argument*/NULL);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_24 = ___baseMat0;
-		IL2CPP_RUNTIME_CLASS_INIT(Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
-		Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8(L_23, L_24, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(StencilMaterial_t498DA9A7C15643B79E27575F27F1D2FC2FEA6AC5_il2cpp_TypeInfo_var);
+		StencilMaterial_LogWarningWhenNotInBatchmode_m7B9EF8ED87D9B8DC4ABC75083664AA44C0B511F9(L_23, L_24, /*hidden argument*/NULL);
 		// return baseMat;
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_25 = ___baseMat0;
 		return L_25;
@@ -15099,15 +15134,15 @@ IL_0093:
 		}
 	}
 	{
-		// Debug.LogWarning("Material " + baseMat.name + " doesn't have _StencilReadMask property", baseMat);
+		// LogWarningWhenNotInBatchmode("Material " + baseMat.name + " doesn't have _StencilReadMask property", baseMat);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_28 = ___baseMat0;
 		String_t* L_29;
 		L_29 = Object_get_name_m0C7BC870ED2F0DC5A2FB09628136CD7D1CB82CFB(L_28, /*hidden argument*/NULL);
 		String_t* L_30;
 		L_30 = String_Concat_m89EAB4C6A96B0E5C3F87300D6BE78D386B9EFC44(_stringLiteral681FE31D1E9449F8A9A62C354D83737C2F5FFE58, L_29, _stringLiteral97BE74F6BDD964B6117097C57EF1E5E04FBBE50B, /*hidden argument*/NULL);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_31 = ___baseMat0;
-		IL2CPP_RUNTIME_CLASS_INIT(Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
-		Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8(L_30, L_31, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(StencilMaterial_t498DA9A7C15643B79E27575F27F1D2FC2FEA6AC5_il2cpp_TypeInfo_var);
+		StencilMaterial_LogWarningWhenNotInBatchmode_m7B9EF8ED87D9B8DC4ABC75083664AA44C0B511F9(L_30, L_31, /*hidden argument*/NULL);
 		// return baseMat;
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_32 = ___baseMat0;
 		return L_32;
@@ -15125,15 +15160,15 @@ IL_00bd:
 		}
 	}
 	{
-		// Debug.LogWarning("Material " + baseMat.name + " doesn't have _StencilWriteMask property", baseMat);
+		// LogWarningWhenNotInBatchmode("Material " + baseMat.name + " doesn't have _StencilWriteMask property", baseMat);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_35 = ___baseMat0;
 		String_t* L_36;
 		L_36 = Object_get_name_m0C7BC870ED2F0DC5A2FB09628136CD7D1CB82CFB(L_35, /*hidden argument*/NULL);
 		String_t* L_37;
 		L_37 = String_Concat_m89EAB4C6A96B0E5C3F87300D6BE78D386B9EFC44(_stringLiteral681FE31D1E9449F8A9A62C354D83737C2F5FFE58, L_36, _stringLiteral5D334A061889D9255A5FB3A0020B19191A3EE18E, /*hidden argument*/NULL);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_38 = ___baseMat0;
-		IL2CPP_RUNTIME_CLASS_INIT(Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
-		Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8(L_37, L_38, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(StencilMaterial_t498DA9A7C15643B79E27575F27F1D2FC2FEA6AC5_il2cpp_TypeInfo_var);
+		StencilMaterial_LogWarningWhenNotInBatchmode_m7B9EF8ED87D9B8DC4ABC75083664AA44C0B511F9(L_37, L_38, /*hidden argument*/NULL);
 		// return baseMat;
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_39 = ___baseMat0;
 		return L_39;
@@ -15151,15 +15186,15 @@ IL_00e7:
 		}
 	}
 	{
-		// Debug.LogWarning("Material " + baseMat.name + " doesn't have _ColorMask property", baseMat);
+		// LogWarningWhenNotInBatchmode("Material " + baseMat.name + " doesn't have _ColorMask property", baseMat);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_42 = ___baseMat0;
 		String_t* L_43;
 		L_43 = Object_get_name_m0C7BC870ED2F0DC5A2FB09628136CD7D1CB82CFB(L_42, /*hidden argument*/NULL);
 		String_t* L_44;
 		L_44 = String_Concat_m89EAB4C6A96B0E5C3F87300D6BE78D386B9EFC44(_stringLiteral681FE31D1E9449F8A9A62C354D83737C2F5FFE58, L_43, _stringLiteral7EEC8C7DA706669BD0B16BFB492B793CD7CA971E, /*hidden argument*/NULL);
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_45 = ___baseMat0;
-		IL2CPP_RUNTIME_CLASS_INIT(Debug_tEB68BCBEB8EFD60F8043C67146DC05E7F50F374B_il2cpp_TypeInfo_var);
-		Debug_LogWarning_mE6AF3EFCF84F2296622CD42FBF9EEAF07244C0A8(L_44, L_45, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(StencilMaterial_t498DA9A7C15643B79E27575F27F1D2FC2FEA6AC5_il2cpp_TypeInfo_var);
+		StencilMaterial_LogWarningWhenNotInBatchmode_m7B9EF8ED87D9B8DC4ABC75083664AA44C0B511F9(L_44, L_45, /*hidden argument*/NULL);
 		// return baseMat;
 		Material_t8927C00353A72755313F046D0CE85178AE8218EE * L_46 = ___baseMat0;
 		return L_46;

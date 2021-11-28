@@ -1192,6 +1192,7 @@ IL2CPP_EXTERN_C const RuntimeMethod* EnumBuilder_get_UnderlyingSystemType_m6EF8A
 IL2CPP_EXTERN_C const RuntimeMethod* Enum_CompareTo_m71728D1C7189108C4C08A5157B220CD66E3C38F2_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enum_Format_m0A5687C02E3BA9F0FCD6D6908FC7DCF7DD0262AE_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enum_GetName_mA141F96AFDC64AD7020374311750DBA47BFCA8FA_RuntimeMethod_var;
+IL2CPP_EXTERN_C const RuntimeMethod* Enum_GetNames_m49110673091D017F43CF0F5F7AD9B7730306D2E8_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enum_GetTypeCode_m054CDC8A47EED05B34EDCCD3B35EADFAD70CD8DE_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enum_GetUnderlyingType_m8BD5EDDA4C9A15C2988B27DD48314AC3C16F7A53_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enum_GetValues_m8EEC6B32F297FDB2F7375DC8B197E0E1AB8643BD_RuntimeMethod_var;
@@ -16686,6 +16687,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool GCHandle_get_IsAllocated_mEDA4DAC6AD6D88
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject * GCHandle_GetTarget_m5D5E23880FBFA12D1CED82AA07801D87CC69A724 (int32_t ___handle0, const RuntimeMethod* method);
 // System.Object System.Runtime.InteropServices.GCHandle::get_Target()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject * GCHandle_get_Target_m6C296AD6520ECDAFC9498E9387677F522871F883 (GCHandle_t757890BC4BBBEDE5A623A3C110013EDD24613603 * __this, const RuntimeMethod* method);
+// System.Void System.Runtime.InteropServices.GCHandle::set_Target(System.Object)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GCHandle_set_Target_mA85979DDB776D29B7B347DC63157BEF51B097098 (GCHandle_t757890BC4BBBEDE5A623A3C110013EDD24613603 * __this, RuntimeObject * ___value0, const RuntimeMethod* method);
 // System.IntPtr System.Runtime.InteropServices.GCHandle::GetAddrOfPinnedObject(System.Int32)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t GCHandle_GetAddrOfPinnedObject_mDE32D94210990C07FCE4222E487F30133541B47D (int32_t ___handle0, const RuntimeMethod* method);
 // System.IntPtr System.IntPtr::op_Explicit(System.Int32)
@@ -18207,6 +18210,39 @@ IL_0014:
 		String_t* L_5;
 		L_5 = VirtFuncInvoker1< String_t*, RuntimeObject * >::Invoke(106 /* System.String System.Type::GetEnumName(System.Object) */, L_3, L_4);
 		return L_5;
+	}
+}
+// System.String[] System.Enum::GetNames(System.Type)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR StringU5BU5D_tACEBFEDE350025B554CD507C9AE8FFE49359549A* Enum_GetNames_m49110673091D017F43CF0F5F7AD9B7730306D2E8 (Type_t * ___enumType0, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Type_t_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		Type_t * L_0 = ___enumType0;
+		IL2CPP_RUNTIME_CLASS_INIT(Type_t_il2cpp_TypeInfo_var);
+		bool L_1;
+		L_1 = Type_op_Equality_mA438719A1FDF103C7BBBB08AEF564E7FAEEA0046(L_0, (Type_t *)NULL, /*hidden argument*/NULL);
+		if (!L_1)
+		{
+			goto IL_0014;
+		}
+	}
+	{
+		ArgumentNullException_tFB5C4621957BC53A7D1B4FDD5C38B4D6E15DB8FB * L_2 = (ArgumentNullException_tFB5C4621957BC53A7D1B4FDD5C38B4D6E15DB8FB *)il2cpp_codegen_object_new(((RuntimeClass*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&ArgumentNullException_tFB5C4621957BC53A7D1B4FDD5C38B4D6E15DB8FB_il2cpp_TypeInfo_var)));
+		ArgumentNullException__ctor_m81AB157B93BFE2FBFDB08B88F84B444293042F97(L_2, ((String_t*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&_stringLiteralAD0928C03BDC2C023E2CF3BC347393F87144F9F8)), /*hidden argument*/NULL);
+		IL2CPP_RAISE_MANAGED_EXCEPTION(L_2, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&Enum_GetNames_m49110673091D017F43CF0F5F7AD9B7730306D2E8_RuntimeMethod_var)));
+	}
+
+IL_0014:
+	{
+		Type_t * L_3 = ___enumType0;
+		StringU5BU5D_tACEBFEDE350025B554CD507C9AE8FFE49359549A* L_4;
+		L_4 = VirtFuncInvoker0< StringU5BU5D_tACEBFEDE350025B554CD507C9AE8FFE49359549A* >::Invoke(102 /* System.String[] System.Type::GetEnumNames() */, L_3);
+		return L_4;
 	}
 }
 // System.String[] System.Enum::InternalGetNames(System.RuntimeType)
@@ -21905,6 +21941,13 @@ IL_0128:
 		L_76 = VirtFuncInvoker0< String_t* >::Invoke(3 /* System.String System.Object::ToString() */, L_75);
 		return L_76;
 	}
+}
+// System.String[] System.Environment::GetCommandLineArgs()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR StringU5BU5D_tACEBFEDE350025B554CD507C9AE8FFE49359549A* Environment_GetCommandLineArgs_m12F7E5CE17BB9D41283D95ADF989C4F75463C329 (const RuntimeMethod* method)
+{
+	typedef StringU5BU5D_tACEBFEDE350025B554CD507C9AE8FFE49359549A* (*Environment_GetCommandLineArgs_m12F7E5CE17BB9D41283D95ADF989C4F75463C329_ftn) ();
+	using namespace il2cpp::icalls;
+	return ((Environment_GetCommandLineArgs_m12F7E5CE17BB9D41283D95ADF989C4F75463C329_ftn)mscorlib::System::Environment::GetCommandLineArgs) ();
 }
 // System.String System.Environment::internalGetEnvironmentVariable_native(System.IntPtr)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Environment_internalGetEnvironmentVariable_native_mBB2E4EB749DC6FFD395F36847C953BE685E141C0 (intptr_t ___variable0, const RuntimeMethod* method)
@@ -38276,6 +38319,24 @@ IL2CPP_EXTERN_C  RuntimeObject * GCHandle_get_Target_m6C296AD6520ECDAFC9498E9387
 	RuntimeObject * _returnValue;
 	_returnValue = GCHandle_get_Target_m6C296AD6520ECDAFC9498E9387677F522871F883(_thisAdjusted, method);
 	return _returnValue;
+}
+// System.Void System.Runtime.InteropServices.GCHandle::set_Target(System.Object)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GCHandle_set_Target_mA85979DDB776D29B7B347DC63157BEF51B097098 (GCHandle_t757890BC4BBBEDE5A623A3C110013EDD24613603 * __this, RuntimeObject * ___value0, const RuntimeMethod* method)
+{
+	{
+		RuntimeObject * L_0 = ___value0;
+		int32_t L_1 = __this->get_handle_0();
+		int32_t L_2;
+		L_2 = GCHandle_GetTargetHandle_m520B2968A9C8EA1DD8B4144B0F711E9310B3FC50(L_0, L_1, (-1), /*hidden argument*/NULL);
+		__this->set_handle_0(L_2);
+		return;
+	}
+}
+IL2CPP_EXTERN_C  void GCHandle_set_Target_mA85979DDB776D29B7B347DC63157BEF51B097098_AdjustorThunk (RuntimeObject * __this, RuntimeObject * ___value0, const RuntimeMethod* method)
+{
+	int32_t _offset = 1;
+	GCHandle_t757890BC4BBBEDE5A623A3C110013EDD24613603 * _thisAdjusted = reinterpret_cast<GCHandle_t757890BC4BBBEDE5A623A3C110013EDD24613603 *>(__this + _offset);
+	GCHandle_set_Target_mA85979DDB776D29B7B347DC63157BEF51B097098(_thisAdjusted, ___value0, method);
 }
 // System.IntPtr System.Runtime.InteropServices.GCHandle::AddrOfPinnedObject()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t GCHandle_AddrOfPinnedObject_m0604506F2BDCD2DC8C167FBC3BF3E965888F7589 (GCHandle_t757890BC4BBBEDE5A623A3C110013EDD24613603 * __this, const RuntimeMethod* method)

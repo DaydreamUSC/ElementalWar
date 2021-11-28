@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,17 +15,21 @@ public class Player : MonoBehaviour
     private HealthBar healthBar;
     public static int currentHP;
     public static int currentEP;
-    public static int PlayerShootSpeed = 8;
-    public static int PlayerShootPower = 2;
+    public static int PlayerShootSpeed;
+    public static int PlayerShootPower;
     public static int PlayerMoveSpeed;
-    public static List<Card> currentWeapon;
+    //public static List<Card> currentWeapon;
     private AudioSource Bullet_Shoot_Audio;
     private PhotonView photonView;
     private AudioSource[] sounds;
     private AudioSource Hit_Sound;
-    //public Weaponbase Weapon;
+    private bool isSlowDown = false;
+    private bool isFreeze = false;
+
     void Start()
     {
+        PlayerShootSpeed = 8;
+        PlayerShootPower = 4;
         if (transform.position.x > 0)
             side = 1;
         else
@@ -33,8 +38,6 @@ public class Player : MonoBehaviour
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.SetMaxHealth(maxHealth);
         currentHP = maxHealth;
-        PlayerShootSpeed = 8;
-        PlayerShootPower = 2;
 
         if (photonView.IsMine) {
             GameObject cureBttn = GameObject.Find("/CanvasSkillCard/changeCard1");
@@ -58,6 +61,10 @@ public class Player : MonoBehaviour
                 Debug.Log("flipped!!");
             }
         }
+
+        //wepaon
+        //currentWeapon = Instantiate(MachineGun, WeaponPoint.position, transform.rotation);
+        // Debug.Log(currentWeapon);
     }
     public Rigidbody2D rb;
     public Camera cam;
@@ -86,7 +93,8 @@ public class Player : MonoBehaviour
             // healthBar.SetHealth(currentHP);
 
         }
-
+        //weapon
+        //currentWeapon.transform.position = WeaponPoint.position;
     }
 
     /*void FixedUpdate()
@@ -127,14 +135,16 @@ public class Player : MonoBehaviour
 
         char Player_ownerID = GetComponent<PhotonView>().Owner.ToString()[2];
         if (isHitByBullet && (Player_ownerID != ownerID)) {
-            Debug.Log("Player_ownerID" + Player_ownerID);
-            Debug.Log("owner_ID" + ownerID);
+            // Debug.Log("Player_ownerID" + Player_ownerID);
+            // Debug.Log("owner_ID" + ownerID);
             //Debug.Log("is hit! "+name);
             //bullet_property b_p = other.gameObject.GetComponent<bullet_property>();
 
             Hit_Sound.PlayOneShot(Hit_Sound.clip);
-
-            photonView.RPC("HPdeduction", RpcTarget.All, 2*PlayerShootPower);
+            int bullet_Damage = other.gameObject.GetComponent<bullet_property>().bullet_Damage;
+            // Debug.Log("damage");
+            // Debug.Log(bullet_Damage);
+            photonView.RPC("HPdeduction", RpcTarget.All, bullet_Damage);
             CheckDeath();
 
             string color = other.gameObject.GetComponent<bullet_property>().col;
@@ -147,29 +157,46 @@ public class Player : MonoBehaviour
 
             if (color == "blue")
             {
-                StartCoroutine(Slowing());
-
+              if(!isSlowDown){
+              StartCoroutine(SlowDown());
             }
-
+          }
             if (color == "yellow")
             {
-                StartCoroutine(Stop());
-
+              if(!isFreeze){
+              StartCoroutine(Freeze());
+              }
             }
 
 
             Debug.Log("color is" + color);
 
-
-
             int photonID = other.gameObject.GetComponent<PhotonView>().ViewID;
             photonView.RPC("DestroyBullet", RpcTarget.All, photonID);
-
-
         }
+
         else if (!isHitByBullet) {
             Debug.Log("Hit by something oth er than bullet: " + other.gameObject.tag);
         }
+    }
+
+
+    IEnumerator SlowDown(){
+      PlayerSlowDown(15f);
+      isSlowDown = true;
+      yield return new WaitForSeconds(3);
+      PlayerSlowDown(-15f);
+      isSlowDown = false;
+    }
+
+
+    IEnumerator Freeze(){
+      float cur_move = Move.moveSpeed;
+      PlayerSlowDown(cur_move);
+      isFreeze = true;
+      yield return new WaitForSeconds(1f);
+      PlayerSlowDown(-cur_move);
+      isFreeze = false;
     }
 
     IEnumerator Burning()
@@ -179,22 +206,6 @@ public class Player : MonoBehaviour
         photonView.RPC("HPdeduction", RpcTarget.All, 3);
         yield return new WaitForSeconds(1);
         photonView.RPC("HPdeduction", RpcTarget.All, 3);
-    }
-    IEnumerator Slowing()
-    {
-        Move.moveSpeed -= 8f;
-        yield return new WaitForSeconds(1);
-        Move.moveSpeed -= 8f;
-        yield return new WaitForSeconds(1);
-        Move.moveSpeed -= 8f;
-        yield return new WaitForSeconds(1);
-        Move.moveSpeed = 20f;
-    }
-    IEnumerator Stop()
-    {
-        Move.moveSpeed -= 20f;
-        yield return new WaitForSeconds(1);
-        Move.moveSpeed = 20f;
     }
 
     [PunRPC]
@@ -220,6 +231,8 @@ public class Player : MonoBehaviour
         if(healthBar == null)
             return;
         int currentHealth = healthBar.GetHealth();
+        // Debug.Log("damage");
+        // Debug.Log(damage);
         healthBar.SetHealth(currentHealth - damage);
         // Hit_Sound.PlayOneShot(Hit_Sound.clip);
     }
@@ -236,6 +249,13 @@ public class Player : MonoBehaviour
 
         healthBar.SetHealth(currentHealth);
     }
+
+
+    void PlayerSlowDown(float value){
+      Move.moveSpeed -= value;
+    }
+
+
 
     void CurePlayer(int point){
         if(photonView.IsMine){

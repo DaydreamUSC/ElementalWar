@@ -10,12 +10,24 @@ public class EnergyBar : MonoBehaviour
 
     public Slider energyBar;
     private int max_energy = 10;
-    private int current_energy;
+    public int current_energy;
     private Coroutine regen;
-
     private WaitForSeconds regenTick = new WaitForSeconds(1);
 
     public static EnergyBar instance;
+    // public GameObject cardNum;
+    //
+    // public SpriteRenderer LaserCard;
+    // public SpriteRenderer FireCard;
+    // public SpriteRenderer FrozenCard;
+    // public SpriteRenderer LightingCard;
+    // public SpriteRenderer CureCard;
+    // public SpriteRenderer SpeedCard;
+    // public SpriteRenderer DoubleGunCard;
+    // public SpriteRenderer FloatingGunCard;
+    // public SpriteRenderer EnlargeCard;
+
+
 
     private void Awake() {
         instance = this;
@@ -47,7 +59,7 @@ public class EnergyBar : MonoBehaviour
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Energy Consumption", new Dictionary<string, object>{
                 { "current_energy", current_energy},
                 { "Player", System.Environment.UserName }
-            }); 
+            });
             Debug.Log("[Analytics] Energy Consumption:" + analyticsResult);
         }
         else
@@ -68,6 +80,10 @@ public class EnergyBar : MonoBehaviour
             yield return regenTick;
         }
         regen = null;
+    }
+
+    public int cur_energy(){
+      return current_energy;
     }
 
 

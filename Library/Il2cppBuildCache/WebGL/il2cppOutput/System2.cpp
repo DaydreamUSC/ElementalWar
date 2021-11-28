@@ -21139,6 +21139,14 @@ IL_001c:
 		return;
 	}
 }
+// System.Boolean System.Text.RegularExpressions.Group::get_Success()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Group_get_Success_m917CA7077102642C3C24106F13B9F5F5D5130C1B (Group_t0B987F132503F2672BC66FCDD21EA8A6EB484883 * __this, const RuntimeMethod* method)
+{
+	{
+		int32_t L_0 = __this->get__capcount_5();
+		return (bool)((!(((uint32_t)L_0) <= ((uint32_t)0)))? 1 : 0);
+	}
+}
 // System.Void System.Text.RegularExpressions.Group::.cctor()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Group__cctor_mC2C601CAA7A29E2CF56AE1A25B7C0683B05C8BE1 (const RuntimeMethod* method)
 {

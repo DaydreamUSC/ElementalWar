@@ -5253,6 +5253,8 @@ struct SharedReference_t74AB40C102A76A7523C72269A49D2C8FBDD83926  : public Runti
 public:
 	// System.WeakReference System.Text.RegularExpressions.SharedReference::_ref
 	WeakReference_tB8558D16C98417FD98C920C42C0CC5C9FF825C76 * ____ref_0;
+	// System.Int32 System.Text.RegularExpressions.SharedReference::_locked
+	int32_t ____locked_1;
 
 public:
 	inline static int32_t get_offset_of__ref_0() { return static_cast<int32_t>(offsetof(SharedReference_t74AB40C102A76A7523C72269A49D2C8FBDD83926, ____ref_0)); }
@@ -5262,6 +5264,14 @@ public:
 	{
 		____ref_0 = value;
 		Il2CppCodeGenWriteBarrier((void**)(&____ref_0), (void*)value);
+	}
+
+	inline static int32_t get_offset_of__locked_1() { return static_cast<int32_t>(offsetof(SharedReference_t74AB40C102A76A7523C72269A49D2C8FBDD83926, ____locked_1)); }
+	inline int32_t get__locked_1() const { return ____locked_1; }
+	inline int32_t* get_address_of__locked_1() { return &____locked_1; }
+	inline void set__locked_1(int32_t value)
+	{
+		____locked_1 = value;
 	}
 };
 
@@ -33251,6 +33261,22 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Capture__ctor_m5FB71B7ADA66B2D3AD6B681BE
 		return;
 	}
 }
+// System.Int32 System.Text.RegularExpressions.Capture::get_Index()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Capture_get_Index_m2CAB876E4DE6099F9696D76176BA7539FA0D5EE7 (Capture_t048191E7E0D3177DCD8610E4968075AB41FB91D6 * __this, const RuntimeMethod* method)
+{
+	{
+		int32_t L_0 = __this->get__index_1();
+		return L_0;
+	}
+}
+// System.Int32 System.Text.RegularExpressions.Capture::get_Length()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Capture_get_Length_m3D1F26419BF69FEA9EE1AE0DB46069686C53A6DF (Capture_t048191E7E0D3177DCD8610E4968075AB41FB91D6 * __this, const RuntimeMethod* method)
+{
+	{
+		int32_t L_0 = __this->get__length_2();
+		return L_0;
+	}
+}
 // System.String System.Text.RegularExpressions.Capture::get_Value()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Capture_get_Value_mC5CAABA66AC24C90CE1A6FE7EE93AD4A926E4D5A (Capture_t048191E7E0D3177DCD8610E4968075AB41FB91D6 * __this, const RuntimeMethod* method)
 {
@@ -33270,6 +33296,42 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Capture_ToString_mA44E5E7488551081E
 		String_t* L_0;
 		L_0 = Capture_get_Value_mC5CAABA66AC24C90CE1A6FE7EE93AD4A926E4D5A(__this, /*hidden argument*/NULL);
 		return L_0;
+	}
+}
+// System.String System.Text.RegularExpressions.Capture::GetOriginalString()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Capture_GetOriginalString_mBC838C19CCFF585AA3C797AEA21A51CE0911E8B3 (Capture_t048191E7E0D3177DCD8610E4968075AB41FB91D6 * __this, const RuntimeMethod* method)
+{
+	{
+		String_t* L_0 = __this->get__text_0();
+		return L_0;
+	}
+}
+// System.String System.Text.RegularExpressions.Capture::GetLeftSubstring()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Capture_GetLeftSubstring_m514D11C56BC032F7317285FE6E22C522A879E1AA (Capture_t048191E7E0D3177DCD8610E4968075AB41FB91D6 * __this, const RuntimeMethod* method)
+{
+	{
+		String_t* L_0 = __this->get__text_0();
+		int32_t L_1 = __this->get__index_1();
+		String_t* L_2;
+		L_2 = String_Substring_m7A39A2AC0893AE940CF4CEC841326D56FFB9D86B(L_0, 0, L_1, /*hidden argument*/NULL);
+		return L_2;
+	}
+}
+// System.String System.Text.RegularExpressions.Capture::GetRightSubstring()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Capture_GetRightSubstring_m5AA1B92DA426764A6919117B3F9FF9416E4D7776 (Capture_t048191E7E0D3177DCD8610E4968075AB41FB91D6 * __this, const RuntimeMethod* method)
+{
+	{
+		String_t* L_0 = __this->get__text_0();
+		int32_t L_1 = __this->get__index_1();
+		int32_t L_2 = __this->get__length_2();
+		String_t* L_3 = __this->get__text_0();
+		int32_t L_4;
+		L_4 = String_get_Length_m129FC0ADA02FECBED3C0B1A809AE84A5AEE1CF09_inline(L_3, /*hidden argument*/NULL);
+		int32_t L_5 = __this->get__index_1();
+		int32_t L_6 = __this->get__length_2();
+		String_t* L_7;
+		L_7 = String_Substring_m7A39A2AC0893AE940CF4CEC841326D56FFB9D86B(L_0, ((int32_t)il2cpp_codegen_add((int32_t)L_1, (int32_t)L_2)), ((int32_t)il2cpp_codegen_subtract((int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_4, (int32_t)L_5)), (int32_t)L_6)), /*hidden argument*/NULL);
+		return L_7;
 	}
 }
 // System.Void System.Text.RegularExpressions.Capture::.ctor()

@@ -218,9 +218,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3815141518301349025, guid: 66047cee101feda48a66166dae4a734f, type: 3}
   firePoint_down: {fileID: 8221766843289684895}
   firePoint_up: {fileID: 7335466926060488758}
-  Shotgun: 1
   Lifetime: 3
   sounds: []
+  WeaponPoint: {fileID: 0}
+  WeaponUI: {fileID: 0}
+  myplayer: {fileID: 0}
 --- !u!114 &4609132770446082586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +359,7 @@ MonoBehaviour:
   firePoint: {fileID: 4609132771035683181}
   startVFX: {fileID: 5283212722751763175}
   endVFX: {fileID: 7417838789252925672}
+  myplayer: {fileID: 0}
 --- !u!82 &7564364445260119259
 AudioSource:
   m_ObjectHideFlags: 0

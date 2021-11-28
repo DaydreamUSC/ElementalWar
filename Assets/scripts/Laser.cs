@@ -10,7 +10,7 @@ public class Laser : MonoBehaviour
     public Transform firePoint;
     public GameObject startVFX;
     public GameObject endVFX;
-
+    public GameObject myplayer;
     private Coroutine LaserActivate;
 
     int hitcount = 0;
@@ -158,8 +158,8 @@ public class Laser : MonoBehaviour
     void UpdateLaser(Vector2 LaserEndpoint)
     {
 
-        lineRenderer.SetPosition(0, (Vector2)firePoint.position);
-        startVFX.transform.position = (Vector2)firePoint.position;
+        lineRenderer.SetPosition(0, firePoint.position);
+        startVFX.transform.position = firePoint.position;
 
         lineRenderer.SetPosition(1, LaserEndpoint);
 
@@ -176,7 +176,7 @@ public class Laser : MonoBehaviour
 
         //angle.Normalize();
 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction.normalized, direction.magnitude, layerMask);
         // RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, direction.normalized, direction.magnitude, layerMask);
 
         if(hit)
@@ -197,7 +197,7 @@ public class Laser : MonoBehaviour
                 hitcount++;
                 if(hitcount == 10)
                 {
-                    hit.collider.gameObject.GetComponent<Player>().HPdeduction(2);
+                    hit.collider.gameObject.GetComponent<Player>().HPdeduction(3);
                     // Hit_Sound.PlayOneShot(Hit_Sound.clip);
                     // Debug.Log("----------------------Call HPdeduction--------------------------");
                     // Debug.Log(hit.collider.gameObject.GetComponent<Player>().healthBar.GetHealth());
@@ -220,6 +220,7 @@ public class Laser : MonoBehaviour
 
         for(int i=0; i<particles.Count; i++)
             particles[i].Stop();
+        myplayer.SendMessage("test","MachineGun");
     }
 
     /*[PunRPC]

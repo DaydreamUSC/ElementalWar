@@ -10,7 +10,6 @@ TagManager:
   - field
   - Player1_field
   - Player2_field
-  - Boundary
   layers:
   - Default
   - TransparentFX
