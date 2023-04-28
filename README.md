@@ -1,4 +1,8 @@
 # ElementalWar (CSCI 526 2021 Fall)
+Play now :point_right: [here](https://play.unity.com/mg/other/daydream-elementalwarfinalv3)
+
+## Demo
+[![gameTrial](https://img.youtube.com/vi/6A_JGWyWOiM/0.jpg)](https://youtu.be/6A_JGWyWOiM?t=46)
 
 ## Game Overview
 - ElementalWar is a turn-based pvp game with role-playing features.
